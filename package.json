@@ -2,7 +2,7 @@
   "name": "backing-track-creator-project",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://ricardogodi.github.io/backing-track-creator-project",
+  "homepage": "https://ricardogodi.github.io/backing-track-creator",
   "type": "module",
   "scripts": {
     "dev": "vite",

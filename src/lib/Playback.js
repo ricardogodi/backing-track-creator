@@ -274,7 +274,7 @@ class Playback {
             let enharmInSharpScale = sharpChromScale[index]; // Get enharmonic equivalente from the 'sharp' chromatic scale
 
             let enharmWithSharpWord = enharmInSharpScale.replace('#', 'sharp')
-            let path = '/piano_audio_samples/' + enharmWithSharpWord + '.wav';
+            let path = 'piano_audio_samples/' + enharmWithSharpWord + '.wav';
 
             if (!(nextNote in this.#pianoSamplesObj)) {
 
@@ -298,8 +298,8 @@ class Playback {
         let rootEnharmWithSharpWord = rootEnharmInSharpScale.replace('#', 'sharp')
         let fifthEnharmWithSharpWord = fifthEnharmInSharpScale.replace('#', 'sharp')
 
-        let rootPath = '/bass_audio_samples/' + rootEnharmWithSharpWord + '.wav';
-        let fifthPath = '/bass_audio_samples/' + fifthEnharmWithSharpWord + '.wav';
+        let rootPath = 'bass_audio_samples/' + rootEnharmWithSharpWord + '.wav';
+        let fifthPath = 'bass_audio_samples/' + fifthEnharmWithSharpWord + '.wav';
 
         if (!(root in this.#bassSamplesObj)) {
 
@@ -325,7 +325,7 @@ class Playback {
 
             for (let [drumComponent, rhythm] of nextBarRhythm) {
 
-                let path = '/drums_audio_samples/' + drumComponent + '.wav';
+                let path = 'drums_audio_samples/' + drumComponent + '.wav';
 
                 if (!(drumComponent in this.#drumsPlayerObj)) {
                    

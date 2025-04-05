@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/backing-track-creator-project/' // change this to match your repo name
+  base: '/backing-track-creator/' // change this to match your repo name
 });

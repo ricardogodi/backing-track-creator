@@ -47,7 +47,6 @@ class Bar {
      * @returns 
      */
     getPianoBar() {
-
         return this.#pianoBar;
     }
 
@@ -56,7 +55,6 @@ class Bar {
      * @returns 
      */
     getBassBar() {
-
         return this.#bassBar;
     }
     
@@ -65,7 +63,6 @@ class Bar {
      * @returns 
      */
     getDrumsBar() {
-        
         return this.#drumsBar;
     }
 }

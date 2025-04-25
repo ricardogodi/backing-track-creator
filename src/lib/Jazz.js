@@ -7,7 +7,6 @@ class Jazz {
     /* -------------------------------------------------------------------------- */
 
     static #bass1 = new Map([
-
         ['root', [12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
         ['5th', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
     ]);
@@ -20,7 +19,6 @@ class Jazz {
 
 
     static #drums1 = new Map([
-
         ['hi-hat', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
         ['ride', [3, 0, 0, 2, 0, 1, 3, 0, 0, 2, 0, 1]],
         ['hi-hat-pedal', [0, 0, 0, 6, 0, 0, 0, 0, 0, 6, 0, 0]],
@@ -38,13 +36,11 @@ class Jazz {
 
     static #bassMap = new Map([
         ["Bass 1", this.#bass1],
-
         // more rhythms
     ]);
 
     static #drumsMap = new Map([
         ["Drums 1", this.#drums1],
-
         // more rhythms
     ]);
 
@@ -65,14 +61,26 @@ class Jazz {
     /*                                                                            */
     /* -------------------------------------------------------------------------- */
 
+    /**
+     * 
+     * @returns 
+     */
     static getBassMap() {
         return this.#bassMap;
     }
 
+    /**
+     * 
+     * @returns 
+     */
     static getDrumsMap() {
         return this.#drumsMap;
     }
 
+    /**
+     * 
+     * @returns 
+     */
     static getDrumsToBassMap() {
         return this.#drumsToBassMap;
     }

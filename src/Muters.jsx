@@ -73,7 +73,6 @@ function Muters({ controller }) {
     return (
 
         <div className="muters-container">
-
             <button className="muter-button"onClick={handleMutePiano}>
                 {labels[0]}
             </button>
@@ -85,10 +84,7 @@ function Muters({ controller }) {
             <button className="muter-button" onClick={handleMuteDrums}>
                 {labels[2]}
             </button>
-
         </div>
-
-
     );
 }
 

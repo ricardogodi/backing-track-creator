@@ -66,39 +66,31 @@ class ChordLinker {
         var direction = 0;
 
         switch (curChordDegreeRelativeToPrevChord) {
-
             case 1:
-
                 direction = 1; // upwards             NASTY BUG HERE G -> Gb         G2 -> Gb3
                 break;
 
             case 2:
-
                 direction = 1; 
                 break;
 
             case 3:
-
                 direction = 1; 
                 break;
                 
             case 4:
-
                 direction = this.#determineMotion(prevConcreteBass);
                 break;
 
             case 5:
-
                 direction = this.#determineMotion(prevConcreteBass);
                 break;
 
             case 6:
-
                 direction = -1; // downwards
                 break;
 
             case 7:
-
                 direction = -1;
                 break;
 
@@ -112,13 +104,11 @@ class ChordLinker {
         var concreteBassIndex = MusicalCore.getIndexInFullPitchChromaticScale(concreteBass);
         
         if (concreteBassIndex < 7) {  // E1 (at index 7) is the bass's lowest note
-     
             var scale = MusicalCore.getFullPitchChromaticScaleByNote(concreteBass); 
             concreteBass = scale[concreteBassIndex + 12];   // Transpose bass one octave higher
         }
 
         if (concreteBassIndex > 31) {  // E3 (at index ) highest wav file
-     
             var scale = MusicalCore.getFullPitchChromaticScaleByNote(concreteBass); 
             concreteBass = scale[concreteBassIndex - 12];   // Transpose bass one octave lower
         }
@@ -126,12 +116,10 @@ class ChordLinker {
         var curConcreteBassIndex = MusicalCore.getIndexInFullPitchChromaticScale(concreteBass);
         
         if (curConcreteBassIndex > this.#highestBassIndex) {
-
             this.#highestBassIndex = curConcreteBassIndex;
         }
 
         if (curConcreteBassIndex < this.#lowestBassIndex) {
-
             this.#lowestBassIndex = curConcreteBassIndex
         }
 
@@ -161,39 +149,31 @@ class ChordLinker {
         var curConcreteTriad;
 
         switch (curChordDegreeRelativeToPrevChord) {
-
             case 1:
-
                 curConcreteTriad = this.#topDownConstruction(prevHighPivotWithOctave, targetTriadNotes)
                 break;
 
             case 2:
-
                 curConcreteTriad = this.#topDownConstruction(prevHighPivotWithOctave, targetTriadNotes)
                 break;
 
             case 3:
-
                 curConcreteTriad = this.#topDownConstruction(prevHighPivotWithOctave, targetTriadNotes)
                 break;
 
             case 4:
-
                 curConcreteTriad = this.#bottomUpConstruction(prevLowPivotWithOctave, targetTriadNotes)
                 break;
 
             case 5:
-
                 curConcreteTriad = this.#topDownConstruction(prevHighPivotWithOctave, targetTriadNotes)
                 break;
 
             case 6:
-
                 curConcreteTriad = this.#bottomUpConstruction(prevLowPivotWithOctave, targetTriadNotes)
                 break;
 
             case 7:
-
                 curConcreteTriad = this.#bottomUpConstruction(prevLowPivotWithOctave, targetTriadNotes)
                 break;
 
@@ -204,9 +184,7 @@ class ChordLinker {
         var curType = curChord.getType();
 
         if (curType == 'triad') {
-
             return curConcreteTriad;
-
         } else { // curType == 'seventh'
 
             let length = curConcreteTriad.length;
@@ -216,39 +194,31 @@ class ChordLinker {
             var upperStructureConcrete;
 
             switch (curChordDegreeRelativeToPrevChord) {
-
                 case 1:
-
                     upperStructureConcrete = this.#topDownConstruction(curTriadHighPivotWithOctave, targetNotes)
                     break;
 
                 case 2:
-
                     upperStructureConcrete = this.#bottomUpConstruction(curTriadLowPivotWithOctave, targetNotes)
                     break;
 
                 case 3:
-
                     upperStructureConcrete = this.#bottomUpConstruction(curTriadLowPivotWithOctave, targetNotes)
                     break;
 
                 case 4:
-
                     upperStructureConcrete = this.#topDownConstruction(curTriadHighPivotWithOctave, targetNotes)
                     break;
 
                 case 5:
-
                     upperStructureConcrete = this.#bottomUpConstruction(curTriadLowPivotWithOctave, targetNotes)
                     break;
 
                 case 6:
-
                     upperStructureConcrete = this.#topDownConstruction(curTriadHighPivotWithOctave, targetNotes)
                     break;
 
                 case 7:
-
                     upperStructureConcrete = this.#topDownConstruction(curTriadHighPivotWithOctave, targetNotes)
                     break;
 
@@ -277,7 +247,6 @@ class ChordLinker {
         var highNote = prevUpperStructureConcrete[length - 1];
 
         if (third == MusicalCore.removePitchOctave(highNote)) {
-
             prevUpperStructureConcrete = this.#getHelperTriad(prevChord, prevVoicedChord);
             length = prevUpperStructureConcrete.length;
         }
@@ -292,37 +261,30 @@ class ChordLinker {
         switch (curChordDegreeRelativeToPrevChord) {
 
             case 1:
-
                 curConcreteTriad = this.#bottomUpConstruction(prevLowPivotWithOctave, targetTriadNotes)
                 break;
 
             case 2:
-
                 curConcreteTriad = this.#topDownConstruction(prevHighPivotWithOctave, targetTriadNotes)
                 break;
 
             case 3:
-
                 curConcreteTriad = this.#topDownConstruction(prevHighPivotWithOctave, targetTriadNotes)
                 break;
 
             case 4:
-
                 curConcreteTriad = this.#topDownConstruction(prevHighPivotWithOctave, targetTriadNotes)
                 break;
 
             case 5:
-
                 curConcreteTriad = this.#topDownConstruction(prevHighPivotWithOctave, targetTriadNotes)
                 break;
 
             case 6:
-
                 curConcreteTriad = this.#bottomUpConstruction(prevLowPivotWithOctave, targetTriadNotes)
                 break;
 
             case 7:
-
                 curConcreteTriad = this.#topDownConstruction(prevHighPivotWithOctave, targetTriadNotes)
                 break;
 
@@ -330,13 +292,10 @@ class ChordLinker {
                 throw new Error('ERROR!')
         }
 
-
         var curType = curChord.getType();
 
         if (curType == 'triad') {
-
             return curConcreteTriad;
-
         } else { // curType == 'seventh'
 
             let length = curConcreteTriad.length;
@@ -346,14 +305,11 @@ class ChordLinker {
             var upperStructureConcrete;
 
             switch (curChordDegreeRelativeToPrevChord) {
-
                 case 1:
-
                     upperStructureConcrete = this.#topDownConstruction(curTriadHighPivotWithOctave, targetNotes)
                     break;
 
                 case 2:
-
                     upperStructureConcrete = this.#bottomUpConstruction(curTriadLowPivotWithOctave, targetNotes)
                     break;
 
@@ -362,22 +318,18 @@ class ChordLinker {
                     break;
 
                 case 4:
-
                     upperStructureConcrete = this.#bottomUpConstruction(curTriadLowPivotWithOctave, targetNotes)
                     break;
 
                 case 5:
-
                     upperStructureConcrete = this.#topDownConstruction(curTriadHighPivotWithOctave, targetNotes)
                     break;
 
                 case 6:
-
                     upperStructureConcrete = this.#bottomUpConstruction(curTriadLowPivotWithOctave, targetNotes)
                     break;
 
                 case 7:
-
                     upperStructureConcrete = this.#topDownConstruction(curTriadHighPivotWithOctave, targetNotes)
                     break;
 
@@ -402,7 +354,6 @@ class ChordLinker {
         var allFullPitchNotes = MusicalCore.getAllValidNotesInFullPitchRange();
 
         if (!allFullPitchNotes.has(topNoteWithOctave)) {
-
             throw new Error(`bottomNoteWithOctave = ${topNoteWithOctave} is not in scientific notation`);
         }
 
@@ -417,26 +368,19 @@ class ChordLinker {
 
         let found = false;
         for (let i = orderedNotes.length - 1; i >= 0; i--) {
-
             let nextTargetNote = orderedNotes[i];
-
             found = false;
 
             while (!found) {
-
                 for (let [_, scale] of allFullPitchScales) {
-
                     let nextNote = scale[horIndex];
                     let nextNoteCurated = MusicalCore.removePitchOctave(nextNote);
-
                     if (nextTargetNote == nextNoteCurated) {
-
                         upperStructureConcrete.unshift(nextNote);
                         found = true;
                         break;
                     }
                 }
-
                 horIndex--
             }
         }
@@ -454,11 +398,9 @@ class ChordLinker {
 
         var targetNotesSet = new Set();
         var noteLetterToRealNoteMap = new Map();
-
         let size = targetNotes.length;
 
         for (let i = 0; i < size; i++) {
-
             let nextNote = targetNotes[i];
             let nextNoteCurated = MusicalCore.removeAccidentalAndPitchOctave(nextNote);
             targetNotesSet.add(nextNoteCurated);
@@ -468,21 +410,15 @@ class ChordLinker {
         var relConstruction = []
         var scaleWithTopNoteLast = MusicalCore.getScaleAlphaWithNoteOnTop(topNote);
         var scaleSize = scaleWithTopNoteLast.length;
-
         var index = scaleSize - 1;
 
         while (targetNotesSet.size != 0) {
-
             let nextNote = scaleWithTopNoteLast[index % scaleSize];
-
             if (targetNotesSet.has(nextNote)) {
-
                 relConstruction.unshift(noteLetterToRealNoteMap.get(nextNote));
                 targetNotesSet.delete(nextNote);
             }
-
             index--;
-
         }
 
         return relConstruction;
@@ -499,7 +435,6 @@ class ChordLinker {
         var allFullPitchNotes = MusicalCore.getAllValidNotesInFullPitchRange();
 
         if (!allFullPitchNotes.has(bottomNoteWithOctave)) {
-
             throw new Error(`bottomNoteWithOctave = ${bottomNoteWithOctave} is not in scientific notation`);
         }
 
@@ -514,19 +449,13 @@ class ChordLinker {
         let found = false;
 
         for (let i = 0; i < orderedNotes.length; i++) {
-
             let nextTargetNote = orderedNotes[i];
             found = false;
-
             while (!found) {
-
                 for (let [_, scale] of allFullPitchScales) {
-
                     let nextNote = scale[horIndex];
                     let nextNoteCurated = MusicalCore.removePitchOctave(nextNote);
-
                     if (nextTargetNote == nextNoteCurated) {
-
                         upperStructureConcrete.push(nextNote);
                         found = true;
                         break;
@@ -534,7 +463,6 @@ class ChordLinker {
                 }
                 horIndex++;
             }
-
         }
         return upperStructureConcrete;
     }
@@ -546,14 +474,11 @@ class ChordLinker {
      * @returns 
      */
     static #bottomUpRelativeConstruction(bottomNote, targetNotes) {
-
         var targetNotesSet = new Set();
         var noteLetterToRealNoteMap = new Map();
-
         let size = targetNotes.length;
 
         for (let i = 0; i < size; i++) {
-
             let nextNote = targetNotes[i];
             let nextNoteCurated = MusicalCore.removeAccidentalAndPitchOctave(nextNote);
             targetNotesSet.add(nextNoteCurated);
@@ -567,11 +492,8 @@ class ChordLinker {
         var index = 0;
 
         while (targetNotesSet.size != 0) {
-
             let nextNote = scaleWithBottomNoteLast[index % scaleSize];
-
             if (targetNotesSet.has(nextNote)) {
-
                 relConstruction.push(noteLetterToRealNoteMap.get(nextNote));
                 targetNotesSet.delete(nextNote);
             }
@@ -587,43 +509,32 @@ class ChordLinker {
      * @returns 
      */
     static #getHelperTriad(prevChord, prevVoicedChord) {
-
         let prevUpperStructureConcrete = prevVoicedChord.getVoicedUpperVoices();
 
         if (prevUpperStructureConcrete.length != 2) {
-
             throw new Error('prevVoicedChord upper voices does not have only two voices');
         }
 
         let length = prevUpperStructureConcrete.length;
         let highNote = prevUpperStructureConcrete[length - 1];
-
         let fifth = prevChord.getNotes()[2];
-
         var allChromaticScales = MusicalCore.getAllFullPitchChromaticScales();
         var index = MusicalCore.getIndexInFullPitchChromaticScale(highNote);
-
         var target;
         var found = false;
 
         while (!found) {
-
             for (let [_, scale] of allChromaticScales) {
-
                 let nextNote = scale[index];
                 let nextNoteCurated = MusicalCore.removePitchOctave(nextNote);
-
                 if (fifth == nextNoteCurated) {
-
                     target = nextNote;
                     found = true;
                     break;
                 }
             }
-
             index++;
         }
-
         var helperTriad = [...prevUpperStructureConcrete];
         helperTriad.push(target);
         return helperTriad;
@@ -636,7 +547,6 @@ class ChordLinker {
      * @returns 
      */
     static #calculateDegree(root1, root2) {
-
         root1 = MusicalCore.removeAccidentalAndPitchOctave(root1);
         root2 = MusicalCore.removeAccidentalAndPitchOctave(root2);
         var alphabetScale = MusicalCore.getScaleAlphaWithNoteAtBottom(root1);
@@ -651,27 +561,18 @@ class ChordLinker {
      * @returns 
      */
     static #getIndexHighestOrLowestSameLetterNote(noteTarget, index, direction) {
-
         var allFullPitchScales = MusicalCore.getAllFullPitchChromaticScales();
-
         var noteTargetLetter = MusicalCore.removeAccidentalAndPitchOctave(noteTarget);
-
         var highestIndexSoFar = -1;
-
         let columnHasNote = false;
         let noSameLetterHasBeenFound = true;
 
         do {
-
             columnHasNote = false;
-
             for (let [_, scale] of allFullPitchScales) {
-
                 let nextNote = scale[index];
                 let nextNoteLetter = MusicalCore.removeAccidentalAndPitchOctave(nextNote);
-
                 if (nextNoteLetter == noteTargetLetter) {
-
                     highestIndexSoFar = index;
                     columnHasNote = true;
                     noSameLetterHasBeenFound = false;
@@ -680,16 +581,12 @@ class ChordLinker {
             }
 
             if (direction == 'toTheRight') {
-
                 index++;
-
             } else { // 'toTheLeft'
-
                 index--;
             }
 
         } while (columnHasNote || noSameLetterHasBeenFound);
-
         return highestIndexSoFar;
     }
 
@@ -699,11 +596,8 @@ class ChordLinker {
      * @returns 
      */
     static #determineMotion(prevConcreteBass) {
-
         var prevConcreteBassIndex = MusicalCore.getIndexInFullPitchChromaticScale(prevConcreteBass);
-
         if (prevConcreteBassIndex >= this.#averageBassIndex ) {  
-
             return -1;
         }
         return 1;
@@ -717,42 +611,24 @@ class ChordLinker {
      * @returns 
      */
     static #findBass(prevConcreteBass, bassTarget, direction) {
-
         var horIndex = -1
-
         var index = MusicalCore.getIndexInFullPitchChromaticScale(prevConcreteBass)
 
         if (direction == 1) {
-
             var horIndex = this.#getIndexHighestOrLowestSameLetterNote(prevConcreteBass, index, 'toTheLeft')
-
         } else if (direction == -1) {
-
             var horIndex = this.#getIndexHighestOrLowestSameLetterNote(prevConcreteBass, index, 'toTheRight')
         }
 
-
-        //var index = MusicalCore.getIndexInFullPitchChromaticScale(prevConcreteBass)
-
-       // var horIndex = this.#getIndexHighestOrLowestSameLetterNote(topNoteWithOctave, topNoteWithOctaveIndex, 'toTheRight')
-
-       // var horIndex = MusicalCore.getIndexInFullPitchChromaticScale(prevConcreteBass)
-
         var concreteBass = null;
-
         var allChromaticScales = MusicalCore.getAllFullPitchChromaticScales();
-
         var found = false;
 
         while(!found) {
-
             for (let [_,scale] of allChromaticScales) {
-
                 var nextNote = scale[horIndex];
                 var nextNoteCurated = MusicalCore.removePitchOctave(nextNote);
-
                 if (nextNoteCurated == bassTarget) {
-
                     concreteBass = nextNote;
                     found = true;
                     break;
@@ -760,14 +636,10 @@ class ChordLinker {
             }
 
             if (direction == 1) {
-
                 horIndex++;
-
             } else if (direction == -1) {
-
                 horIndex--;
             } 
-
         }
         return concreteBass;
     }

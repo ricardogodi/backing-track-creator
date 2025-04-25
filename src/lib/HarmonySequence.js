@@ -68,6 +68,9 @@ class HarmonySequence {
         return new HarmonySequenceIterator(this)
     }
 
+    /**
+     * 
+     */
     changeInitialHarmonicPosition() {
         if (this.#firstChordType == 'triad') {
             let pos = this.#initialHarmonicPosition;
@@ -82,7 +85,6 @@ class HarmonySequence {
             const CHORD_POSITION = "left";
             this.#linkAll(firstChord, this.#firstBarWithChordIndex, CHORD_POSITION);
         }
-
         this.#playback.updateHarmony(this.createIterator());
     }
 
@@ -134,8 +136,14 @@ class HarmonySequence {
         this.#playback.updateHarmony(this.createIterator());
     }
 
+    /**
+     * 
+     * @param {*} barIndexFrom 
+     * @param {*} barIndexTo 
+     * @param {*} positionFrom 
+     * @param {*} positionTo 
+     */
     switchChords(barIndexFrom, barIndexTo, positionFrom, positionTo) {
-
         let barFrom = this.#bars[barIndexFrom]
         let barTo = this.#bars[barIndexTo]
 
@@ -170,6 +178,13 @@ class HarmonySequence {
         }
     }
 
+    /**
+     * 
+     * @param {*} barIndexFrom 
+     * @param {*} barIndexTo 
+     * @param {*} positionFrom 
+     * @param {*} positionTo 
+     */
     moveChord(barIndexFrom, barIndexTo, positionFrom, positionTo) {
 
         let barFrom = this.#bars[barIndexFrom]
@@ -277,7 +292,6 @@ class HarmonySequence {
                 }
             }
         }
-
         this.#firstBarWithChordIndex = this.findBarWithFirstChordIndex();
         let firstChord = this.#bars[this.#firstBarWithChordIndex].getLeftChord();
         this.#firstChordType = firstChord.getType();
@@ -285,6 +299,12 @@ class HarmonySequence {
         this.#playback.updateHarmony(this.createIterator());
     }
 
+    /**
+     * 
+     * @param {*} barIndex 
+     * @param {*} removePosition 
+     * @returns 
+     */
     removeChordAtBarAndPosition(barIndex, removePosition) {
         if (barIndex < 0 || barIndex >= this.#bars.length) {
             console.error(`Invalid barIndex: ${barIndex}`);
@@ -302,10 +322,13 @@ class HarmonySequence {
                  this.#firstChordType = chord.getType();
                  this.#linkAll(chord, this.#firstBarWithChordIndex, 0)
              }
-     
              this.#playback.updateHarmony(this.createIterator());
     }
 
+    /**
+     * 
+     * @returns 
+     */
     findBarWithFirstChordIndex() {
         let size = this.#numOfBars;
         for (let i = 0; i < size; i++) {
@@ -322,9 +345,7 @@ class HarmonySequence {
      * @param {*} barIndex 
      */
     #linkAll(curChord, barIndex, chordPosition) {
-
         let prevChordIndex = this.#getLeftChordIndex(barIndex, chordPosition);
-
         var curVoicedUpperNotes;
         var curBassConcrete;
 
@@ -384,7 +405,6 @@ class HarmonySequence {
      * @returns 
      */
     #getLeftChordIndex(barIndex, chordPosition) {
-
         let size = this.#bars.length;
         // Validate index
         if (barIndex < 0 || barIndex >= size) {
@@ -392,20 +412,16 @@ class HarmonySequence {
         }
 
         if (chordPosition == "right") {  // Starting chord is on the right, therefore it must have a left chord
-
             return barIndex;
         }
 
         // If we get here, the starting chord is on the left. 
         // We can start looking for the chord
-
         for (let i = barIndex - 1; i >= 0; i--) {
-
             if (this.#bars[i].hasLeftChord()) {
                 return i;
             }
         }
-
         return -1;
     }
 
@@ -415,7 +431,6 @@ class HarmonySequence {
      * @returns 
      */
     #getRightChordIndex(barIndex, chordPosition) {
-
         let size = this.#bars.length;
         // Validate index
         if (barIndex < 0 || barIndex >= size) {
@@ -423,31 +438,27 @@ class HarmonySequence {
         }
 
         const bar = this.#bars[barIndex]
-
-        // console.log("well... the position is:", chordPosition)
         if (chordPosition == "left" && bar.hasTwoChords()) {
-            //console.log("should have exe...")
             // Chord is on the left and bar has two chords. Then the chord on the right is the one in the same bar
             return barIndex;
         }
 
-
         for (let i = barIndex + 1; i < size; i++) {
-
             if (this.#bars[i].hasLeftChord()) {
                 return i;
             }
         }
-
         return -1;
     }
 
+    /**
+     * 
+     * @param {*} chord 
+     * @returns 
+     */
     #upperVoicesInitialPosition(chord) {
-
         var upperVoices = chord.getUpperVoices();
-
         let pos = this.#initialHarmonicPosition;
-
         var targetNotes;
         if (this.#firstChordType == 'triad') {
             if (pos == 0) {
@@ -475,11 +486,8 @@ class HarmonySequence {
         // determine A3 to be the lowest
         let horIndex = 36;/*MusicalCore.getIndexInFullPitchChromaticScale(lowerVoice);*/
         let allChromScales = MusicalCore.getAllFullPitchChromaticScales();
-
         let length = targetNotes.length;
-
         var voicedUpperVoices = []
-
         for (let i = 0; i < length; i++) {
             let nextTargetNote = targetNotes[i];
             let found = false;
@@ -496,10 +504,14 @@ class HarmonySequence {
                 horIndex++;
             }
         }
-
         return voicedUpperVoices;
     }
 
+    /**
+     * 
+     * @param {*} chord 
+     * @returns 
+     */
     #bassInitialPosition(chord) {
         var bassTarget = chord.getRoot();
         let horIndex = 12;  // A1
@@ -519,7 +531,6 @@ class HarmonySequence {
             }
             horIndex++;
         }
-
         ChordLinker.setAverageBass(concreteBass);
         ChordLinker.setHighestBass(concreteBass);
         ChordLinker.setLowestBass(concreteBass);

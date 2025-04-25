@@ -16,7 +16,6 @@ class MusicalCore {
      * @returns 
      */
     static getAllFullPitchChromaticScales() {
-
         return Scales.getAllFullPitchChromaticScales();
     }
 
@@ -25,7 +24,6 @@ class MusicalCore {
      * @returns 
      */
     static getAllOneOctaveChromaticScales() {
-
         return Scales.getAllOneOctaveChromaticScales();
     }
 
@@ -35,7 +33,6 @@ class MusicalCore {
      * @returns 
      */
     static getChromaticScaleNameByNote(noteName) {
-
         return Scales.getChromaticScaleNameByNote(noteName);
     }
 
@@ -45,7 +42,6 @@ class MusicalCore {
      * @returns 
      */
     static getFullPitchChromaticScaleByType(chromScaleType) {
-
         return Scales.getFullPitchChromaticScaleByType(chromScaleType);
     }
 
@@ -55,7 +51,6 @@ class MusicalCore {
      * @returns 
      */
     static getFullPitchChromaticScaleByNote(noteName) {
-
         return Scales.getFullPitchChromaticScaleByNote(noteName);
     }
 
@@ -65,7 +60,6 @@ class MusicalCore {
      * @returns 
      */
     static getIndexInFullPitchChromaticScale(noteName) {
-
         return Scales.getIndexInFullPitchChromaticScale(noteName);
     }
 
@@ -75,7 +69,6 @@ class MusicalCore {
      * @returns 
      */
     static getIndexInOneOctaveChromaticScale(noteName) {
-
         return Scales.getIndexInOneOctaveChromaticScale(noteName);
     }
 
@@ -85,7 +78,6 @@ class MusicalCore {
      * @returns 
      */
     static getOneOctaveChromaticScaleByType(chromScaleType) {
-
         return Scales.getOneOctaveChromaticScaleByType(chromScaleType)
     }
 
@@ -95,7 +87,6 @@ class MusicalCore {
      * @returns 
      */
     static getOneOctaveChromaticScaleByNote(noteName) {
-
         return Scales.getOneOctaveChromaticScaleByNote(noteName);
     }
 
@@ -105,7 +96,6 @@ class MusicalCore {
      * @returns 
      */
     static getIndexInOneOctaveChromaticScale(noteName) {
-
         return Scales.getIndexInOneOctaveChromaticScale(noteName);
     }
 
@@ -114,7 +104,6 @@ class MusicalCore {
      * @returns 
      */
     static getScaleAlphabetCAtBottom() {
-
         return Scales.getScaleAlphabetCAtBottom();
     }
 
@@ -123,7 +112,6 @@ class MusicalCore {
      * @returns 
      */
     static getAllValidNotesInFullPitchRange() {
-
         return Scales.getAllValidNotesInFullPitchRange();
     }
 
@@ -132,7 +120,6 @@ class MusicalCore {
      * @returns 
      */
     static getAllValidNotes() {
-
         return Scales.getAllValidNotes();
     }
 
@@ -149,7 +136,6 @@ class MusicalCore {
      * @returns 
      */
     static getChordQualitiesByScaleAndChordType(scaleType, chordType) {
-
         return MusicalStructures.getChordQualitiesByScaleAndChordType(scaleType, chordType);
     }
 
@@ -159,7 +145,6 @@ class MusicalCore {
      * @returns 
      */
     static getChromaticDegreesByChordQuality(chordQuality) {
-
         return MusicalStructures.getChromaticDegreesByChordQuality(chordQuality);
     }
 
@@ -169,7 +154,6 @@ class MusicalCore {
      * @returns 
      */
     static getChordTypeByChordQuality(chordQuality) {
-
         return MusicalStructures.getChordTypeByChordQuality(chordQuality);
     }
 
@@ -179,7 +163,6 @@ class MusicalCore {
      * @returns 
      */
     static getChromaticIntervalsByScale(scaleType) {
-
         return MusicalStructures.getChromaticIntervalsByScale(scaleType);
     }
 
@@ -189,7 +172,6 @@ class MusicalCore {
      * @returns 
      */
     static getChromaticIntervalByChromaticDegree(chromDeg) {
-
         return MusicalStructures.getChromaticIntervalByChromaticDegree(chromDeg);
     }
 
@@ -199,7 +181,6 @@ class MusicalCore {
      * @returns 
      */
     static convertChromDegreeToScaleDegreeOffset(chromDeg) {
-
         return MusicalStructures.convertChromDegreeToScaleDegreeOffset(chromDeg);
     }
 
@@ -215,7 +196,6 @@ class MusicalCore {
      * @returns 
      */
     static removePitchOctave(note) {
-
         return MusicalUtilities.removePitchOctave(note);
     }
 
@@ -225,7 +205,6 @@ class MusicalCore {
      * @returns 
      */
     static removeAccidentalAndPitchOctave(note) {
-
         return MusicalUtilities.removeAccidentalAndPitchOctave(note);
     }
 
@@ -235,7 +214,6 @@ class MusicalCore {
      * @returns 
      */
     static getScaleAlphaWithNoteAtBottom(bottomTarget) {
-
         return MusicalUtilities.getScaleAlphaWithNoteAtBottom(bottomTarget);
     }
 
@@ -245,7 +223,6 @@ class MusicalCore {
      * @returns 
      */
     static getScaleAlphaWithNoteOnTop(topTarget) {
-
         return MusicalUtilities.getScaleAlphaWithNoteOnTop(topTarget);
     }
 
@@ -256,7 +233,6 @@ class MusicalCore {
      * @returns 
      */
     static retrieveEnharmonic(noteTarget, index) {
-
         return MusicalUtilities.retrieveEnharmonic(noteTarget, index);
     }
 
@@ -267,7 +243,6 @@ class MusicalCore {
      * @returns 
      */
     static rotateStructure(notes, index) {
-
         return MusicalUtilities.rotateStructure(notes, index)
     }
 
@@ -284,7 +259,6 @@ class MusicalCore {
      * @returns 
      */
     static generateChord(root, chordQuality) {
-
         return NoteGenerator.generateChord(root, chordQuality);
     }
 
@@ -295,7 +269,6 @@ class MusicalCore {
      * @returns 
      */
     static generateScale(tonic, scaleType) {
-
         return NoteGenerator.generateScale(tonic, scaleType);
     }
 }

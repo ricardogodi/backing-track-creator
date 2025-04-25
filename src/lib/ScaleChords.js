@@ -19,7 +19,6 @@ class ScaleChords {
      * @param {*} chordsType 
      */
     constructor(tonic, scaleType, chordsType) {
-
         this.#tonic = tonic;
         this.#scaleType = scaleType;
         this.#chordsType = chordsType;
@@ -36,7 +35,6 @@ class ScaleChords {
      * @returns 
      */
     getTonic() {
-
         return this.#tonic;
     }
 
@@ -45,7 +43,6 @@ class ScaleChords {
      * @returns 
      */
     getScaleType() {
-
         return this.#scaleType;
     }
 
@@ -54,7 +51,6 @@ class ScaleChords {
      * @returns 
      */
     getChordsType() {
-
         return this.#chordsType;
     }
 
@@ -63,7 +59,6 @@ class ScaleChords {
      * @returns 
      */
     getScaleNotes() {
-
         return this.#scaleNotes;
     }
 
@@ -72,7 +67,6 @@ class ScaleChords {
      * @returns 
      */
     getChordQualities() {
-
         return this.#chordQualities;
     }
 
@@ -81,7 +75,6 @@ class ScaleChords {
      * @returns 
      */
     getFullChordNames() {
-
         return this.#fullChordNames;
     }
 
@@ -94,7 +87,6 @@ class ScaleChords {
      * @param {*} index 
      */
     getChordQualityAt(index) {
-
         return this.#chordQualities[index];
     }
 
@@ -103,7 +95,6 @@ class ScaleChords {
      * @param {*} index 
      */
     getScaleNoteAt(index) {
-
         return this.#scaleNotes[index];
     }
 
@@ -112,7 +103,6 @@ class ScaleChords {
      * @param {*} newTonic 
      */
     setTonic(newTonic) {
-
         if (this.#tonic != newTonic) {
             this.#tonic = newTonic;
             this.#scaleNotes = MusicalCore.generateScale(this.#tonic, this.#scaleType);
@@ -125,7 +115,6 @@ class ScaleChords {
      * @param {*} newScaleType 
      */
     setScaleType(newScaleType) {
-
         if (this.#scaleType != newScaleType) {
             this.#scaleType = newScaleType;
             this.#scaleNotes = MusicalCore.generateScale(this.#tonic, this.#scaleType);
@@ -139,7 +128,6 @@ class ScaleChords {
      * @param {*} chordsType 
      */
     setChordsType(chordsType) {
-        
         if (this.#chordsType != chordsType) {
             this.#chordsType = chordsType;
             this.#chordQualities = MusicalCore.getChordQualitiesByScaleAndChordType(this.#scaleType, chordsType);
@@ -151,9 +139,7 @@ class ScaleChords {
      * 
      */
     #generateFullChordNames() {
-
         const NUM_OF_NOTES = 7;
-
         const newfullChordNames = []
 
         for (let i = 0; i < NUM_OF_NOTES; i++) {
@@ -163,12 +149,9 @@ class ScaleChords {
             } else {
                 nextChord = this.#scaleNotes[i] + "" + this.#chordQualities[i];
             }
-
             newfullChordNames.push(nextChord);
         }
-
-        return newfullChordNames;
-        
+        return newfullChordNames;  
     };
 
     printState() {

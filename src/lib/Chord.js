@@ -18,7 +18,6 @@ class Chord {
      * @param {*} quality 
      */
     constructor(root, quality) {
-
         this.#root = root;
         this.#quality = quality;
         this.#setDependentProperties();
@@ -29,7 +28,6 @@ class Chord {
      * @returns 
      */
     getRoot() {
-
         return this.#root;
     }
 
@@ -38,7 +36,6 @@ class Chord {
      * @returns 
      */
     getQuality() {
-
         return this.#quality;
     }
 
@@ -47,7 +44,6 @@ class Chord {
      * @returns 
      */
     getType() {
-
         return this.#type;
     }
 
@@ -56,7 +52,6 @@ class Chord {
      * @returns 
      */
     getNotes() {
-
         return this.#notes;
     }
 
@@ -65,7 +60,6 @@ class Chord {
      * @returns 
      */
     getBaseTriad() {
-
         return this.#baseTriad;
     }
 
@@ -74,7 +68,6 @@ class Chord {
      * @returns 
      */
     getUpperVoices() {
-
         return this.#upperVoices;
     }
 
@@ -88,7 +81,6 @@ class Chord {
      * After setting the root to E we get root = E, quality = maj7
      */
     setRoot(newRoot) {
-
         if (this.#root != newRoot) {
             this.#root = newRoot;
             this.#setDependentProperties();
@@ -100,7 +92,6 @@ class Chord {
      * @param {*} newQuality 
      */
     setQuality(newQuality) {
-
         if (this.#quality != newQuality) {
             this.#quality = newQuality;
             this.#setDependentProperties();
@@ -111,7 +102,6 @@ class Chord {
      * 
      */
     #setDependentProperties() {
-
         this.#notes = Object.freeze(MusicalCore.generateChord(this.#root, this.#quality));
         this.#type = Object.freeze(MusicalCore.getChordTypeByChordQuality(this.#quality));
         this.#baseTriad = this.#setBaseTriad();  // must freeze
@@ -123,7 +113,6 @@ class Chord {
      * @returns 
      */
     #setBaseTriad() {
-
         if (this.#notes == null) {
             throw new Error('notes is null')
         } else {
@@ -136,30 +125,22 @@ class Chord {
      * @returns 
      */
     #setUpperVoices() {
-
         if (this.#notes == null) {
-
             throw new Error('"notes" is null')
         }
 
         if (this.#type != 'triad' && this.#type != 'seventhChord') {
-
             throw new Error('"type" is neither triad or seventhChord')
         }
      
         if (this.#type == 'triad') {
-
             return this.#notes.slice(0, 3);
-
         } else { // this.#type == 'seventhChord'
-           
             let third = this.#notes[1];
             let seventh = this.#notes[3];
             var upperVoicesSeventhChord = [];
-            
             upperVoicesSeventhChord.push(third);
             upperVoicesSeventhChord.push(seventh);
-
             return upperVoicesSeventhChord;
         }
     }

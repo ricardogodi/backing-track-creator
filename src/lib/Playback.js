@@ -41,7 +41,6 @@ class Playback {
      * 
      */
     constructor() {
-
         this.#numOfBars = 4;
         this.#initializeBars();
 
@@ -70,8 +69,10 @@ class Playback {
         this.#loopSetup();
     }
 
+    /**
+     * 
+     */
     calculateSubdivision() {
-
         let arrayLength = this.#bassRhythm.get('root').length;
 
         if (arrayLength == 16) {
@@ -83,6 +84,9 @@ class Playback {
         }
     }
 
+    /**
+     * 
+     */
     async startTone() {
         await Tone.start();
     }
@@ -99,6 +103,10 @@ class Playback {
         }
     }
 
+    /**
+     * 
+     * @param {*} newTempo 
+     */
     changeTempo(newTempo) {
         if (this.#tempo !== newTempo) {
             Tone.Transport.cancel();
@@ -107,8 +115,10 @@ class Playback {
         }
     }
 
+    /**
+     * 
+     */
     async play() {
-
         this.#playbackStartTime = Tone.now();
         
         if (!this.#hasPlayed) {
@@ -127,6 +137,9 @@ class Playback {
         }
     }
 
+    /**
+     * 
+     */
     stop() {
         if (Tone.Transport.state == 'started') {
             this.mutePiano(true)
@@ -170,12 +183,10 @@ class Playback {
      * @param {*} harmSeqBars 
      */
     updateHarmony(harmSeqIterator) {
-
         let length = this.#numOfBars;
         this.#bars = [];
 
         while(harmSeqIterator.hasNext()) {
-
             let harmonyBar = harmSeqIterator.next();
             let bar = new Bar();
 
@@ -190,7 +201,6 @@ class Playback {
             this.#bars.push(bar);
 
             if (harmonyBar.hasTwoChords()) {
-
                 let leftVoicedChord = harmonyBar.getLeftVoicedChord();
                 let concreteLeftChord = leftVoicedChord.getVoicedUpperVoices()
                 let concreteLeftChordBass = leftVoicedChord.getConcreteBass()
@@ -212,7 +222,6 @@ class Playback {
                 this.#updateBassSampler(concreteRightChordBass, bassBar.getRightChordFifth());
 
             } else if (harmonyBar.hasAChord()) {
-
                 let leftVoicedChord = harmonyBar.getLeftVoicedChord();
                 let concreteLeftChord = leftVoicedChord.getVoicedUpperVoices()
                 let concreteLeftChordBass = leftVoicedChord.getConcreteBass()
@@ -236,7 +245,6 @@ class Playback {
      * 
      */
     #updatePianoSampler(nextBarVoicesArray) {
-
         var length = nextBarVoicesArray.length;
 
         for (let i = 0; i < length; i++) {
@@ -260,7 +268,6 @@ class Playback {
      * @param {*} fifth 
      */
     #updateBassSampler(root, fifth) {
-
         let rootIndex = MusicalCore.getIndexInFullPitchChromaticScale(root);
         let fifthIndex = MusicalCore.getIndexInFullPitchChromaticScale(fifth)
 
@@ -290,7 +297,6 @@ class Playback {
      * 
      */
     #setupDrumsPlayer() {
-
         for (let i = 0; i < this.#numOfBars; i++) {
             let nextBarRhythm = this.#bars[0].getDrumsBar().getDrumsRhythm()
             for (let [drumComponent, rhythm] of nextBarRhythm) {
@@ -319,7 +325,6 @@ class Playback {
      */
     #schedulePiano(loopTime) {
         var sixteenthNoteDuration = Tone.Time('16n').toSeconds();
-
         // Helper function to schedule notes
         const scheduleNotes = (notes, rhythm, barIndex, loopTime) => {
             for (let note of notes) {
@@ -362,8 +367,11 @@ class Playback {
         }
     }
 
+    /**
+     * 
+     * @param {*} loopTime 
+     */
     #scheduleBass(loopTime) {
-
         let subdivisionDuration;
         let arrayLength = this.#bassRhythm.get('root').length;
 
@@ -377,7 +385,6 @@ class Playback {
 
         const scheduleNotes = (notes, bassRhythm, barIndex, loopTime) => {
             for (let [voice, rhythm] of bassRhythm) {
-
                 let arrayLength = rhythm.length;       
                 let subdivisionDuration;
 
@@ -410,7 +417,6 @@ class Playback {
         // Schedule notes for each bar
         for (let i = 0; i < this.#numOfBars; i++) {
             let bassBar = this.#bars[i].getBassBar();
-
             // Skip if there is no chord
             if (!bassBar.hasAChord()) {
                 continue;
@@ -432,6 +438,10 @@ class Playback {
         }
     }
 
+    /**
+     * 
+     * @param {*} loopTime 
+     */
     #scheduleDrums(loopTime) {
 
         for (let i = 0; i < this.#numOfBars; i++) {
@@ -464,51 +474,6 @@ class Playback {
             }
         }
     }
-
-    /**
-     * 
-     */
-    printState() {
-
-        for (let i = 0; i < this.#numOfBars; i++) {
-
-            console.log(`Bar: ${i}`)
-            let nextBar = this.#bars[i];
-            let nextPianoBar = nextBar.getPianoBar();
-
-            let notes = nextPianoBar.getPianoVoices();
-
-            let rhythm = nextPianoBar.getPianoVoicesRhythm();
-
-            if (notes != null) {
-
-                for (let note of notes) {
-
-                    console.log(`Next note: ${note}`)
-                }
-
-                console.log(rhythm);
-            }
-
-            console.log("");
-        }
-
-        console.log('Piano samples:');
-        for (let key in this.#pianoSamplesObj) {
-
-            console.log(`${key} -> ${this.#pianoSamplesObj[key]}`);
-        }
-
-        console.log("");
-
-        console.log('Bass samples:');
-        for (let key in this.#bassSamplesObj) {
-
-            console.log(`${key} -> ${this.#bassSamplesObj[key]}`);
-        }
-    }
-
-
 
     /**
      * 
@@ -584,6 +549,48 @@ class Playback {
         let drumsBar = this.#bars[index].getDrumsBar();
         drumsBar.setDrumsRhythm(newRhythm);
     }
+
+        /**
+     * 
+     */
+        printState() {
+
+            for (let i = 0; i < this.#numOfBars; i++) {
+    
+                console.log(`Bar: ${i}`)
+                let nextBar = this.#bars[i];
+                let nextPianoBar = nextBar.getPianoBar();
+    
+                let notes = nextPianoBar.getPianoVoices();
+    
+                let rhythm = nextPianoBar.getPianoVoicesRhythm();
+    
+                if (notes != null) {
+    
+                    for (let note of notes) {
+    
+                        console.log(`Next note: ${note}`)
+                    }
+    
+                    console.log(rhythm);
+                }
+    
+                console.log("");
+            }
+    
+            console.log('Piano samples:');
+            for (let key in this.#pianoSamplesObj) {
+    
+                console.log(`${key} -> ${this.#pianoSamplesObj[key]}`);
+            }
+    
+            console.log("");
+    
+            console.log('Bass samples:');
+            for (let key in this.#bassSamplesObj) {
+                console.log(`${key} -> ${this.#bassSamplesObj[key]}`);
+            }
+        }
 }
 
 export default Playback;

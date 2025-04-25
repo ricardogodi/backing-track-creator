@@ -8,12 +8,10 @@ class NoteGenerator {
      * @param {*} chordQuality 
      */
     static generateChord(root, chordQuality) {
-
         // Get the scale alphabet starting at the root's base letter
         var alphabetScaleWithRootAtBottom = MusicalCore.getScaleAlphaWithNoteAtBottom(root);
         // Get the chromatic degrees from the chord quality we plan to construct
         var chordChromaticDegrees = MusicalCore.getChromaticDegreesByChordQuality(chordQuality);
-
         var chordNotesBaseLetters = [];
         var chomaticIntervals = [];
 
@@ -55,7 +53,7 @@ class NoteGenerator {
      * @returns 
      */
     static #realizeNotes(startNote, chromaticIntervalsStructure, noteLetters) {
-
+        
         if (chromaticIntervalsStructure.length != noteLetters.length) {
             throw new Error("chromaticIntervalsStructure and noteLetters lengths should be equal!");
         }

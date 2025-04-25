@@ -12,25 +12,17 @@ class PianoBar {
     #leftChordRhythm;
     #rightChordRhythm;
 
-
-
-    //#rhythm;
-
     /**
      * 
      */
     constructor(rhythm) {
-
         this.#leftConcreteChord = null;
         this.#rightConcreteChord = null;
 
         this.#hasLeftChord = false;
         this.#hasRightChord = false;
 
-       // console.log("piano constructor: ")
-       // console.log(rhythm)
         this.#baseRhythm = [...rhythm]
-
         this.#leftChordRhythm = [...rhythm]
     }
 
@@ -39,10 +31,8 @@ class PianoBar {
      * @param {*} notes 
      */
     setLeftConcreteChord(notes) {
-
         this.#leftConcreteChord = notes;
         this.#hasLeftChord = true;
-       // console.log("now has left chord")
     }
 
     /**
@@ -50,7 +40,6 @@ class PianoBar {
      * @param {*} notes 
      */
     setRightConcreteChord(notes) {
-
         this.#rightConcreteChord = notes;
         this.#hasRightChord = true;
 
@@ -63,7 +52,6 @@ class PianoBar {
      * @returns 
      */
     getLeftConcreteChord() {
-
         return this.#leftConcreteChord
     }
 
@@ -72,7 +60,6 @@ class PianoBar {
      * @returns 
      */
     getRightConcreteChord() {
-
         return this.#rightConcreteChord
     }
 
@@ -81,7 +68,6 @@ class PianoBar {
      * @param {*} rhythm 
      */
     setPianoRhythm(rhythm) {
-        
         this.#baseRhythm = this.deepCopyMap(rhythm)
 
         if (this.hasTwoChords()) {
@@ -93,7 +79,6 @@ class PianoBar {
             this.#rightChordRhythm = this.leftPartition(rhythm);
 
         } else {
-
             this.#leftChordRhythm = this.deepCopyMap(this.#baseRhythm); // Set the whole rhythm
         }
     }
@@ -120,75 +105,69 @@ class PianoBar {
      * @returns 
      */
     hasAChord() {
-
-       // console.log("this.#hasLeftChord is: ", this.#hasLeftChord )
-       // console.log("this.#hasRightChord is: ", this.#hasRightChord)
-       // console.log("left chord is: ", this.#leftConcreteChord)
-
-
-
         return this.#hasLeftChord || this.#hasRightChord;
     }
 
+    /**
+     * 
+     * @returns 
+     */
     hasTwoChords() {
-
         return this.#hasLeftChord && this.#hasRightChord;
     }
 
+    /**
+     * 
+     * @param {*} fullRhythm 
+     * @returns 
+     */
     leftPartition(fullRhythm) {
-
         let length = fullRhythm.length;
         let half = Math.floor(length / 2);
-
         const newArray = new Array(length).fill(0);
-
         for (let i = 0; i < half; i++) {
-
             newArray[i] = fullRhythm[i];
-
             let remainingIndices = half - i;
-
             if (newArray[i] > remainingIndices) {
-
                 newArray[i] = remainingIndices;
             }
         }
-
         return newArray;
     }
 
+    /**
+     * 
+     * @param {*} fullRhythm 
+     * @returns 
+     */
     rightPartition(fullRhythm) {
-
         let length = fullRhythm.length;
         let offset = Math.floor(length / 2);
-
         const newArray = new Array(length).fill(0);
-
         for (let i = 0; i < offset; i++) {
             newArray[offset + i] = fullRhythm[i];
         }
 
         for (let i = offset; i < length; i++) {
-
             let remainingIndices = length - i;
-
             if (newArray[i] > remainingIndices) {
                 newArray[i] = remainingIndices;
             }
         }
-
         return newArray;
     }
 
+    /**
+     * 
+     * @param {*} originalMap 
+     * @returns 
+     */
     deepCopyMap(originalMap) {
-        
         const newMap = new Map();
-
         for (const [key, value] of originalMap) {
             // If the value is an array, create a new array with the same elements
             newMap.set(key, Array.isArray(value) ? [...value] : value);
         }
-
         return newMap;
     }
 }

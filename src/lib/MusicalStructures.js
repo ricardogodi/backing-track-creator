@@ -11,31 +11,26 @@ class MusicalStructures {
      * 
      */
     static #majorQualities = new Map([
-
         ['triads', ['M', 'm', 'm', 'M', 'M', 'm', '(b5)']],
         ['seventhChords', ['maj7', 'm7', 'm7', 'maj7', '7', 'm7', 'm7b5']]
     ]);
 
     static #minorQualities = new Map([
-
         ['triads', ['m', '(b5)', 'M', 'm', 'm', 'M', 'M']],
         ['seventhChords', ['m7', 'm7b5', 'maj7', 'm7', 'm7', 'maj7', '7']]
     ]);
 
     static #melMinorQualities = new Map([
-
         ['triads', ['m', 'm', '+', 'M', 'M', '(b5)', '(b5)']],
         ['seventhChords', ['m(maj7)', 'm7', '+(maj7)', '7', '7', 'm7b5', 'm7b5']]
     ]);
 
     static #harmMinorQualities = Object.freeze(new Map([
-
         ['triads', ['m', '(b5)', '+', 'm', 'M', 'M', '(b5)']],
         ['seventhChords', ['m(maj7)', 'm7b5', '+(maj7)', 'm7', '7', 'maj7', 'dim7']]
     ]));
 
     static #scaleToChordQualities = Object.freeze(new Map([
-
         ['major', this.#majorQualities],
         ['minor', this.#minorQualities],
         ['melodic minor', this.#melMinorQualities],
@@ -47,7 +42,6 @@ class MusicalStructures {
      * 
      */
     static #chordQualityToChromDegreesMapping = Object.freeze(new Map([
-
         // Triads:
         ['M', ['1', '3', '5']],
         ['m', ['1', 'b3', '5']],
@@ -71,7 +65,6 @@ class MusicalStructures {
      * 
      */
     static #chromDegreesToChromIntervalsMapping = Object.freeze(new Map([
-
         ['1', 0],
         // 2nd's
         ['b2', 1],
@@ -110,7 +103,6 @@ class MusicalStructures {
      * 
      */
     static #scaleToChromIntervalsMapping = Object.freeze(new Map([
-
         ['major', [0, 2, 4, 5, 7, 9, 11]],
         ['minor', [0, 2, 3, 5, 7, 8, 10]],
         ['melodic minor', [0, 2, 3, 5, 7, 9, 11]],
@@ -122,7 +114,6 @@ class MusicalStructures {
 
     // Most likely will not change so we can define it statically
     static #allChromDegreesList = Object.freeze([
-
         '1', 'b2', '2', 'b3',
         '3', '4', '#4', 'b5',
         '5', '#5', 'b6', '6',
@@ -132,7 +123,6 @@ class MusicalStructures {
     ]);
 
     static #chordQualityToChordTypeMapping = Object.freeze(new Map([
-
         // Triads
         ['M', 'triad'],
         ['m', 'triad'],
@@ -151,10 +141,8 @@ class MusicalStructures {
         ['', []],
     ]));
 
-
     // Will change if we add more qualities, so define it dynamically:
     static #allChordQualities = Array.from(this.#chordQualityToChromDegreesMapping.keys());
-
 
     /* -------------------------------------------------------------------------- */
     /*                                                                            */
@@ -188,16 +176,11 @@ class MusicalStructures {
      * @returns 
      */
     static getChordQualitiesByScaleAndChordType(scaleType, chordType) {
-        
         if (!this.#allScalesList.includes(scaleType)) {
-
             throw new Error(`Scale name "${scaleType}" is not included in "allScalesList"`);
-
         } else if (chordType != 'triads' && chordType != 'seventhChords') {
-
             throw new Error(`${chordType} is an invalid chord type`);
         }
-
         return this.#scaleToChordQualities.get(scaleType).get(chordType);
 
     };
@@ -208,12 +191,9 @@ class MusicalStructures {
      * @returns 
      */
     static getChromaticDegreesByChordQuality(chordQuality) {
-
         if (!this.#allChordQualities.includes(chordQuality)) {
-
             throw new Error(`Chord quality "${chordQuality}" is not included in allChordQualities`)
         }
-
         return this.#chordQualityToChromDegreesMapping.get(chordQuality);
 
     };
@@ -224,12 +204,9 @@ class MusicalStructures {
      * @returns 
      */
     static getChordTypeByChordQuality(chordQuality) {
-
         if (!this.#allChordQualities.includes(chordQuality)) {
-
             throw new Error(`Chord quality "${chordQuality}" is not included in allChordQualities`)
         }
-
         return this.#chordQualityToChordTypeMapping.get(chordQuality);
     }
 
@@ -239,12 +216,9 @@ class MusicalStructures {
      * @returns 
      */
     static getChromaticIntervalsByScale(scaleType) {
-
         if (!this.#allScalesList.includes(scaleType)) {
-
             throw new Error(`Scale name "${scaleType}" is not included in "allScalesList"`)
         }
-
         return this.#scaleToChromIntervalsMapping.get(scaleType);
     };
 
@@ -254,12 +228,9 @@ class MusicalStructures {
      * @returns 
      */
     static getChromaticIntervalByChromaticDegree(chromDeg) {
-
         if (!this.#allChromDegreesList.includes(chromDeg)) {
-
             throw new Error(`Chromatic degree "${chromDeg}" is not included in "chromaticDegreesToChromaticIntervalsMapping"`);
         }
-
         return this.#chromDegreesToChromIntervalsMapping.get(chromDeg);
     };
 
@@ -268,22 +239,17 @@ class MusicalStructures {
      * @param {*} chromDeg 
      */
     static convertChromDegreeToScaleDegreeOffset(chromDeg) {
-
         const NUM_OF_NOTES = 7;
-
         if (!this.#allChromDegreesList.includes(chromDeg)) {
-            
             throw new Error(`${chromDeg} is not a valid chromatic degree`)
         }
-
         // Remove accidentals
         chromDeg = chromDeg.replaceAll('b', "");
         chromDeg = chromDeg.replaceAll('#', "");
-
         // Convert to Number
         var chromDegNum = Number(chromDeg);
-
         return (chromDegNum - 1) % NUM_OF_NOTES;
     }
 }
+
 export default MusicalStructures;

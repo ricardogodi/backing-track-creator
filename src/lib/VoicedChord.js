@@ -9,7 +9,6 @@ class VoicedChord {
      * @param {*} concreteBass 
      */
     constructor(voicedUpperVoices, concreteBass) {
-
         this.#voicedUpperVoices = voicedUpperVoices;
         this.#concreteBass = concreteBass;
     }
@@ -19,7 +18,6 @@ class VoicedChord {
      * @returns 
      */
     getVoicedUpperVoices() {
-
         return this.#voicedUpperVoices;
     }
 
@@ -28,7 +26,6 @@ class VoicedChord {
      * @returns 
      */
     getConcreteBass() {
-
         return this.#concreteBass;
     }
 
@@ -37,7 +34,6 @@ class VoicedChord {
      * @param {*} voicedUpperVoices 
      */
     setVoicedUpperVoices(voicedUpperVoices) {
-
         this.#voicedUpperVoices = voicedUpperVoices;
     }   
 
@@ -46,7 +42,6 @@ class VoicedChord {
      * @param {*} concreteBass 
      */
     setConcreteBass(concreteBass) {
-        
         this.#concreteBass = concreteBass;
     }
 

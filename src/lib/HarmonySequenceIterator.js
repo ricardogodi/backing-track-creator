@@ -3,11 +3,19 @@ class HarmonySequenceIterator {
     #harmonySeq
     #position
 
+    /**
+     * 
+     * @param {*} harmonySeq 
+     */
     constructor(harmonySeq) {
         this.#harmonySeq = harmonySeq;
         this.#position = 0;
     }
 
+    /**
+     * 
+     * @returns 
+     */
     hasNext() {
         if (this.#position < this.#harmonySeq.getNumOfBars()) {
             return true;
@@ -16,6 +24,10 @@ class HarmonySequenceIterator {
         }
     }
 
+    /**
+     * 
+     * @returns 
+     */
     next() {
         let bar = this.#harmonySeq.getBarAt(this.#position)
         this.#position++;

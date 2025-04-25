@@ -12,7 +12,6 @@ class Scales {
      * 
      */
     static #doubleSharpFullPitchRange = Object.freeze([
-
         'G##0', 'A#0', 'A##0',
         'B#1', 'C#1', 'C##1', 'D#1', 'D##1', 'E#1', 'F#1', 'F##1', 'G#1', 'G##1', 'A#1', 'A##1',
         'B#2', 'C#2', 'C##2', 'D#2', 'D##2', 'E#2', 'F#2', 'F##2', 'G#2', 'G##2', 'A#2', 'A##2',
@@ -25,7 +24,6 @@ class Scales {
     ]);
 
     static #sharpFullPitchRange = Object.freeze([
-
         'A0', 'A#0', 'B0',
         'C1', 'C#1', 'D1', 'D#1', 'E1', 'F1', 'F#1', 'G1', 'G#1', 'A1', 'A#1', 'B1',
         'C2', 'C#2', 'D2', 'D#2', 'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'A#2', 'B2',
@@ -38,7 +36,6 @@ class Scales {
     ]);
 
     static #flatFullPitchRange = Object.freeze([
-
         'A0', 'Bb0', 'B0',
         'C1', 'Db1', 'D1', 'Eb1', 'E1', 'F1', 'Gb1', 'G1', 'Ab1', 'A1', 'Bb1', 'B1',
         'C2', 'Db2', 'D2', 'Eb2', 'E2', 'F2', 'Gb2', 'G2', 'Ab2', 'A2', 'Bb2', 'B2',
@@ -51,7 +48,6 @@ class Scales {
     ]);
 
     static #doubleFlatFullPitchRange = Object.freeze([
-
         'Bbb0', 'Bb0', 'Cb0',
         'Dbb1', 'Db1', 'Ebb1', 'Eb1', 'Fb1', 'Gbb1', 'Gb1', 'Abb1', 'Ab1', 'Bbb1', 'Bb1', 'Cb1',
         'Dbb2', 'Db2', 'Ebb2', 'Eb2', 'Fb2', 'Gbb2', 'Gb2', 'Abb2', 'Ab2', 'Bbb2', 'Bb2', 'Cb2',
@@ -64,7 +60,6 @@ class Scales {
     ]);
 
     static #allFullPitchChromaticScales = Object.freeze(new Map([
-
         ["doubleSharp", this.#doubleSharpFullPitchRange],
         ["sharp", this.#sharpFullPitchRange],
         ["flat", this.#flatFullPitchRange],
@@ -81,7 +76,6 @@ class Scales {
     static #doubleFlatChromaticScale = Object.freeze(['Dbb', 'Db', 'Ebb', 'Eb', 'Fb', 'Gbb', 'Gb', 'Abb', 'Ab', 'Bbb', 'Bb', 'Cb']);
 
     static #allChromaticOneOctaveScales = Object.freeze(new Map([
-
         ["doubleSharp", this.#doubleSharpChromaticScale],
         ["sharp", this.#sharpChromaticScale],
         ["flat", this.#flatChromaticScale],
@@ -93,7 +87,6 @@ class Scales {
      *  in which we are completely sure it exists.
      */
     static #allNotesToChromScaleNameMapping = Object.freeze(new Map([
-
         // 0
         ["B#", "doubleSharp"],
         ["C", "sharp"],
@@ -193,7 +186,6 @@ class Scales {
     *  'doubleFlat':   []        
     */
     static getAllFullPitchChromaticScales() {
-
         return this.#allFullPitchChromaticScales;
     }
 
@@ -202,7 +194,6 @@ class Scales {
      * @returns 
      */
     static getAllOneOctaveChromaticScales() {
-
         return this.#allChromaticOneOctaveScales;
     }
 
@@ -212,7 +203,6 @@ class Scales {
     * @returns {string} - The name of a variation of a chromatic scale:  'doubleSharp', 'sharp', 'flat', or 'doubleFlat'
     */
     static getChromaticScaleNameByNote(note) {
-
         note = MusicalCore.removePitchOctave(note)
         return this.#allNotesToChromScaleNameMapping.get(note);
     }
@@ -230,14 +220,11 @@ class Scales {
      *          Returns: [...'E5', 'F5', 'Gb5', 'G5', 'Ab5'...]
      */
     static getFullPitchChromaticScaleByType(chromScaleType) {
-
         var allValidChromaticScaleTypes = this.getAllValidChromaticScaleTypes();
 
         if (!allValidChromaticScaleTypes.includes(chromScaleType)) {
-
             throw new Error(`${chromScaleType} is not a valid chromatic scale type`);
         }
-
         return this.#allFullPitchChromaticScales.get(chromScaleType)
     }
 
@@ -254,7 +241,6 @@ class Scales {
      *          Returns: [...'E5', 'F5', 'Gb5', 'G5', 'Ab5'...]
      */
     static getFullPitchChromaticScaleByNote(note) {
-
         var chromScaleType = this.getChromaticScaleNameByNote(note);
         return this.getFullPitchChromaticScaleByType(chromScaleType);
     }
@@ -265,11 +251,9 @@ class Scales {
      * 
      */
     static getIndexInFullPitchChromaticScale(scientificNote) {
-
         var allValidNotesScientific = this.getAllValidNotesInFullPitchRange();
 
         if (!allValidNotesScientific.has(scientificNote)) {
-
             throw new Error(`${scientificNote} is not a valid scientific note`);
         }
 
@@ -283,11 +267,9 @@ class Scales {
      * @returns 
      */
     static getOneOctaveChromaticScaleByType(chromScaleType) {
-
         var allValidChromaticScaleNames = this.getAllValidChromaticScaleTypes();
 
         if (!allValidChromaticScaleNames.includes(chromScaleType)) {
-
             throw new Error(`${chromScaleType} is not a valid chromatic scale type`);
         }
         return this.#allChromaticOneOctaveScales.get(chromScaleType)
@@ -299,7 +281,6 @@ class Scales {
      * @returns 
      */
     static getOneOctaveChromaticScaleByNote(note) {
-
         var chromScaleType = this.getChromaticScaleNameByNote(note);
         return this.getOneOctaveChromaticScaleByType(chromScaleType);
     }
@@ -310,10 +291,8 @@ class Scales {
      * @returns 
      */
     static getIndexInOneOctaveChromaticScale(note) {
-
         note = MusicalCore.removePitchOctave(note)
         var oneOctaveChromaticScale = this.getOneOctaveChromaticScaleByNote(note);
-
         return oneOctaveChromaticScale.indexOf(note);
     }
 
@@ -322,7 +301,6 @@ class Scales {
      * @returns {}
      */
     static getScaleAlphabetCAtBottom() {
-
         return this.#scaleAlphabetCAtBottom;
     }
 
@@ -331,7 +309,6 @@ class Scales {
      * @returns {}
      */
     static getAllNotesToChromScaleMapping() {
-
         return this.#allNotesToChromScaleNameMapping;
     }
 
@@ -341,7 +318,6 @@ class Scales {
     * 
     */
     static getAllValidNotesInFullPitchRange() {
-
         return this.#allValidNotesWithPitchOctave;
     }
 
@@ -351,7 +327,6 @@ class Scales {
      * 
      */
     static getAllValidNotes() {
-
         return this.#allValidNotes;
     }
 
@@ -360,7 +335,6 @@ class Scales {
      * @returns 
      */
     static getAllValidChromaticScaleTypes() {
-
         return this.#allValidChromaticScaleTypes;
     }
 
@@ -368,10 +342,8 @@ class Scales {
      * 
      */
     static printAllFullPitchChromaticScalesVertically() {
-
         var allScales = this.getAllFullPitchChromaticScales();
         var length = allScales.get('sharp').length; // should be 88
-
         const colWidth = 7; // Set a fixed column width for consistent spacing
 
         console.log('    ' + '-'.repeat(colWidth * 4 + 6)); // Dynamic width

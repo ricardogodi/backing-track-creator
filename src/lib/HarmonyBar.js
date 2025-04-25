@@ -16,7 +16,6 @@ class HarmonyBar {
      * 
      */
     constructor() {
-
         this.#leftChord = null;
         this.#rightChord = null;
 
@@ -27,13 +26,11 @@ class HarmonyBar {
         this.#hasRightChord = false;
     }
 
-
     /**
      * 
      * @param {*} chord 
      */
     setLeftChord(chord) {
-
         this.#leftChord = chord;
         this.#hasLeftChord = true;
     }
@@ -43,8 +40,6 @@ class HarmonyBar {
     * @param {*} chord 
     */
     setRightChord(chord) {
-
-        //console.log("we inserted to the right.")
         this.#rightChord = chord;
         this.#hasRightChord = true;
     }
@@ -54,7 +49,6 @@ class HarmonyBar {
      * @param {*} voicedChord 
      */
     setVoicedLeftChord(voicedChord) {
-
         this.#voicedLeftChord = voicedChord;
     }
 
@@ -63,31 +57,14 @@ class HarmonyBar {
      * @param {*} voicedChord 
      */
     setVoicedRightChord(voicedChord) {
-
         this.#voicedRightChord = voicedChord;
     }
-
-
-  /*
-    setHasLeftChord(bool) {
-
-        this.#hasLeftChord = bool;
-    }
-
- 
-    setHasRightChord(bool) {
-
-        this.#hasRightChord = bool;
-    }
-    */
-
 
     /**
      * 
      * @returns 
      */
     getLeftChord() {
-
         return this.#leftChord;
     }
 
@@ -96,18 +73,14 @@ class HarmonyBar {
      * @returns 
      */
     getRightChord() {
-
         return this.#rightChord;
     }
-
-
 
     /**
      * 
      * @returns 
      */
     getLeftVoicedChord() {
-
         return this.#voicedLeftChord;
     }
 
@@ -116,7 +89,6 @@ class HarmonyBar {
      * @returns 
     */
     getRightVoicedChord() {
-
         return this.#voicedRightChord;
     }
 
@@ -125,7 +97,6 @@ class HarmonyBar {
      * @returns 
      */
     hasLeftChord() {
-
         return this.#hasLeftChord;
     }
 
@@ -134,7 +105,6 @@ class HarmonyBar {
      * @returns 
      */
     hasRightChord() {
-
         return this.#hasRightChord;
     }
 
@@ -143,7 +113,6 @@ class HarmonyBar {
     * @returns 
     */
     hasTwoChords() {
-
         return this.#hasLeftChord && this.#hasRightChord
     }
 
@@ -152,12 +121,14 @@ class HarmonyBar {
     * @returns 
     */
     hasAChord() {
-
         return this.#hasLeftChord || this.#hasRightChord
     }
 
+    /**
+     * 
+     * @param {*} position 
+     */
     removeChordAtPosition(position) {
-
         if (!this.hasTwoChords() && position == 'right') { 
             // Trying to remove right chord when there isn't one
             throw new Error(`Bar does not have a right chord!`)
@@ -168,9 +139,7 @@ class HarmonyBar {
         }
 
         if (this.hasTwoChords()) {
-
             if (position == 'left' || position == "middle") { // Removing left chord
-
                 // Move right chord the left
                 this.#leftChord = this.#rightChord;
                 this.#voicedLeftChord = this.#voicedRightChord;
@@ -182,8 +151,6 @@ class HarmonyBar {
             this.#hasRightChord = false;
 
         } else { // Must have one chord
-           // console.log("removed inside Harmony bar")
-
             this.#leftChord = null;
             this.#voicedLeftChord = null;
             this.#hasLeftChord = false;

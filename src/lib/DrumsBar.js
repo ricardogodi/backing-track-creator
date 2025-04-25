@@ -8,7 +8,6 @@ class DrumsBar {
      * 
      */
     constructor(rhythm) {
-
         this.#drumsRythm = rhythm
     }
 
@@ -17,11 +16,8 @@ class DrumsBar {
      * @param {*} components 
      */
     setDrumsRhythm(components) { 
-
         this.#drumsRythm = new Map();
-
         for (let [component, rhythm] of components) {  
-
             let newRhythmArr = structuredClone(rhythm);
             this.#drumsRythm.set(component,newRhythmArr);
         }
@@ -32,7 +28,6 @@ class DrumsBar {
      * @returns 
      */
     getDrumsRhythm() {
-        
         return this.#drumsRythm;
     }
 }

@@ -2,15 +2,13 @@
 
 function ChangeHarmonicPosition({ controller, isPlaying }) {
 
-    const handleClick = () => {
-
+    const handleClick = () => { 
         controller.changeInitialHarmonicPosition()
     }
 
     return (
         <div className={`change-harm-pos ${isPlaying ? "disabled" : ""}`} >
             <button className="change-harmonic-position-button"
-
                 onClick={handleClick}
              
             >
@@ -18,8 +16,6 @@ function ChangeHarmonicPosition({ controller, isPlaying }) {
             </button>
 
         </div>
-
-
     )
 }
 

@@ -78,7 +78,6 @@ class MusicalUtilities {
         var newScale = []
 
         for (let i = 0; i < length; i++) {
-
             let nextNote = scaleAlphabet[(curatedNoteIndex + i) % length];
             newScale.push(nextNote);
         }
@@ -97,21 +96,17 @@ class MusicalUtilities {
         var allNotesWithPitch = MusicalCore.getAllValidNotesInFullPitchRange()
 
         if (!allNotes.has(note) && !allNotesWithPitch.has(note)) {
-
             throw new Error (`${note } is not a valid note.`)
         }
 
         var curatedNote = this.removeAccidentalAndPitchOctave(note)
-
         var scaleAlphabet = MusicalCore.getScaleAlphabetCAtBottom();
-
         var curatedNoteIndex = scaleAlphabet.indexOf(curatedNote);
 
         var length = scaleAlphabet.length;
         var newScale = []
 
         for (let i = 0; i < length; i++) {
-
             let nextNote = scaleAlphabet[(curatedNoteIndex + i + 1) % length];
             newScale.push(nextNote);
         }
@@ -140,7 +135,6 @@ class MusicalUtilities {
      */
     static retrieveEnharmonic(noteTarget, index) {
         
-
         // Get all the four chromatic scales
         var allChromaticScales = MusicalCore.getAllOneOctaveChromaticScales();
 

@@ -13,8 +13,6 @@ class Bar {
      * 
      */
     constructor() {
-
-    
         this.#pianoBar = new PianoBar([16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
         this.#bassBar = new BassBar(StylesLibrary.getBass('Rock', 'Bass 1'));
         this.#drumsBar = new DrumsBar(StylesLibrary.getBass('Rock', 'Drums 1'));
@@ -25,7 +23,6 @@ class Bar {
      * @param {*} pianoBar 
      */
     setPianoBar(pianoBar) {
-
         this.#pianoBar = pianoBar;
     }
 
@@ -34,7 +31,6 @@ class Bar {
      * @param {*} bassBar 
      */
     setBassBar(bassBar) {
-
         this.#bassBar = bassBar;
     }
 
@@ -43,7 +39,6 @@ class Bar {
      * @param {*} drumsBar 
      */
     setDrumsBar(drumsBar) {
-
         this.#drumsBar = drumsBar;
     }
 

@@ -144,7 +144,7 @@ class Playback {
     }
 
     stop() {
-
+        
         if (Tone.Transport.state == 'started') {
 
             console.log('Stopped...')

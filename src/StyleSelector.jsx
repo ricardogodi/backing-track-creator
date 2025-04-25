@@ -4,7 +4,7 @@ import DrumsRhythms from './DrumsRhythms.jsx';
 
 import { useState } from "react";
 
-function StyleSelector({ controller }) {
+function StyleSelector({ controller, isPlaying }) {
 
 
     const [styleSelection, setStyleSelection] = useState("Rock")
@@ -40,22 +40,19 @@ function StyleSelector({ controller }) {
     }
 
     const handleBassSelection = (bassLabel) => {
-
         setBassSelection(bassLabel)
         controller.setBass(styleSelection, bassLabel)
     };
 
     const handleDrumsSelection = (drumsLabel) => {
-
         setDrumsSelection(drumsLabel)
         controller.setDrums(styleSelection, drumsLabel)
     };
 
     return (
-        <div className='style-selector-container'>
+        <div className={`style-selector-container ${isPlaying ? 'disabled' : ""}` }>
 
             <StylesList
-
                 controller={controller}
                 handleStyleSelection={handleStyleSelection}
             />
@@ -63,7 +60,6 @@ function StyleSelector({ controller }) {
             <div className='rhythms-container'>
 
                 <DrumsRhythms
-
                     drumsList={drumsList}
                     drumsPressedIndex={drumsPressedIndex}
                     setDrumsPressedIndex={setDrumsPressedIndex}
@@ -71,7 +67,6 @@ function StyleSelector({ controller }) {
                 />
 
                 <BassRhythms
-
                     bassList={bassList}
                     handleBassSelection={handleBassSelection}
                     setBassPressedIndex={setBassPressedIndex}

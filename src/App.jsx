@@ -24,7 +24,7 @@ function App() {
     if (!appController.current) {
         appController.current = new AppController();
     }
-
+    
     const [chords, setChords] = useState(appController.current.getFullChordNames());
     const [isPlaying, setIsPlaying] = useState(false);
     const [chordIsDragging, setChordIsDragging] = useState(false)
@@ -42,7 +42,6 @@ function App() {
                 <div className="left-panel">
 
                     <TonicSelectionPanel
-
                         controller={appController.current}
                         setChords={setChords}
                         isPlaying={isPlaying}
@@ -56,7 +55,6 @@ function App() {
                     />
 
                     <ChordTypeSelectionPanel
-
                         controller={appController.current}
                         setChords={setChords}
                         isPlaying={isPlaying}
@@ -67,27 +65,23 @@ function App() {
                 <div className="middle-content">
 
                     <ChordBoxList
-
                         chordList={chords}
                         isPlaying={isPlaying}
-
                         setChordIsDragging={setChordIsDragging}
 
                     />
 
                     <Bars
-
                         controller={appController.current}
                         isPlaying={isPlaying}
                         numOfBars={numOfBars}
-
                         setChordIsDragging={setChordIsDragging}
                         chordIsDragging={chordIsDragging}
                     />
 
                     <StyleSelector
                         controller={appController.current}
-
+                        isPlaying={isPlaying}
                     />
 
                 </div>
@@ -95,31 +89,24 @@ function App() {
                 <div className="right-panel">
 
                     <PlayerControls
-
                         controller={appController.current}
                         isPlaying={isPlaying}
                         setIsPlaying={setIsPlaying}
                     />
 
                     <TempoSlider
-
                         controller={appController.current}
                         isPlaying={isPlaying}
                     />
 
                     <Muters
-
                         controller={appController.current}
                     />
 
                     <ChangeHarmonicPosition
-
                         controller={appController.current}
                         isPlaying={isPlaying}
                     />
-
-
-
 
                 </div>
             </div>

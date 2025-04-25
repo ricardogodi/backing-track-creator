@@ -27,9 +27,6 @@ function ScaleTypeSelectionPanel({ controller, setChords, isPlaying }) {
         );
     }
 
-
-
-
     return (
         <div className={`scale-type-selection-container ${isPlaying ? 'disabled' : ""} `} >
 

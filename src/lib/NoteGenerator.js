@@ -40,7 +40,6 @@ class NoteGenerator {
      * @returns 
      */
     static generateScale(tonic, scaleType) {
-
         // Get chromatic intervals array by scale name
         var chromaticIntervals = MusicalCore.getChromaticIntervalsByScale(scaleType);
         // Get alphabet scale with root at the bottom

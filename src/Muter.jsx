@@ -2,9 +2,7 @@
 import React from 'react';
 
 function Muter({ label, setter }) {
-
   return (
-    
         <button >
             {label}
         </button>

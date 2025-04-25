@@ -4,7 +4,7 @@ function Bar({ barIndex, barLabels, isPlaying, isDragging, chordDropHandler, bar
 
     const [hasAChord, setHasAChord] = useState(true);
     const [hasTwoChords, setHasTwoChord] = useState(false);
-
+    
     const [isOverLeft, setIsOverLeft] = useState(false);
     const [isOverMiddle, setIsOverMiddle] = useState(false);
     const [isOverRight, setIsOverRight] = useState(false);

@@ -1,7 +1,6 @@
 function ChordTypeButton({ index, pressedIndex, setPressedIndex, controller, setChords, label }) {
 
     const handleButtonClick = () => {
-
         setPressedIndex(index)
         controller.setChordsType(label.toLowerCase());
         setChords(controller.getFullChordNames());
@@ -9,9 +8,7 @@ function ChordTypeButton({ index, pressedIndex, setPressedIndex, controller, set
 
     return (
         <button className={`chord-type-button ${pressedIndex == index ? "pressed" : ""}`}
-
             onClick={handleButtonClick}
-
         >
             {label}
         </button>

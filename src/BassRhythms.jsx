@@ -5,11 +5,8 @@ function BassRhythms({ bassPressedIndex, setBassPressedIndex, bassList, handleBa
 
     let list = []
     for (let i = 0; i < bassList.length; i++) {
-
         list.push(
-
             <BassButton
-
                 key={i}
                 index={i}
                 label={bassList[i]}

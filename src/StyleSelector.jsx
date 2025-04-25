@@ -12,16 +12,10 @@ function StyleSelector({ controller, isPlaying }) {
     const [bassList, setBassList] = useState(controller.getBassListByStyle(styleSelection))
     const [drumsSelection, setDrumsSelection] = useState("")
     const [bassSelection, setBassSelection] = useState("")
-
     const [drumsPressedIndex, setDrumsPressedIndex] = useState(0)
     const [bassPressedIndex, setBassPressedIndex] = useState(0)
 
-
-
     const handleStyleSelection = (styleLabel) => {
-
-        console.log("Changing style to: ", styleLabel)
-
         setStyleSelection(styleLabel)
 
         const drumsPerStyle = controller.getDrumsListByStyle(styleLabel)
@@ -35,8 +29,6 @@ function StyleSelector({ controller, isPlaying }) {
 
         setDrumsPressedIndex(0)
         setBassPressedIndex(0)
-
-
     }
 
     const handleBassSelection = (bassLabel) => {
@@ -51,28 +43,23 @@ function StyleSelector({ controller, isPlaying }) {
 
     return (
         <div className={`style-selector-container ${isPlaying ? 'disabled' : ""}` }>
-
             <StylesList
                 controller={controller}
                 handleStyleSelection={handleStyleSelection}
             />
-
             <div className='rhythms-container'>
-
                 <DrumsRhythms
                     drumsList={drumsList}
                     drumsPressedIndex={drumsPressedIndex}
                     setDrumsPressedIndex={setDrumsPressedIndex}
                     handleDrumsSelection={handleDrumsSelection}
                 />
-
                 <BassRhythms
                     bassList={bassList}
                     handleBassSelection={handleBassSelection}
                     setBassPressedIndex={setBassPressedIndex}
                     bassPressedIndex={bassPressedIndex}
                 />
-                
             </div>
         </div>
     )

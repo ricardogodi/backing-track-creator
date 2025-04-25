@@ -1,7 +1,6 @@
 function ScaleTypeButton({ index, pressedIndex, setPressedIndex, controller, setChords, label }) {
 
     const handleButtonClick = () => {
-
         controller.setScaleType(label.toLowerCase());
         setChords(controller.getFullChordNames());
         setPressedIndex(index)
@@ -9,9 +8,7 @@ function ScaleTypeButton({ index, pressedIndex, setPressedIndex, controller, set
 
     return (
         <button className={`scale-type-button ${pressedIndex == index ? "pressed" : ""}`}
-
             onClick={handleButtonClick}
-
         >
             {label}
         </button>

@@ -1,18 +1,12 @@
 function BassButton({bassPressedIndex, index, label, setBassPressedIndex, handleBassSelection }) {
     return (
-
         <div
-
         className={`bass-button ${bassPressedIndex == index ? "pressed" : ""}`}
-
-            onClick={() => {
-                
+            onClick={() => {  
                 handleBassSelection(label)
                 setBassPressedIndex(index)
             }}>
-
             {label}
-
         </div>
     )
 }

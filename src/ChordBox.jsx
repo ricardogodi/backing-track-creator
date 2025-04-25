@@ -9,7 +9,6 @@ function ChordBox({ label, index, setChordIsDragging }) {
         draggable={true}
 
         onDragStart={(e) => {
-
             e.dataTransfer.setData("type", "chordBox")
             e.dataTransfer.setData("chordIndex", index)
             e.dataTransfer.setData("chordLabel", label)
@@ -19,14 +18,11 @@ function ChordBox({ label, index, setChordIsDragging }) {
         }}
 
         onDragEnd={() => {
-
             setChordIsDragging(false)
             setIsLocalDragging(false)
 
         }}
-
     >
-
         {label}
     </div>;
 }

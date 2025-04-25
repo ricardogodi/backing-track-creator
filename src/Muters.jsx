@@ -15,63 +15,46 @@ function Muters({ controller }) {
         const newLabels = [...labels]
 
         if (!pianoIsMuted) {
-            
             newLabels[0] = "Unmute Piano"
             controller.mutePiano(true);
             setPianoMuted(true)
-
         } else {
-
             newLabels[0] = "Mute Piano"
             controller.mutePiano(false);
             setPianoMuted(false)
         }
-
         setLabels(newLabels)
     };
 
   const handleMuteBass = () => {
-        
         const newLabels = [...labels]
-
         if (!bassIsMuted) {
-            
             newLabels[1] = "Unmute Bass"
             controller.muteBass(true);
             setBassMuted(true)
-
         } else {
-
             newLabels[1] = "Mute Bass"
             controller.muteBass(false);
             setBassMuted(false)
         }
-
         setLabels(newLabels)
     };
 
     const handleMuteDrums = () => {
-        
         const newLabels = [...labels]
-
         if (!drumsAreMuted) {
-            
             newLabels[2] = "Unmute Drums"
             controller.muteDrums(true);
             setDrumsMuted(true)
-
         } else {
-
             newLabels[2] = "Mute Drums"
             controller.muteDrums(false);
             setDrumsMuted(false)
         }
-
         setLabels(newLabels)
     };
 
     return (
-
         <div className="muters-container">
             <button className="muter-button"onClick={handleMutePiano}>
                 {labels[0]}

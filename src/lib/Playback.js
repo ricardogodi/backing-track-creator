@@ -75,18 +75,11 @@ class Playback {
         let arrayLength = this.#bassRhythm.get('root').length;
 
         if (arrayLength == 16) {
-
             this.#subdivisionDuration = Tone.Time('16n').toSeconds();
-
         } else if (arrayLength == 12) {
-
             this.#subdivisionDuration = Tone.Time('8t').toSeconds();
-
         } else if (arrayLength == 32) {
-
-            console.log("subdivision is 32")
             this.#subdivisionDuration = Tone.Time('32n').toSeconds();
-
         }
     }
 
@@ -107,57 +100,42 @@ class Playback {
     }
 
     changeTempo(newTempo) {
-
         if (this.#tempo !== newTempo) {
             Tone.Transport.cancel();
             this.#tempo = newTempo;
             Tone.Transport.bpm.value = this.#tempo;
-
         }
-
-        console.log(`tempo is now: ${Tone.Transport.bpm.value }`)
     }
 
     async play() {
 
         this.#playbackStartTime = Tone.now();
-
+        
         if (!this.#hasPlayed) {
             await Tone.start();
             this.#hasPlayed = true
         }
 
         if (Tone.Transport.state == 'stopped') {
-
-            console.log('Playing...')
             this.mutePiano(false)
             this.muteBass(false)
             this.muteDrums(false)
-
             Tone.Transport.start("+0.1"); // Start the transport
             this.#mainLoop.start(); // Start the main loop
-
         } else if (Tone.Transport.state == 'started') {
-
-            console.log("Loop state is started")
+            //console.log("Loop state is started")
         }
     }
 
     stop() {
-        
         if (Tone.Transport.state == 'started') {
-
-            console.log('Stopped...')
             this.mutePiano(true)
             this.muteBass(true)
             this.muteDrums(true)
-
             Tone.Transport.stop();
             this.#mainLoop.stop();
-
         } else if (Tone.Transport.state == 'stopped') {
-
-            console.log("Loop state is stopped")
+            //console.log("Loop state is stopped")
         }
     }
 
@@ -192,7 +170,7 @@ class Playback {
      * @param {*} harmSeqBars 
      */
     updateHarmony(harmSeqIterator) {
-        
+
         let length = this.#numOfBars;
         this.#bars = [];
 
@@ -262,26 +240,25 @@ class Playback {
         var length = nextBarVoicesArray.length;
 
         for (let i = 0; i < length; i++) {
-
             let nextNote = nextBarVoicesArray[i];
-
             let index = MusicalCore.getIndexInFullPitchChromaticScale(nextNote)
             let sharpChromScale = MusicalCore.getFullPitchChromaticScaleByType('sharp'); // Get the 'sharp' chromatic scale: ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-
             let enharmInSharpScale = sharpChromScale[index]; // Get enharmonic equivalente from the 'sharp' chromatic scale
-
             let enharmWithSharpWord = enharmInSharpScale.replace('#', 'sharp')
             let path = 'piano_audio_samples/' + enharmWithSharpWord + '.wav';
 
             if (!(nextNote in this.#pianoSamplesObj)) {
-
                 this.#pianoSamplesObj[nextNote] = path; // Map properly named note to the path of its corresponding wav file
             }
         }
-
         this.#pianoSampler = new Tone.Sampler(this.#pianoSamplesObj).connect(this.#pianoVolume);
     }
 
+    /**
+     * 
+     * @param {*} root 
+     * @param {*} fifth 
+     */
     #updateBassSampler(root, fifth) {
 
         let rootIndex = MusicalCore.getIndexInFullPitchChromaticScale(root);
@@ -299,12 +276,10 @@ class Playback {
         let fifthPath = 'bass_audio_samples/' + fifthEnharmWithSharpWord + '.wav';
 
         if (!(root in this.#bassSamplesObj)) {
-
             this.#bassSamplesObj[root] = rootPath; // Map properly named note to the path of its corresponding wav file
         }
 
         if (!(fifth in this.#bassSamplesObj)) {
-
             this.#bassSamplesObj[fifth] = fifthPath; // Map properly named note to the path of its corresponding wav file
         }
 
@@ -317,26 +292,21 @@ class Playback {
     #setupDrumsPlayer() {
 
         for (let i = 0; i < this.#numOfBars; i++) {
-
             let nextBarRhythm = this.#bars[0].getDrumsBar().getDrumsRhythm()
-
             for (let [drumComponent, rhythm] of nextBarRhythm) {
-
                 let path = 'drums_audio_samples/' + drumComponent + '.wav';
-
                 if (!(drumComponent in this.#drumsPlayerObj)) {
-                   
                     this.#drumsPlayerObj[drumComponent] = new Tone.Player(path).connect(this.#drumsVolume); // Map properly named note to the path of its corresponding wav file
                 }
             }
         }
     }
 
-
+    /**
+     * 
+     */
     #loopSetup() {
-       
         this.#mainLoop = new Tone.Loop((loopTime) => {
-
             this.#schedulePiano(loopTime);
             this.#scheduleBass(loopTime);
             this.#scheduleDrums(loopTime);
@@ -348,33 +318,21 @@ class Playback {
      * @param {*} loopTime - The time at which the loop starts.
      */
     #schedulePiano(loopTime) {
-
-       
         var sixteenthNoteDuration = Tone.Time('16n').toSeconds();
 
         // Helper function to schedule notes
         const scheduleNotes = (notes, rhythm, barIndex, loopTime) => {
-
             for (let note of notes) {
-
                 let size = rhythm.length;
-
                 for (let sixteenth = 0; sixteenth < size; sixteenth++) {
-
                     let noteDurationInTermsOfSixteenths = rhythm[sixteenth];
-
                     if (noteDurationInTermsOfSixteenths > 0) {
-
                         let measureOffset = Tone.Time(barIndex.toString() + 'm').toSeconds();
                         let whenExactly = loopTime + measureOffset + (sixteenth * sixteenthNoteDuration) - this.#playbackStartTime;
                         const actualDuration = noteDurationInTermsOfSixteenths * sixteenthNoteDuration;
-
                         const eventID = Tone.Transport.scheduleOnce((time) => {
-
                             this.#pianoSampler.triggerAttackRelease(note, actualDuration, time);
-
                         }, whenExactly);
-
                         this.#pianoEventIDs.push(eventID);
                     }
                 }
@@ -382,17 +340,13 @@ class Playback {
         }
 
         for (let i = 0; i < this.#numOfBars; i++) {
-
             let pianoBar = this.#bars[i].getPianoBar();
-
             // Skip if there is no chord
             if (!pianoBar.hasAChord()) {
-
                 continue;
             }
 
             if (pianoBar.hasTwoChords()) {
-
                 let leftChordNotes = pianoBar.getLeftConcreteChord();
                 let leftChordRhythm = pianoBar.getLeftChordRhythm();
                 scheduleNotes(leftChordNotes, leftChordRhythm, i, loopTime);
@@ -400,9 +354,7 @@ class Playback {
                 let rightChordNotes = pianoBar.getRightConcreteChord();
                 let rightChordRhythm = pianoBar.getRightChordRhythm();
                 scheduleNotes(rightChordNotes, rightChordRhythm, i, loopTime);
-
             } else { // pianoBar has one chord exactly
-
                 let leftChordNotes = pianoBar.getLeftConcreteChord();
                 let leftChordRhythm = pianoBar.getLeftChordRhythm();
                 scheduleNotes(leftChordNotes, leftChordRhythm, i, loopTime);
@@ -413,67 +365,42 @@ class Playback {
     #scheduleBass(loopTime) {
 
         let subdivisionDuration;
-
         let arrayLength = this.#bassRhythm.get('root').length;
 
         if (arrayLength == 16) {
-
             subdivisionDuration = Tone.Time('16n').toSeconds();
-
         } else if (arrayLength == 12) {
-
             subdivisionDuration = Tone.Time('8t').toSeconds();
-
         } else if (arrayLength == 32) {
-
-            console.log("subdivision is 32")
             subdivisionDuration = Tone.Time('32n').toSeconds();
-
         }
 
-
         const scheduleNotes = (notes, bassRhythm, barIndex, loopTime) => {
-
-
             for (let [voice, rhythm] of bassRhythm) {
 
                 let arrayLength = rhythm.length;       
+                let subdivisionDuration;
 
-            let subdivisionDuration;
-
-            if (arrayLength == 16) {
-    
-                subdivisionDuration = Tone.Time('16n').toSeconds();
-    
-            } else if (arrayLength == 12) {
-    
-                subdivisionDuration = Tone.Time('8t').toSeconds();
-    
-            } else if (arrayLength == 32) {
-    
-               
-                subdivisionDuration = Tone.Time('32n').toSeconds();
-    
-            }
-
+                if (arrayLength == 16) {
+                    subdivisionDuration = Tone.Time('16n').toSeconds();
+                } else if (arrayLength == 12) {
+                    subdivisionDuration = Tone.Time('8t').toSeconds();
+                } else if (arrayLength == 32) {
+                    subdivisionDuration = Tone.Time('32n').toSeconds();
+                }
 
                 let note = notes.get(voice);
                 let size = rhythm.length;
 
                 for (let subdivision = 0; subdivision < size; subdivision++) {
                     let noteDurationInTermsOfSubdivisions = rhythm[subdivision];
-
                     if (noteDurationInTermsOfSubdivisions > 0) {
-
                         let measureOffset = Tone.Time(barIndex.toString() + 'm').toSeconds();
                         let whenExactly = loopTime + measureOffset + (subdivision * subdivisionDuration) - this.#playbackStartTime;
                         const actualDuration = noteDurationInTermsOfSubdivisions * subdivisionDuration;
-
                         const eventID = Tone.Transport.scheduleOnce((time) => {
-
                             this.#bassSampler.triggerAttackRelease(note, actualDuration, time);
                         }, whenExactly);
-
                         this.#bassEventIDs.push(eventID);
                     }
                 }
@@ -508,55 +435,31 @@ class Playback {
     #scheduleDrums(loopTime) {
 
         for (let i = 0; i < this.#numOfBars; i++) {
-
             let drumsBar = this.#bars[i].getDrumsBar();
             let components = drumsBar.getDrumsRhythm();
-
             for (let [component, rhythm] of components) {
-
-
                 let subdivisionDuration;
                 let arrayLength = rhythm.length;
-
-
                 if (arrayLength == 16) {
-        
                     subdivisionDuration = Tone.Time('16n').toSeconds();
-        
                 } else if (arrayLength == 12) {
-        
                     subdivisionDuration = Tone.Time('8t').toSeconds();
-        
-                } else if (arrayLength == 32) {
-        
-                   
+                } else if (arrayLength == 32) {  
                     subdivisionDuration = Tone.Time('32n').toSeconds();
-        
                 }
         
-
                 let size = rhythm.length;
-
                 for (let sixteenth = 0; sixteenth < size; sixteenth++) {
-
                     let noteDurationInTermsOfSixteenths = rhythm[sixteenth];
-
                     var measureOffset = Tone.Time(i.toString() + 'm').toSeconds();
-
                     let whenExactly = loopTime + measureOffset + (sixteenth * subdivisionDuration) - this.#playbackStartTime
-
                     if (noteDurationInTermsOfSixteenths > 0) {
-
                         const eventID = Tone.Transport.scheduleOnce((time) => {
                             console.log(`component is: ${component}`)
                             this.#drumsPlayerObj[component].start(time)
-
-
                         }, whenExactly);
-
                         this.#drumsEventIDs.push(eventID)
                     }
-
                 }
             }
         }
@@ -566,8 +469,6 @@ class Playback {
      * 
      */
     printState() {
-
-        console.log("");
 
         for (let i = 0; i < this.#numOfBars; i++) {
 
@@ -614,19 +515,13 @@ class Playback {
      * @param {*} newRhythm 
      */
     setPianoRhythm(newRhythm) {
-
         this.#pianoRhythm = newRhythm
-
         let length = this.#numOfBars;
-
         for (let i = 0; i < length; i++) {
-
             let nextPianoBar = this.#bars[i].getPianoBar();
             nextPianoBar.setPianoRhythm(newRhythm);
         }
-
         Tone.Transport.cancel();
-
     }
 
     /**
@@ -634,18 +529,12 @@ class Playback {
      * @param {*} newRhythm 
      */
     setBassRhythm(newRhythm) {
-
         this.#bassRhythm = newRhythm
-
         let length = this.#numOfBars;
-
-
         for (let i = 0; i < length; i++) {
-
             let nextBassBar = this.#bars[i].getBassBar();
             nextBassBar.setBassRhythm(newRhythm);
         }
-
         this.calculateSubdivision()
         Tone.Transport.cancel();
     }
@@ -655,18 +544,13 @@ class Playback {
      * @param {*} newRhythm 
      */
     setDrumsRhythm(newRhythm) {
-
         this.#drumsRhythm = newRhythm
-
         let length = this.#numOfBars;
-
         for (let i = 0; i < length; i++) {
-
             let nextDrumsBar = this.#bars[i].getDrumsBar();
             nextDrumsBar.setDrumsRhythm(newRhythm);
         }
         this.#setupDrumsPlayer()
-
         Tone.Transport.cancel();
     }
 
@@ -676,7 +560,6 @@ class Playback {
      * @param {*} index 
      */
     setPianoRhythmAtIndex(newRhythm, index) {
-
         let pianoBar = this.#bars[index].getPianoBar();
         pianoBar.setPianoRhythm(newRhythm);
 
@@ -688,7 +571,6 @@ class Playback {
      * @param {*} index 
      */
     setBassRhythmAtIndex(newRhythm, index) {
-
         let bassBar = this.#bars[index].getBassBar();
         bassBar.setBassRhythm(newRhythm);
     }
@@ -699,31 +581,9 @@ class Playback {
      * @param {*} index 
      */
     setDrumsRhythmAtIndex(newRhythm, index) {
-
         let drumsBar = this.#bars[index].getDrumsBar();
         drumsBar.setDrumsRhythm(newRhythm);
     }
 }
 
 export default Playback;
-
-
-/*
-  clearAllEvents() {
- 
-              this.#pianoEventIDs.forEach((eventId) => Tone.getTransport().clear(eventId));
-              this.#bassEventIDs.forEach((eventId) => Tone.getTransport().clear(eventId));
-              this.#drumsEventIDs.forEach((eventId) => Tone.getTransport().clear(eventId));
-              Tone.Transport.cancel();
-          
-              // Reset event arrays after clearing them
-              this.#pianoEventIDs = [];
-              this.#bassEventIDs = [];
-              this.#drumsEventIDs = [];
-          }
-      
-
-*/
-
-
-

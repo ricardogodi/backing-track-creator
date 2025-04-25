@@ -1,10 +1,8 @@
 import MusicalCore from "./MusicalCore.js";
 import HarmonyBar from "./HarmonyBar.js";
-import Chord from "./Chord.js";
 import VoicedChord from "./VoicedChord.js";
 import ChordLinker from "./ChordLinker.js"
-import Playback from "./Playback.js";
-
+import HarmonySequenceIterator from "./HarmonySequenceIterator.js"
 
 class HarmonySequence {
 
@@ -13,7 +11,6 @@ class HarmonySequence {
     #firstChordType;
     #firstBarWithChordIndex;
     #numOfBars;
-
     #playback; // Observer
 
     /**
@@ -21,14 +18,11 @@ class HarmonySequence {
      * @param {*} playback 
      */
     constructor(playback) {
-
         this.#numOfBars = 4;
         this.#initializeBars();
-
         this.#initialHarmonicPosition = 0;
         this.#firstChordType = null;
         this.#firstBarWithChordIndex = -1;
-
         this.#playback = playback;
     }
 
@@ -49,9 +43,29 @@ class HarmonySequence {
         this.#bars.push(new HarmonyBar());
     }
 
+    /**
+     * 
+     * @returns 
+     */
     getNumOfBars() {
-        console.log(`this.#bars.length: ${this.#bars.length}`)
         return this.#bars.length;
+    }
+
+    /**
+     * 
+     * @param {*} index 
+     * @returns 
+     */
+    getBarAt(index) {
+        return this.#bars[index]
+    }
+
+    /**
+     * 
+     * @returns 
+     */
+    createIterator() {
+        return new HarmonySequenceIterator(this)
     }
 
     changeInitialHarmonicPosition() {
@@ -64,13 +78,12 @@ class HarmonySequence {
         }
 
         if (this.#firstBarWithChordIndex != -1) {
-
             var firstChord = this.#bars[this.#firstBarWithChordIndex].getLeftChord();
             const CHORD_POSITION = "left";
             this.#linkAll(firstChord, this.#firstBarWithChordIndex, CHORD_POSITION);
         }
 
-        this.#playback.updateHarmony(this.#bars);
+        this.#playback.updateHarmony(this.createIterator());
     }
 
     /**
@@ -79,11 +92,6 @@ class HarmonySequence {
      * @param {*} index 
      */
     insertChordAtBar(chord, barIndex, chordPosition) { // 0 ->left, 1 -> middle(replace)   2 -> right 
-
-        /*
-        we can only insert to the right when bar already has a chord
-        */
-
         // Validate index
         if ((barIndex < 0) || (barIndex >= this.#numOfBars)) {
             throw new Error(`index ${index} is out of bounds`);
@@ -92,55 +100,28 @@ class HarmonySequence {
         const bar = this.#bars[barIndex];
 
         if (bar.hasTwoChords()) { // Bar has two chords
-
-            console.log("Bar has two chords")
-
             if (chordPosition == 'left') { // Insert to the left
-
                 bar.setLeftChord(chord);
-
             } else if (chordPosition == 'right') { // Insert to the right
-
                 bar.setRightChord(chord);
-
             }
-
         } else if (bar.hasAChord()) {  // The only chord must be on the left
-
-            console.log("Bar has one chord exactly")
-
             if (chordPosition == 'left') {
-
-                console.log("Inserting to the left")
-
                 bar.setRightChord(bar.getLeftChord()); // Move left chord to the right 
                 bar.setLeftChord(chord);
-
             } else if (chordPosition == 'middle') {
-
-                console.log("Inserting to the 'middle''")
-
                 bar.setLeftChord(chord)
-
             } else if (chordPosition == 'right') {
-
                 bar.setRightChord(chord);
-
             }
-
         } else { // Bar has no chord
-
-            console.log("Bar has no chord")
             bar.setLeftChord(chord);
         }
 
         if (this.#firstBarWithChordIndex == -1 || barIndex < this.#firstBarWithChordIndex) {
-
             this.#firstBarWithChordIndex = barIndex;
             this.#firstChordType = chord.getType();
-
         } else if (barIndex == this.#firstBarWithChordIndex && chordPosition == 0) {
-
             this.#firstChordType = chord.getType();
         }
 
@@ -150,12 +131,10 @@ class HarmonySequence {
             this.#linkAll(chord, barIndex, chordPosition);
         }
 
-        this.#playback.updateHarmony(this.#bars);
+        this.#playback.updateHarmony(this.createIterator());
     }
 
     switchChords(barIndexFrom, barIndexTo, positionFrom, positionTo) {
-
-        console.log(`Switching chord at barIndex ${barIndexFrom}, position ${positionFrom}, WITH barIndex ${barIndexTo}, position ${positionTo}`)
 
         let barFrom = this.#bars[barIndexFrom]
         let barTo = this.#bars[barIndexTo]
@@ -164,92 +143,63 @@ class HarmonySequence {
         let chordFrom;
 
         if (positionFrom == 'left') {
-
             chordFrom = barFrom.getLeftChord();
-
         } else if (positionFrom == 'right') {
-
             chordFrom = barFrom.getRightChord();
         }
 
         let chordTo;
 
         if (positionTo == 'left') {
-
             chordTo = barTo.getLeftChord();
-
         } else if (positionTo == 'right') {
-
             chordTo = barTo.getRightChord();
         }
 
         // Now we do the switching
         if (positionTo == 'left') {
-
             barTo.setLeftChord(chordFrom);
-
         } else if (positionTo == 'right') {
-
             barTo.setRightChord(chordFrom);
         }
 
         if (positionFrom == 'left') {
-
             barFrom.setLeftChord(chordTo);
-
         } else if (positionFrom == 'right') {
-
             barFrom.setRightChord(chordTo);
         }
     }
 
     moveChord(barIndexFrom, barIndexTo, positionFrom, positionTo) {
 
-        console.log(`barIndexFrom: ${barIndexFrom} barIndexTo: ${barIndexTo} positionFrom: ${positionFrom} positionTo: ${positionTo}`)
-
         let barFrom = this.#bars[barIndexFrom]
         let barTo = this.#bars[barIndexTo]
-
         let chordFrom;
 
         if (positionFrom == 'left') {
-
             chordFrom = barFrom.getLeftChord();
-
         } else if (positionFrom == 'middle') {
-
             chordFrom = barFrom.getLeftChord();
-
         } else if (positionFrom == 'right') {
-
             chordFrom = barFrom.getRightChord();
         }
-
 
         let chordTo;
 
         if (barTo.hasAChord() && !barTo.hasTwoChords()) { // barTo has exactly one chord
-
             chordTo = barTo.getLeftChord();
-
         } else if (barTo.hasTwoChords()) {
-
             if (positionTo == 'left') {
-
                 chordTo = barTo.getLeftChord();
-    
             } else if (positionTo == 'right') {            
-    
                 chordTo = barTo.getRightChord();
             }
-
         }
 
         if (barFrom.hasAChord() && !barFrom.hasTwoChords()) { // Bar from has exactly one chord
             if (!barTo.hasAChord()) { // Bar to has no chords
                 barTo.setLeftChord(chordFrom);
                 barFrom.removeChordAtPosition(positionFrom);
-
             } else if (barTo.hasAChord() && !barTo.hasTwoChords()) { // Bar to has exactly chord
                 if (positionTo == "left") {
                     barTo.setLeftChord(chordFrom);
@@ -264,7 +214,6 @@ class HarmonySequence {
                     barTo.setRightChord(chordFrom);
                     barFrom.removeChordAtPosition(positionFrom);
                 }
-
             } else if (barTo.hasTwoChords()) { // Bar to has two chords
                 if (positionTo == "left") {
                     barTo.setLeftChord(chordFrom);
@@ -274,7 +223,6 @@ class HarmonySequence {
                     barFrom.setLeftChord(chordTo);
                 }
             }
-
         } else if (barFrom.hasTwoChords()) { // Bar from has two chords
             if (!barTo.hasAChord()) { // Bar to has no chords
                 if (positionFrom == "left") {
@@ -285,7 +233,6 @@ class HarmonySequence {
                     barTo.setLeftChord(chordFrom);
                     barFrom.removeChordAtPosition("right") // Just remove the right chord  
                 }
-
             } else if (barTo.hasAChord() && !barTo.hasTwoChords()) { // Bar to has exactly chord
                 if (positionTo == "left") {
                     barTo.setLeftChord(chordFrom);
@@ -296,7 +243,6 @@ class HarmonySequence {
                     } else if (positionFrom == "right") {
                         barFrom.removeChordAtPosition("right");
                     }
-
                 } else if (positionTo == "middle") { // switch chords
                     barTo.setLeftChord(chordFrom);
                     if (positionFrom == "left") {
@@ -314,108 +260,55 @@ class HarmonySequence {
                     }
                 }
             } else if (barTo.hasTwoChords()) {  // Bar to has two chords
-
                 if (positionTo == "left") {
-
                     barTo.setLeftChord(chordFrom);
-
                     if (positionFrom == "left") {
-
                         barFrom.setLeftChord(chordTo);
-
                     } else if (positionFrom == "right") {
-
                         barFrom.setRightChord(chordTo);
                     }
-
                 } else if (positionTo == "right") {
-
                     barTo.setRightChord(chordFrom);
-
                     if (positionFrom == "left") {
-
                         barFrom.setLeftChord(chordTo);
-
                     } else if (positionFrom == "right") {
-
                         barFrom.setRightChord(chordTo);
                     }
                 }
             }
         }
 
-/*
-
-        if (barTo.hasAChord()) {
-
-            console.log("Bar to has chord")
-            this.switchChords(barIndexFrom, barIndexTo, positionFrom, positionTo);
-
-        } else { // Bar we are moving the chord to does not have a chord
-
-            let chordFrom;
-
-            if (positionFrom == 'left') {
-
-                chordFrom = barFrom.getLeftChord()
-
-            } else if (positionFrom == 'right') {
-
-                chordFrom = barFrom.getRightChord()
-            }
-
-            // Insert chord into empty bar
-            barTo.setLeftChord(chordFrom);
-
-            // Remove chord from
-            this.removeChordAtBarAndPosition(barIndexFrom, positionFrom);
-        }*/
-
         this.#firstBarWithChordIndex = this.findBarWithFirstChordIndex();
-        console.log(  `firstBarWithChordIndex is:  ${ this.#firstBarWithChordIndex}` )
         let firstChord = this.#bars[this.#firstBarWithChordIndex].getLeftChord();
         this.#firstChordType = firstChord.getType();
-
         this.#linkAll(firstChord, this.#firstBarWithChordIndex, "left")
-        this.#playback.updateHarmony(this.#bars);
+        this.#playback.updateHarmony(this.createIterator());
     }
 
     removeChordAtBarAndPosition(barIndex, removePosition) {
-
         if (barIndex < 0 || barIndex >= this.#bars.length) {
             console.error(`Invalid barIndex: ${barIndex}`);
             return;
         }
 
-        //console.log(`Removing at bar ${barIndex} and position ${removePosition}`)
-
         let bar = this.#bars[barIndex];
 
-        console.log("right before removing")
         bar.removeChordAtPosition(removePosition);
-        
              this.#firstBarWithChordIndex = this.findBarWithFirstChordIndex();
-     
              // We want to link all the chords from the start
              if (this.#firstBarWithChordIndex != -1) { // There is a chord in the sequence
-             
                  let bar = this.#bars[this.#firstBarWithChordIndex];
                  let chord = bar.getLeftChord(); // Get the very first chord
                  this.#firstChordType = chord.getType();
-     
                  this.#linkAll(chord, this.#firstBarWithChordIndex, 0)
              }
      
-             this.#playback.updateHarmony(this.#bars);
-             
+             this.#playback.updateHarmony(this.createIterator());
     }
 
     findBarWithFirstChordIndex() {
-
         let size = this.#numOfBars;
-
         for (let i = 0; i < size; i++) {
-
             if (this.#bars[i].hasAChord()) {
                 return i;
             }
@@ -612,8 +505,8 @@ class HarmonySequence {
         let horIndex = 12;  // A1
         let allChromScales = MusicalCore.getAllFullPitchChromaticScales();
         var concreteBass;
-
         let found = false;
+
         while (!found) {
             for (let [_, chromScale] of allChromScales) {
                 let nextNote = chromScale[horIndex];
@@ -630,30 +523,22 @@ class HarmonySequence {
         ChordLinker.setAverageBass(concreteBass);
         ChordLinker.setHighestBass(concreteBass);
         ChordLinker.setLowestBass(concreteBass);
-
         return concreteBass;
     }
 
     printState() {
-
         for (let i = 0; i < this.#numOfBars; i++) {
-
-            let nextBar = this.#bars[i];
-
+            let nextBar = this.#bars[i]
             if (nextBar.hasTwoChords()) {
-
                 nextBar.getLeftChord().printState();
                 nextBar.getLeftVoicedChord().printState();
 
                 nextBar.getRightChord().printState();
                 nextBar.getRightVoicedChord().printState();
-
-
             } else if (nextBar.hasAChord()) {
 
                 nextBar.getLeftChord().printState();
                 nextBar.getLeftVoicedChord().printState();
-
             }
         }
     }

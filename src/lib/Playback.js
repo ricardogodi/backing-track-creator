@@ -191,18 +191,14 @@ class Playback {
      * 
      * @param {*} harmSeqBars 
      */
-    updateHarmony(harmSeqBars) {
+    updateHarmony(harmSeqIterator) {
         
-
-        console.log("Updating harmony...")
-
         let length = this.#numOfBars;
-
         this.#bars = [];
 
-        for (let i = 0; i < length; i++) {
+        while(harmSeqIterator.hasNext()) {
 
-            let harmonyBar = harmSeqBars[i];
+            let harmonyBar = harmSeqIterator.next();
             let bar = new Bar();
 
             let pianoBar = new PianoBar(this.#pianoRhythm);
@@ -249,6 +245,7 @@ class Playback {
                 this.#updatePianoSampler(concreteLeftChord);
                 this.#updateBassSampler(concreteLeftChordBass, bassBar.getLeftChordFifth());
             }
+            
         }
 
         Tone.Transport.cancel();

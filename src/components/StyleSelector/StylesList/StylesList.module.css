@@ -1,0 +1,18 @@
+.stylesListContainer {
+  display: flex;
+  /* Use flexbox for horizontal layout */
+  justify-content: space-between;
+  /* Distribute buttons evenly */
+  align-items: center;
+  /* Align buttons vertically */
+  width: 100%;
+  /* Ensure full width */
+}
+
+.stylesListContainer button {
+  flex: 1;
+  /* Make buttons expand equally */
+  text-align: center;
+  /* Center text inside buttons */
+}
+

@@ -1,0 +1,93 @@
+.barContainer {
+  /*border-radius: 15px;*/
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px;
+  width: 150px;
+  height: 90px;
+  font-weight: bold;
+  font-size: 18px;
+  box-sizing: border-box;
+}
+
+.bar {
+  border-radius: 15px;
+  position: absolute;
+  margin: 4px;
+  border: 3px solid #ddd;
+  width: 150px;
+  height: 90px;
+  box-sizing: border-box;
+}
+
+.bar.over {
+  border-color: #646cff;
+}
+
+/* Droppable areas */
+.leftArea,
+.middleArea,
+.rightArea {
+  flex: 0;
+  height: 100%;
+  transition: flex 0.3s ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.droppableMode {
+  flex: 1;
+}
+
+.draggableMode {
+  flex: 1;
+}
+
+.barIsDragging {
+  border-radius: 15px;
+  border: 3px solid #ddd;
+  background-color: #242424;
+}
+
+/* Highlights */
+.leftHighlight,
+.middleHighlight,
+.rightHighlight {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: #646cff;
+  opacity: 0;
+  border-radius: 15px;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
+  z-index: -1;
+}
+
+.leftHighlight {
+  left: 0;
+  width: 50%;
+}
+
+.middleHighlight {
+  left: 0;
+  width: 100%;
+}
+
+.rightHighlight {
+  right: 0;
+  width: 50%;
+}
+
+.highlightVisible {
+  opacity: 1;
+}

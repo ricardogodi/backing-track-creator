@@ -36,4 +36,22 @@ button:hover {
   border-color: #646cff;
 }
 
+.disabled {
+  pointer-events: none;
+  opacity: .04;
 
+  user-select: none;
+  /* Prevents text selection */
+  -webkit-user-select: none;
+  /* For Safari */
+  -moz-user-select: none;
+  /* For Firefox */
+  -ms-user-select: none;
+  /* For older versions of IE */
+}
+
+.pressed {
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transform: translateY(2px);
+  background-color: rgb(30, 45, 94);
+}

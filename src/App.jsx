@@ -1,19 +1,12 @@
 import React, { useState, useRef } from "react";
 import AppController from "./lib/AppController.js";
-import TonicSelectionPanel from "./TonicSelectionPanel";
-import PlayButton from "./PlayButton.jsx";
-import StopButton from "./StopButton.jsx";
-import ScaleTypeSelectionPanel from "./ScaleTypeSelectionPanel.jsx";
-import ChordTypeSelectionPanel from "./ChordTypeSelectionPanel.jsx"
-import ChordBoxList from "./ChordBoxList.jsx";
-import Bars from "./Bars.jsx";
-import TempoSlider from "./TempoSlider.jsx";
-import Muters from "./Muters.jsx"
-import ChangeHarmonicPosition from "./ChangeHarmonicPosition.jsx";
-import StyleSelector from "./StyleSelector.jsx";
-import AddBarButton from "./AddBarButton.jsx";
-import PlayerControls from "./PlayerControls.jsx";
-import PlayStopButton from "./PlayStopButton.jsx";
+import TonicSelectionPanel from "./components/TonicSelectionPanel/TonicSelectionPanel";
+import ScaleTypeSelectionPanel from "./components/ScaleTypeSelectionPanel/ScaleTypeSelectionPanel";
+import ChordTypeSelectionPanel from "./components/ChordTypeSelectionPanel/ChordTypeSelectionPanel"
+import ChordBoxList from "./components/ChordBoxList/ChordBoxList";
+import Bars from "./components/Bars/Bars";
+import StyleSelector from "./components/StyleSelector/StyleSelector";
+import PlayerControls from "./components/PlayerControls/PlayerControls";
 
 import "./App.css";
 
@@ -74,17 +67,6 @@ function App() {
                         controller={appController.current}
                         isPlaying={isPlaying}
                         setIsPlaying={setIsPlaying}
-                    />
-                    <TempoSlider
-                        controller={appController.current}
-                        isPlaying={isPlaying}
-                    />
-                    <Muters
-                        controller={appController.current}
-                    />
-                    <ChangeHarmonicPosition
-                        controller={appController.current}
-                        isPlaying={isPlaying}
                     />
                 </div>
             </div>

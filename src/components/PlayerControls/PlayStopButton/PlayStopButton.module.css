@@ -1,0 +1,13 @@
+.playButton {
+
+  width: 30px;
+  height: 30px;
+  color: darkgreen;
+}
+
+.stopButton {
+
+  width: 30px;
+  height: 30px;
+  color: darkred;
+}

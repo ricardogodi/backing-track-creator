@@ -1,469 +1,50 @@
-#root {
-  max-width: 100%;
-  align-items: center;
-  padding: 2rem;
-  user-select: none; 
-  -webkit-user-select: none;  /* Safari */
-  -moz-user-select: none;     /* Firefox */
-  -ms-user-select: none;      /* Internet Explorer/Edge */
+/* src/App.css */
+
+:root {
+  --gap: 2rem;
+  --max-width: 1200px;
+  --padding: 1.5rem;
 }
 
+/* Center & constrain the app */
+.app {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--padding);
+  user-select: none;
+}
+
+/* Heading */
 h1 {
   text-align: center;
 }
 
-/* Main content container */
+/* 3-column layout at desktop, single column on mobile */
 .main-content {
-  display: flex;
-  position: relative;
-  margin: 50px;
-
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas: "left main right";
+  gap: var(--gap);
+  margin-top: var(--gap);
 }
 
-
-
-/* Panels container */
-.left-panel {
-  display: flex;
-  gap: 30px;
-  width: 25%;
-  margin-top: 100px;
-}
-
-/* Track container */
-.middle-content {
-
-  align-items: center;
-  justify-content: center;
-  /* Horizontal center */
-  width: 50%;
-  margin: 10px;
-}
-
-/* Panels container */
-.right-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  width: 25%;
-}
-
-.chord-box {
-  display: flex;
-  border-radius: 15px; 
-  align-items: center;
-  /* Vertical center */
-  justify-content: center;
-  /* Horizontal center */
-  padding: 0 16px;
-  /* Remove vertical padding */
-  margin: 4px;
-  border: 3px solid #ddd;
-
-  width: 80px;
-  height: 80px;
-  font-weight: bold;
-  font-size: 18px;
-  box-sizing: border-box;
-
-  user-select: none; 
-  -webkit-user-select: none;  /* Safari */
-  -moz-user-select: none;     /* Firefox */
-  -ms-user-select: none;      /* Internet Explorer/Edge */
-}
-
-
-.tonic-selection-container {
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.scale-type-selection-container {
-
-  display: flex;
-  flex-direction: column;
-}
-
-.scale-buttons-container {
-
-display: flex;
-flex-direction: column;
-
-}
-
-.chord-type-selection-container {
-
-  display: flex;
-  flex-direction: column;
-}
-
-
-
-.selection-title {
-
-  text-align: center;
-  /* Center the text horizontally */
-  margin-bottom: 10px;
-  /* Add space below the title */
-  font-size: 16px;
-  /* Adjust font size */
-  font-weight: bold;
-  /* Make the text bold */
-  color: white;
-  /* Set text color */
-  padding: 5px;
-
-}
-
-.button-pair {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-}
-
-.tonic-button {
-  text-align: center;
-  margin: 3px auto;
-  padding: 0;
-  width: 40px;
-  height: 30px;
-}
-
-.scale-type-button {
-  text-align: center;
-  margin: 3px auto;
-  width: 100%;
-}
-
-.chord-type-button {
-  text-align: center;
-  margin: 3px auto;
-  width: 100%;
-}
-
-.player-controls {
-display: flex;
-flex-direction: row;
-justify-content: center;
-gap: 5px;
-
-
-}
-
-.play-button {
-
-  width: 30px;
-  height: 30px;
-  color: darkgreen;
-}
-
-.stop-button {
-
-  width: 30px;
-  height: 30px;
-  color: darkred;
-}
-
-.chord-box:hover {
-  border-color: #646cff;
-}
-
-
-.bar.over {
-  border-color: #646cff;
-}
-
-
-
-
-
-
-
-
-
-
-.chord-box-list-container {
-  display: flex;
-  flex-direction: row;
-  margin: 0px 0 25px 0;
-
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-
-.muters-container {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-
-}
-
-.muter-button {
-  height: 75px;
-}
-
-.change-harm-pos {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-  padding: 0;
-  height: 75px;
-}
-
-.style-selector-container {
-  border: 3px;
-  border-color: #ddd;
-  border-width: 3px;
-  width: 100%;
-  border-width: 3px;
-  border-style: solid;
-  border-color: #ddd;
-}
-
-.styles-list-container {
-  display: flex;
-  /* Use flexbox for horizontal layout */
-  justify-content: space-between;
-  /* Distribute buttons evenly */
-  align-items: center;
-  /* Align buttons vertically */
-  width: 100%;
-  /* Ensure full width */
-}
-
-.styles-list-container button {
-  flex: 1;
-  /* Make buttons expand equally */
-  text-align: center;
-  /* Center text inside buttons */
-}
-
-.rhythms-container {
-  display: flex;
-  width: 100%;
-  margin-top: 20px;
-  /* Adds space between this container and the one above */
-}
-
-.drums-rhythms-container,
-.bass-rhythms-container {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-
-  border: 2px;
-  border-style: solid;
-
-  /* Space between buttons */
-}
-
-.drums-rhythms-container button,
-.bass-rhythms-container button {
-
-  /* Add some padding inside buttons */
-  width: 100%;
-  /* Ensure buttons stretch fully */
-}
-
-.pressed {
-  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
-  transform: translateY(2px);
-  background-color: rgb(30, 45, 94);
-}
-
-.disabled {
-  pointer-events: none;
-  opacity: .04;
-
-  user-select: none;
-  /* Prevents text selection */
-  -webkit-user-select: none;
-  /* For Safari */
-  -moz-user-select: none;
-  /* For Firefox */
-  -ms-user-select: none;
-  /* For older versions of IE */
-}
-
-.bars-and-drop-zone-container {
-
-  display: flex;
-  flex-direction: column;
-}
-
-.bars-container {
-
-  display: flex;
-  flex-direction: row;
-  margin: 25px 0px 50px 0px;
-  flex-wrap: nowrap;
-  /* Prevent wrapping to new line */
-  align-items: center;
-  justify-content: center;
-
-}
-
-.drop-zone-wrapper {
-  display: flex;
-  height: 100px;
-  justify-content: center; 
-  align-items: center;   
-
-}
-
-.drop-zone {
- 
-  display: none;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100px;
-  width: 200px;
-  font-weight: bold;
-  border: 3px dashed gray;
-  border-radius: 15px; 
-  opacity: .5;
-  transition: background .7s ease;
-
-  user-select: none; 
-  -webkit-user-select: none;  /* Safari */
-  -moz-user-select: none;     /* Firefox */
-  -ms-user-select: none;      /* Internet Explorer/Edge */
-
-
-
-
-}
-
-.dragging {
-  display: flex;
-}
-
-.drop-zone.over {
-  background-color: lightgray;
-}
-.bar-container {
-
-  /*border-radius: 15px; */
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  margin: 4px;
-  /*border: 3px solid #ddd;*/
-
-  width: 150px;
-  height: 90px;
-  font-weight: bold;
-  font-size: 18px;
-  box-sizing: border-box;
-
-
-}
-
-
-.bar {
-  border-radius: 15px; 
-  position: absolute;
-
-  margin: 4px;
-  border: 3px solid #ddd;
-
-  width: 150px;
-  height: 90px;
-
-  box-sizing: border-box;
-}
-
-/* Droppable areas */
-.left-area,
-.middle-area,
-.right-area {
-  flex: 0;
-  height: 100%;
-  transition: flex 0.3s ease-in;
-
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  box-sizing: border-box;
-
-  user-select: none; 
-  -webkit-user-select: none;  /* Safari */
-  -moz-user-select: none;     /* Firefox */
-  -ms-user-select: none;      /* Internet Explorer/Edge */
-}
-
-.droppable-mode {
-  flex: 1;
-}
-
-.draggable-mode {
-  flex: 1;
-}
-
-.bar-is-dragging {
-  border-radius: 15px; 
-  border: 3px solid #ddd;
- 
-  background-color: #242424;;
-}
-
-.chord-is-dragging {
-  background-color: #242424;;
-}
-
-/* Highlights */
-.left-highlight,
-.middle-highlight,
-.right-highlight {
-  position: absolute;
-  top: 0;
-  width: 33.3%;
-  /* Each highlight takes up one-third of the bar */
-  height: 100%;
-  background-color: #646cff;
-  opacity: 0;
-  border-radius: 15px; 
-  pointer-events: none;
-  transition: opacity 0.5s ease-in-out;
-  z-index: -1;
-}
-
-.left-highlight {
-  left: 0;
-  width: 50%;
-  /* Covers the left half */
-}
-
-.middle-highlight {
-  left: 0;
-  width: 100%;
-  /* Covers the entire bar */
-}
-
-.right-highlight {
-  right: 0;
-  width: 50%;
-  /* Covers the right half */
-}
-
-.highlight-visible {
-  opacity: 1;
-}
-
-
-.text {
-  align-items: center;
-  justify-content: center;
+/* Named grid-areas */
+.left-panel   { grid-area: left;   display: flex; flex-direction: column; gap: var(--gap); }
+.middle-content{ grid-area: main;  display: flex; flex-direction: column; gap: var(--gap); }
+.right-panel  { grid-area: right;  display: flex; flex-direction: column; gap: var(--gap); }
+
+/* Responsive collapse below 768px */
+@media (max-width: 767px) {
+  .main-content {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "left"
+      "main"
+      "right";
+  }
+  /* optional spacing tweaks on mobile */
+  .left-panel,
+  .right-panel {
+    margin-top: var(--gap);
+  }
 }

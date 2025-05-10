@@ -1,0 +1,19 @@
+/* src/components/ChordTypeSelectionPanel/ChordTypeSelectionPanel.module.css */
+.chordTypeSelectionContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.selectionTitle {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    padding: 5px;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.04;
+}

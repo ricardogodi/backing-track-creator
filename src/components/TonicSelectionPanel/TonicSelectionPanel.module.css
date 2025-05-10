@@ -1,0 +1,39 @@
+/* src/components/TonicSelectionPanel/TonicSelectionPanel.module.css */
+
+.tonicSelectionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ALIGN CHILDREN HORIZONTALLY ON MOBILE */
+@media (max-width: 767px) {
+  .tonicSelectionContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  /* STACK EACH PAIR VERTICALLY */
+  .buttonPair {
+    flex-direction: column;
+    align-items: center;  /* center the two notes */
+    gap: 0.25rem;
+  }
+}
+
+.selectionTitle {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  padding: 5px;
+}
+
+.buttonPair {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}

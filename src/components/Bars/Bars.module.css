@@ -1,0 +1,49 @@
+/* src/components/Bars/Bars.module.css */
+
+.barsAndDropZoneContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropZoneWrapper {
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropZone {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100px;
+  width: 200px;
+  font-weight: bold;
+  border: 3px dashed gray;
+  border-radius: 15px;
+  opacity: 0.5;
+  transition: background 0.7s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.dragging {
+  display: flex;
+}
+
+.over {
+  background-color: lightgray;
+}
+
+.barsContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 25px 0 50px;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+

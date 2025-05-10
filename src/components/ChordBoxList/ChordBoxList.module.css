@@ -1,0 +1,11 @@
+
+.chordBoxListContainer {
+  display: flex;
+  flex-direction: row;
+
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}

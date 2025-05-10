@@ -24,7 +24,7 @@ function ChordTypeSelectionPanel({ controller, setChords, isPlaying }) {
     }
 
     return (
-        <div className={`${styles.chordTypeSelectionContainer} ${isPlaying ? styles.disabled : ''}`}>
+        <div className={`${styles.chordTypeSelectionContainer} ${isPlaying ? "disabled" : ''}`}>
             <h2 className={styles.selectionTitle}>Chords Type</h2>
             {list}
         </div>

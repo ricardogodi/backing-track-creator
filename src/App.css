@@ -1,5 +1,3 @@
-/* src/App.css */
-
 :root {
   --gap: 2rem;
   --max-width: 1200px;
@@ -20,7 +18,7 @@ h1 {
 }
 
 /* 3-column layout at desktop, single column on mobile */
-.main-content {
+.mainContent {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-areas: "left main right";
@@ -29,22 +27,70 @@ h1 {
 }
 
 /* Named grid-areas */
-.left-panel   { grid-area: left;   display: flex; flex-direction: column; gap: var(--gap); }
-.middle-content{ grid-area: main;  display: flex; flex-direction: column; gap: var(--gap); }
-.right-panel  { grid-area: right;  display: flex; flex-direction: column; gap: var(--gap); }
+.leftPanel {
+  grid-area: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
 
-/* Responsive collapse below 768px */
+.middleContent {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.rightPanel {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/* turn leftPanel horizontal at desktop */
+@media (min-width: 768px) {
+  .leftPanel {
+    flex-direction: row;
+  }
+}
+
+/* collapse into one column below 768px */
 @media (max-width: 767px) {
-  .main-content {
+  .mainContent {
     grid-template-columns: 1fr;
     grid-template-areas:
       "left"
       "main"
       "right";
   }
-  /* optional spacing tweaks on mobile */
-  .left-panel,
-  .right-panel {
+
+  /* breathing room above middle/right */
+  .leftPanel,
+  .rightPanel {
     margin-top: var(--gap);
+  }
+
+  /*
+    Now make the leftPanel wrap:
+    - First child (tonic) goes full width on its own row
+    - Second + third children (scale & chord) share the next row, each 50%
+  */
+  .leftPanel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--gap);
+  }
+
+  /* TonicSelectionPanel spans 100% */
+  .leftPanel > :nth-child(1) {
+    flex: 0 0 100%;
+  }
+
+  /* ScaleType & ChordType each take half width */
+  .leftPanel > :nth-child(2),
+  .leftPanel > :nth-child(3) {
+    flex: 1 1 calc(50% - var(--gap)/2);
   }
 }

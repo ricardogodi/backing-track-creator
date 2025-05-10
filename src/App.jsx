@@ -26,8 +26,8 @@ function App() {
     return (
         <div className="app">
             <h1>Backing Track Creator</h1>
-            <div className="main-content">
-                <div className="left-panel">
+            <div className="mainContent">
+                <div className="leftPanel">
                     <TonicSelectionPanel
                         controller={appController.current}
                         setChords={setChords}
@@ -44,7 +44,7 @@ function App() {
                         isPlaying={isPlaying}
                     />
                 </div>
-                <div className="middle-content">
+                <div className="middleContent">
                     <ChordBoxList
                         chordList={chords}
                         isPlaying={isPlaying}
@@ -62,7 +62,7 @@ function App() {
                         isPlaying={isPlaying}
                     />
                 </div>
-                <div className="right-panel">
+                <div className="rightPanel">
                     <PlayerControls
                         controller={appController.current}
                         isPlaying={isPlaying}

@@ -3,7 +3,8 @@
 .barsAndDropZoneContainer {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .dropZoneWrapper {
@@ -42,9 +43,10 @@
 .barsContainer {
   display: flex;
   flex-direction: row;
-  margin: 20px 0 50px;
-  flex-wrap: nowrap;
-  align-items: center;
+  flex-wrap: nowrap; /* ✅ All bars in one row */
   justify-content: center;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  overflow-x: auto;  /* ✅ Let it scroll if it must */
 }
-

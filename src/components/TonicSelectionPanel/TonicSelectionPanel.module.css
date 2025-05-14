@@ -1,27 +1,8 @@
-/* src/components/TonicSelectionPanel/TonicSelectionPanel.module.css */
-
 .tonicSelectionContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  float: left;
-}
-
-/* ALIGN CHILDREN HORIZONTALLY ON MOBILE */
-@media (max-width: 767px) {
-  .tonicSelectionContainer {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  /* STACK EACH PAIR VERTICALLY */
-  .buttonPair {
-    flex-direction: column;
-    align-items: center;  /* center the two notes */
-    gap: 0.25rem;
-  }
+  width: 100%;
 }
 
 .selectionTitle {
@@ -37,4 +18,19 @@
   display: flex;
   justify-content: center;
   gap: 5px;
+}
+
+@media (max-width: 767px) {
+  .tonicSelectionContainer {
+    flex-direction: row;
+    flex-wrap: nowrap; /* 👈 Prevents wrapping */
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .buttonPair {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
 }

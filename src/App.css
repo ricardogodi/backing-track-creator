@@ -90,8 +90,12 @@ h1 {
   }
 
   /* ScaleType & ChordType each take half width */
-  .leftPanel> :nth-child(2),
-  .leftPanel> :nth-child(3) {
-    flex: 1 1 calc(50% - var(--gap)/2);
-  }
+ /* Correct, browser-compatible fix */
+.leftPanel > :nth-child(2),
+.leftPanel > :nth-child(3) {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: calc(50% - 0.5rem); /* or use gap value directly */
+  box-sizing: border-box;
+}
 }

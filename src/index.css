@@ -65,10 +65,22 @@ button:active {
   box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-
 /* Optional: Make interactive elements feel clickable */
 button,
 input,
 select {
   outline: none;
+}
+
+
+/* Disable body scroll when dragging */
+.no-scroll {
+  overflow: hidden !important;
+  touch-action: none !important;
+}
+
+/* Make draggable items touch-reactive */
+.draggable {
+  touch-action: none; /* Prevent default scrolling on touch */
+  -webkit-user-drag: element; /* Enables native drag on WebKit */
 }

@@ -2,7 +2,7 @@
   flex: 1 1 0;                     /* ✅ Take up equal column space */
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+
   padding: 0.5rem;
   background-color: #1c1c1c;
   border-radius: var(--border-radius);

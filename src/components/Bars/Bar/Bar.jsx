@@ -59,6 +59,7 @@ export default function Bar({
         onDragOver={(e) => { e.preventDefault(); setIsOverLeft(true); }}
         onDragLeave={(e) => { e.preventDefault(); setIsOverLeft(false); }}
         onDragStart={(e) => {
+          document.body.classList.add('no-scroll');
           e.stopPropagation();
           e.dataTransfer.setData('type', 'bar');
           e.dataTransfer.setData('barIndex', barIndex);
@@ -67,6 +68,7 @@ export default function Bar({
           setLeftIsLocalDragging(true);
         }}
         onDragEnd={() => {
+          document.body.classList.remove('no-scroll');
           setBarIsDragging(false);
           setLeftIsLocalDragging(false);
         }}

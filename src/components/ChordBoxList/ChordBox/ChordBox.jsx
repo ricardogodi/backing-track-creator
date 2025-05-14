@@ -6,9 +6,10 @@ export default function ChordBox({ label, index, fontSize, setChordIsDragging })
 
   return (
     <div
-      className={`${styles.chordBox} ${isLocalDragging ? styles.chordIsDragging : ''}`}
+      className={`${styles.chordBox} draggable ${isLocalDragging ? styles.chordIsDragging : ''}`}
       draggable={true}
       onDragStart={(e) => {
+        document.body.classList.add('no-scroll');
         e.dataTransfer.setData("type", "chordBox");
         e.dataTransfer.setData("chordIndex", index);
         e.dataTransfer.setData("chordLabel", label);
@@ -16,6 +17,7 @@ export default function ChordBox({ label, index, fontSize, setChordIsDragging })
         setIsLocalDragging(true);
       }}
       onDragEnd={() => {
+        document.body.classList.remove('no-scroll');
         setChordIsDragging(false);
         setIsLocalDragging(false);
       }}

@@ -2,6 +2,7 @@
 .chordTypeSelectionContainer {
     display: flex;
     flex-direction: column;
+    float: left;
 }
 
 .selectionTitle {

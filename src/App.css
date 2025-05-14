@@ -1,9 +1,3 @@
-:root {
-  --gap: 2rem;
-  --max-width: 1200px;
-  --padding: 1.5rem;
-}
-
 /* Center & constrain the app */
 .app {
   max-width: var(--max-width);
@@ -17,41 +11,48 @@ h1 {
   text-align: center;
 }
 
-/* 3-column layout at desktop, single column on mobile */
-.mainContent {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-template-areas: "left main right";
-  gap: var(--gap);
-  margin-top: var(--gap);
-}
-
-/* Named grid-areas */
-.leftPanel {
-  grid-area: left;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-.middleContent {
-  grid-area: main;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-.rightPanel {
-  grid-area: right;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-/* turn leftPanel horizontal at desktop */
 @media (min-width: 768px) {
+  .mainContent {
+    display: flex;
+    height: 100%;
+    gap: var(--gap);
+    margin: 5%;
+  }
+
+  .leftPanel,
+  .middleContent,
+  .rightPanel {
+    flex: 1;
+    min-height: 0;
+  }
+
   .leftPanel {
+    display: flex;
     flex-direction: row;
+    /* Lay children horizontally */
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+    padding: 2%;
+  }
+
+  .rightPanel {
+    display: flex;
+    flex-direction: column;
+    /* Lay children horizontally */
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+    padding: 2%;
+  }
+
+  .leftPanel>* {
+    flex: 1;
+    /* Each child fills equal width */
+    height: 100%;
+    /* Fill vertical space too, if needed */
+    min-width: 0;
+    /* Prevent overflow from internal content */
   }
 }
 
@@ -84,13 +85,13 @@ h1 {
   }
 
   /* TonicSelectionPanel spans 100% */
-  .leftPanel > :nth-child(1) {
+  .leftPanel> :nth-child(1) {
     flex: 0 0 100%;
   }
 
   /* ScaleType & ChordType each take half width */
-  .leftPanel > :nth-child(2),
-  .leftPanel > :nth-child(3) {
+  .leftPanel> :nth-child(2),
+  .leftPanel> :nth-child(3) {
     flex: 1 1 calc(50% - var(--gap)/2);
   }
 }

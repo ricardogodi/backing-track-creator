@@ -2,6 +2,7 @@
 .scaleTypeSelectionContainer {
   display: flex;
   flex-direction: column;
+  float: left;
 }
 
 .selectionTitle {
@@ -15,14 +16,9 @@
 
 
 @media (max-width: 767px) {
-
   .scaleTypeSelectionContainer {
     display: flex;
     flex-direction: column;
     float: left;
   }
-
-
-
-
 }

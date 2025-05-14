@@ -1,57 +1,74 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --bg-color: #1e1e1e;
+  --fg-color: #f0f0f0;
+  --accent-color: #4f8ef7;
+  --accent-color-hover: #77aaff;
+  --border-radius: 0.5rem;
+  --transition: 0.2s ease;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 16px;
+  background-color: var(--bg-color);
+  color: var(--fg-color);
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+
+  color: var(--fg-color);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+
+/* Buttons */
 button {
-  border-radius: 8px;
-  border: 4px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
-  /*background-color: #1a1a1a;*/
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 button:hover {
-  border-color: #646cff;
+  background-color: var(--accent-color-hover);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(1px);
 }
 
 .disabled {
   pointer-events: none;
-  opacity: .04;
-
-  user-select: none;
-  /* Prevents text selection */
-  -webkit-user-select: none;
-  /* For Safari */
-  -moz-user-select: none;
-  /* For Firefox */
-  -ms-user-select: none;
-  /* For older versions of IE */
+  opacity: 0.4;
+  filter: grayscale(80%);
 }
 
+/* Pressed style for virtual pads etc. */
 .pressed {
-  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
-  transform: translateY(2px);
-  background-color: rgb(30, 45, 94);
+  background-color: #2a3f8d;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Optional: Make interactive elements feel clickable */
+button,
+input,
+select {
+  outline: none;
 }

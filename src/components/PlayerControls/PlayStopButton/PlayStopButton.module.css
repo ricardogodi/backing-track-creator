@@ -1,13 +1,23 @@
 .playButton {
-
   width: 30px;
   height: 30px;
   color: darkgreen;
 }
 
 .stopButton {
-
   width: 30px;
   height: 30px;
   color: darkred;
+}
+
+.playStopButton {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
 }

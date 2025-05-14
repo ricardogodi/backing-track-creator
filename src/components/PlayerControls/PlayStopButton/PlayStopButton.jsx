@@ -16,7 +16,7 @@ function PlayStopButton({ controller, isPlaying, setIsPlaying }) {
     };
 
     return (
-        <button className="play-stop-button" onClick={handleClick}>
+        <button className={styles.playStopButton} onClick={handleClick}>
             {isPlaying ? <FaStop className={styles.stopButton}/> : <FaPlay className={styles.playButton}/>}
         </button>
     );

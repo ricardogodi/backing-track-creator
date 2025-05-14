@@ -18,7 +18,7 @@ function TempoSlider({ controller, isPlaying }) {
 
     return (    
        /* <div className = {`tempo-slider-container ${isPlaying ? "disabled" : ""}`}>*/
-       <div className = "tempoSliderContainer">
+       <div className = {styles.tempoSliderContainer}>
             <h3>Tempo: {sliderValue}</h3>
             <input
                 type = "range"

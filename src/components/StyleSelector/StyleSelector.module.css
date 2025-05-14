@@ -1,16 +1,19 @@
+.styleSelectorContainer {
+  border: 2px solid #ddd;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  height: 300px; /* ✅ Lock height (adjust if needed) */
+  display: flex;
+  flex-direction: column;
+}
+
 .rhythmsContainer {
   display: flex;
   width: 100%;
-  margin-top: 20px;
-  /* Adds space between this container and the one above */
-}
-
-.styleSelectorContainer {
-  border: 3px;
-  border-color: #ddd;
-  border-width: 3px;
-  width: 100%;
-  border-width: 3px;
-  border-style: solid;
-  border-color: #ddd;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex: 1;
+  overflow: hidden; /* ✅ Ensures no overflow from children */
 }

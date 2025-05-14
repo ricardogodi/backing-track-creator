@@ -1,5 +1,4 @@
 .barContainer {
-  /*border-radius: 15px;*/
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -26,7 +25,6 @@
   border-color: #77aaff;
 }
 
-/* Droppable areas */
 .leftArea,
 .middleArea,
 .rightArea {
@@ -90,4 +88,19 @@
 
 .highlightVisible {
   opacity: 1;
+}
+
+
+.placeholderText {
+  color: grey;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
+  text-align: center;
 }

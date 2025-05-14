@@ -1,0 +1,12 @@
+.muterButton {
+  width: 120px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.5rem;
+}

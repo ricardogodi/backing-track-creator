@@ -4,7 +4,10 @@ import styles from './Muter.module.css';  // optional, for the .muter-button sty
 
 export default function Muter({ label, isMuted, onToggle }) {
   return (
-    <button className="muterButton" onClick={onToggle}>
+    <button
+      className={`${styles.muterButton} ${isMuted ? 'pressed' : ''}`}
+      onClick={onToggle}
+    >
       {isMuted ? `Unmute ${label}` : `Mute ${label}`}
     </button>
   );

@@ -1,4 +1,3 @@
-// src/components/Bar/Bar.jsx
 import React, { useState } from 'react';
 import styles from './Bar.module.css';
 
@@ -23,6 +22,8 @@ export default function Bar({
   const [middleIsDragging, setMiddleIsLocalDragging] = useState(false);
   const [rightIsDragging, setRightIsLocalDragging] = useState(false);
 
+  const isBarEmpty = !barLabels.left && !barLabels.middle && !barLabels.right;
+
   const onDropHandler = (event, positionTo, isOverSetter) => {
     isOverSetter(false);
     const type = event.dataTransfer.getData('type');
@@ -40,7 +41,11 @@ export default function Bar({
 
   return (
     <div className={styles.barContainer}>
-      <div className={styles.bar} />
+      <div className={styles.bar}>
+        {isBarEmpty && (
+          <div className={styles.placeholderText}>Drag chord here</div>
+        )}
+      </div>
 
       {/* Left Droppable Area */}
       <div

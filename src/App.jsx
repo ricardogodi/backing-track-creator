@@ -8,6 +8,7 @@ import ChordBoxList from "./components/ChordBoxList/ChordBoxList";
 import Bars from "./components/Bars/Bars";
 import StyleSelector from "./components/StyleSelector/StyleSelector";
 import PlayerControls from "./components/PlayerControls/PlayerControls";
+import AddBar from "./components/AddBar/AddBar";
 
 import "./App.css";
 
@@ -57,6 +58,10 @@ function App() {
             setChordIsDragging={setChordIsDragging}
             chordIsDragging={chordIsDragging}
           />
+          <AddBar
+  controller={appController.current}
+  setNumOfBars={setNumOfBars}
+/>
           <StyleSelector
             controller={appController.current}
             isPlaying={isPlaying}

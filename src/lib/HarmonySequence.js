@@ -41,6 +41,7 @@ class HarmonySequence {
      */
     addBar() {
         this.#bars.push(new HarmonyBar());
+        this.#numOfBars++;
     }
 
     /**

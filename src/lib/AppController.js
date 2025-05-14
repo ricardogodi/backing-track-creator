@@ -104,7 +104,6 @@ class AppController {
      * @returns 
      */
     getNumOfBars() {
-        console.log(`this.#harmonySequence.getNumOfBars() ${this.#harmonySequence.getNumOfBars()}`)
         return this.#harmonySequence.getNumOfBars()
     }
 

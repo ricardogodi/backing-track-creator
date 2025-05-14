@@ -95,9 +95,7 @@ class Playback {
      * 
      */
     #initializeBars() {
-
         this.#bars = [];
-
         for (let i = 0; i < this.#numOfBars; i++) {
             this.#bars.push(new Bar());
         }
@@ -183,7 +181,7 @@ class Playback {
      * @param {*} harmSeqBars 
      */
     updateHarmony(harmSeqIterator) {
-        let length = this.#numOfBars;
+        this.#numOfBars = 0;
         this.#bars = [];
 
         while(harmSeqIterator.hasNext()) {
@@ -199,6 +197,7 @@ class Playback {
             bar.setDrumsBar(drumsBar)
 
             this.#bars.push(bar);
+            this.#numOfBars++;
 
             if (harmonyBar.hasTwoChords()) {
                 let leftVoicedChord = harmonyBar.getLeftVoicedChord();
@@ -234,8 +233,9 @@ class Playback {
             }
             
         }
-
+        console.log(this.#numOfBars);
         Tone.Transport.cancel();
+         this.#loopSetup();
     }
 
     /**

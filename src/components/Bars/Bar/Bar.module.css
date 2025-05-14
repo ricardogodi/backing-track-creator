@@ -3,14 +3,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 4px;
-  flex: 1 1 0;            /* ✅ Responsive width */
-  min-width: 60px;        /* ✅ Avoid collapsing too far */
-  max-width: 150px;       /* ✅ Keep it readable */
+
+  width: calc(25% - 12px); /* ✅ Adjust to account for gap */
+  box-sizing: border-box;
   height: 90px;
   font-weight: bold;
   font-size: 18px;
-  box-sizing: border-box;
 }
 
 .bar {

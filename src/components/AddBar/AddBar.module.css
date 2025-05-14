@@ -1,0 +1,22 @@
+/* src/components/AddBar/AddBar.module.css */
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.addBarButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addBarButton:hover {
+  background-color: #45a049;
+}

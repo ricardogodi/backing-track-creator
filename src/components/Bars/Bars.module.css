@@ -42,11 +42,9 @@
 
 .barsContainer {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap; /* ✅ All bars in one row */
-  justify-content: center;
-  align-items: center;
-  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;      /* ✅ Add space between bars */
   width: 100%;
-  overflow-x: auto;  /* ✅ Let it scroll if it must */
 }

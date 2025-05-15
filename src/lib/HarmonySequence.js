@@ -5,7 +5,7 @@ import ChordLinker from "./ChordLinker.js"
 import HarmonySequenceIterator from "./HarmonySequenceIterator.js"
 
 class HarmonySequence {
-
+    
     #bars;
     #initialHarmonicPosition;
     #firstChordType;
@@ -97,7 +97,8 @@ class HarmonySequence {
     insertChordAtBar(chord, barIndex, chordPosition) { // 0 ->left, 1 -> middle(replace)   2 -> right 
         // Validate index
         if ((barIndex < 0) || (barIndex >= this.#numOfBars)) {
-            throw new Error(`index ${index} is out of bounds`);
+            console.log(`numOfBars is: ${this.#numOfBars}`)
+            throw new Error(`index ${barIndex} is out of bounds`);   
         }
 
         const bar = this.#bars[barIndex];

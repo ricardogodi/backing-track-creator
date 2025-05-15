@@ -5,7 +5,7 @@ class Chord {
     // Base properties
     #root;
     #quality;
-    
+
     // Dependent properties
     #type;
     #notes;
@@ -23,6 +23,7 @@ class Chord {
         this.#setDependentProperties();
     }
 
+    
     /**
      * 
      * @returns 
@@ -37,6 +38,10 @@ class Chord {
      */
     getQuality() {
         return this.#quality;
+    }
+
+    getLabel() {
+        return `${this.#root}${this.#quality}`;
     }
 
     /**
@@ -132,7 +137,7 @@ class Chord {
         if (this.#type != 'triad' && this.#type != 'seventhChord') {
             throw new Error('"type" is neither triad or seventhChord')
         }
-     
+
         if (this.#type == 'triad') {
             return this.#notes.slice(0, 3);
         } else { // this.#type == 'seventhChord'

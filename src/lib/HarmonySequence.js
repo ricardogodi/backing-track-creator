@@ -2,10 +2,11 @@ import MusicalCore from "./MusicalCore.js";
 import HarmonyBar from "./HarmonyBar.js";
 import VoicedChord from "./VoicedChord.js";
 import ChordLinker from "./ChordLinker.js"
+import Chord from "./Chord.js";
 import HarmonySequenceIterator from "./HarmonySequenceIterator.js"
 
 class HarmonySequence {
-    
+
     #bars;
     #initialHarmonicPosition;
     #firstChordType;
@@ -25,6 +26,54 @@ class HarmonySequence {
         this.#firstBarWithChordIndex = -1;
         this.#playback = playback;
     }
+
+    getBarLabels() {
+        const labels = [];
+        for (let i = 0; i < this.#numOfBars; i++) {
+            labels.push(this.#bars[i].getChordLabels());
+        }
+        return labels;
+    }
+
+    load(chords) {
+        // Step 1: Reset and reinitialize with the new bar count
+        this.#numOfBars = chords.length;
+        this.#initializeBars();
+
+        // Step 2: Iterate through the chords array
+        chords.forEach((labelObj, barIndex) => {
+            if (labelObj.left) {
+                const quality = labelObj.left.quality === "" ? "M" : labelObj.left.quality;
+                const chord = new Chord(labelObj.left.root, quality);
+                this.insertChordAtBar(chord, barIndex, "left");
+            }
+
+            if (labelObj.middle) {
+                const quality = labelObj.middle.quality === "" ? "M" : labelObj.middle.quality;
+                const chord = new Chord(labelObj.middle.root, quality);
+                this.insertChordAtBar(chord, barIndex, "middle");
+            }
+
+            if (labelObj.right) {
+                const quality = labelObj.right.quality === "" ? "M" : labelObj.right.quality;
+                const chord = new Chord(labelObj.right.root, quality);
+                this.insertChordAtBar(chord, barIndex, "right");
+            }
+        });
+
+        // Step 3: Update playback
+        this.#playback.updateHarmony(this.createIterator());
+    }
+
+    export() {
+
+    }
+
+    reset() {
+        this.#initializeBars();
+    }
+
+
 
     /**
      * 
@@ -94,11 +143,11 @@ class HarmonySequence {
      * @param {*} chord 
      * @param {*} index 
      */
-    insertChordAtBar(chord, barIndex, chordPosition) { // 0 ->left, 1 -> middle(replace)   2 -> right 
+    insertChordAtBar(chord, barIndex, chordPosition) {
         // Validate index
         if ((barIndex < 0) || (barIndex >= this.#numOfBars)) {
             console.log(`numOfBars is: ${this.#numOfBars}`)
-            throw new Error(`index ${barIndex} is out of bounds`);   
+            throw new Error(`index ${barIndex} is out of bounds`);
         }
 
         const bar = this.#bars[barIndex];
@@ -208,7 +257,7 @@ class HarmonySequence {
         } else if (barTo.hasTwoChords()) {
             if (positionTo == 'left') {
                 chordTo = barTo.getLeftChord();
-            } else if (positionTo == 'right') {            
+            } else if (positionTo == 'right') {
                 chordTo = barTo.getRightChord();
             }
         }
@@ -316,15 +365,15 @@ class HarmonySequence {
         let bar = this.#bars[barIndex];
 
         bar.removeChordAtPosition(removePosition);
-             this.#firstBarWithChordIndex = this.findBarWithFirstChordIndex();
-             // We want to link all the chords from the start
-             if (this.#firstBarWithChordIndex != -1) { // There is a chord in the sequence
-                 let bar = this.#bars[this.#firstBarWithChordIndex];
-                 let chord = bar.getLeftChord(); // Get the very first chord
-                 this.#firstChordType = chord.getType();
-                 this.#linkAll(chord, this.#firstBarWithChordIndex, 0)
-             }
-             this.#playback.updateHarmony(this.createIterator());
+        this.#firstBarWithChordIndex = this.findBarWithFirstChordIndex();
+        // We want to link all the chords from the start
+        if (this.#firstBarWithChordIndex != -1) { // There is a chord in the sequence
+            let bar = this.#bars[this.#firstBarWithChordIndex];
+            let chord = bar.getLeftChord(); // Get the very first chord
+            this.#firstChordType = chord.getType();
+            this.#linkAll(chord, this.#firstBarWithChordIndex, 0)
+        }
+        this.#playback.updateHarmony(this.createIterator());
     }
 
     /**

@@ -5,10 +5,10 @@ import Chord from "./Chord.js";
 import StylesLibrary from "./StylesLibrary.js";
 
 class AppController {
-    
+
     #scaleChords
     #playback
-    #harmonySequence 
+    #harmonySequence
 
     /**
      * 
@@ -52,7 +52,7 @@ class AppController {
             this.#scaleChords.setChordsType('seventhChords');
         } else {
             this.#scaleChords.setChordsType(newChordsType);
-        }    
+        }
     }
 
     // it's possible that we might have to update the ui 'manually'
@@ -92,6 +92,9 @@ class AppController {
         this.#harmonySequence.insertChordAtBar(chord, indexTo, chordPosition);
     }
 
+    load(chords) {
+        this.#harmonySequence.load(chords);
+    }
     /**
      * 
      */
@@ -128,6 +131,10 @@ class AppController {
             position = "left"
         }
         this.#harmonySequence.removeChordAtBarAndPosition(barIndex, position);
+    }
+
+    getBarLabels() {
+        return this.#harmonySequence.getBarLabels();
     }
 
     /**
@@ -200,7 +207,7 @@ class AppController {
      * @param {*} style 
      * @returns 
      */
-    getDrumsListByStyle(style) { 
+    getDrumsListByStyle(style) {
         return StylesLibrary.getDrumsKeys(style)
     }
 
@@ -209,7 +216,7 @@ class AppController {
      * @param {*} style 
      * @returns 
      */
-    getBassListByStyle(style) { 
+    getBassListByStyle(style) {
         return StylesLibrary.getBassKeys(style)
     }
 
@@ -227,8 +234,8 @@ class AppController {
      * @param {*} drums 
      */
     setDrums(style, drums) {
-       const drumsRhythm = StylesLibrary.getDrums(style, drums);
-       this.#playback.setDrumsRhythm(drumsRhythm);
+        const drumsRhythm = StylesLibrary.getDrums(style, drums);
+        this.#playback.setDrumsRhythm(drumsRhythm);
     }
 
     /**
@@ -239,7 +246,7 @@ class AppController {
     setBass(style, bass) {
         const bassRhythm = StylesLibrary.getBass(style, bass);
         this.#playback.setBassRhythm(bassRhythm);
-     }
+    }
 }
 
 export default AppController;

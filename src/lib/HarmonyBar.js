@@ -26,6 +26,37 @@ class HarmonyBar {
         this.#hasRightChord = false;
     }
 
+  getChordLabels() {
+    // If only left chord exists, treat it as "middle"
+    if (this.#hasLeftChord && !this.#hasRightChord) {
+        return {
+            left: null,
+            middle: {
+                root: this.#leftChord.getRoot(),
+                quality: this.#leftChord.getQuality(),
+            },
+            right: null
+        };
+    }
+
+    // If both chords exist
+    return {
+        left: this.#hasLeftChord
+            ? {
+                root: this.#leftChord.getRoot(),
+                quality: this.#leftChord.getQuality(),
+            }
+            : null,
+        middle: null,
+        right: this.#hasRightChord
+            ? {
+                root: this.#rightChord.getRoot(),
+                quality: this.#rightChord.getQuality(),
+            }
+            : null,
+    };
+}
+
     /**
      * 
      * @param {*} chord 
@@ -129,7 +160,7 @@ class HarmonyBar {
      * @param {*} position 
      */
     removeChordAtPosition(position) {
-        if (!this.hasTwoChords() && position == 'right') { 
+        if (!this.hasTwoChords() && position == 'right') {
             // Trying to remove right chord when there isn't one
             throw new Error(`Bar does not have a right chord!`)
         }
@@ -143,8 +174,8 @@ class HarmonyBar {
                 // Move right chord the left
                 this.#leftChord = this.#rightChord;
                 this.#voicedLeftChord = this.#voicedRightChord;
-            } 
-        
+            }
+
             // Set right chord to null
             this.#rightChord = null;
             this.#voicedRightChord = null;

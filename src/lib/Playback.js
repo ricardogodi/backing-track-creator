@@ -113,6 +113,10 @@ class Playback {
         }
     }
 
+    getTempo() {
+        return this.#tempo;
+    }
+
     /**
      * 
      */

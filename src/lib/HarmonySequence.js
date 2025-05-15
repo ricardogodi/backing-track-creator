@@ -70,10 +70,10 @@ class HarmonySequence {
     }
 
     reset() {
+        this.#numOfBars = 4;
         this.#initializeBars();
+        this.#playback.updateHarmony(this.createIterator());
     }
-
-
 
     /**
      * 
@@ -91,6 +91,25 @@ class HarmonySequence {
     addBar() {
         this.#bars.push(new HarmonyBar());
         this.#numOfBars++;
+        this.#playback.updateHarmony(this.createIterator());
+    }
+
+    popBar() {
+        if (this.#numOfBars <= 1) return; 
+
+        this.#bars.pop();
+        this.#numOfBars--;
+
+        // Recompute first bar with chord
+        this.#firstBarWithChordIndex = this.findBarWithFirstChordIndex();
+
+        if (this.#firstBarWithChordIndex !== -1) {
+            const chord = this.#bars[this.#firstBarWithChordIndex].getLeftChord();
+            this.#firstChordType = chord.getType();
+            this.#linkAll(chord, this.#firstBarWithChordIndex, "left");
+        }
+
+        this.#playback.updateHarmony(this.createIterator());
     }
 
     /**

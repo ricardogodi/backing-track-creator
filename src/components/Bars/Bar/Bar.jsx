@@ -27,7 +27,7 @@ export default function Bar({
   const onDropHandler = (event, positionTo, isOverSetter) => {
     isOverSetter(false);
     const type = event.dataTransfer.getData('type');
-
+    
     if (type === 'chordBox') {
       const chordIndexFrom = Number(event.dataTransfer.getData('chordIndex'));
       chordDropHandler(chordIndexFrom, barIndex, positionTo);

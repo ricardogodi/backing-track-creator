@@ -9,7 +9,6 @@ import Bars from "./components/Bars/Bars";
 import StyleSelector from "./components/StyleSelector/StyleSelector";
 import PlayerControls from "./components/PlayerControls/PlayerControls";
 
-
 import "./App.css";
 
 function App() {
@@ -18,6 +17,13 @@ function App() {
     appController.current = new AppController();
   }
 
+  const positionMap = () => ({ left: "", middle: "", right: "" });
+
+  const [barLabels, setBarLabels] = useState(
+    Array.from({ length: 4 }, () => ({ ...positionMap() }))
+  );
+  const [barsHaveChord, setBarsHaveChord] = useState([false, false, false, false]);
+  const [barsHaveTwoChords, setBarsHaveTwoChords] = useState([false, false, false, false]);
   const [chords, setChords] = useState(appController.current.getFullChordNames());
   const [isPlaying, setIsPlaying] = useState(false);
   const [chordIsDragging, setChordIsDragging] = useState(false);
@@ -57,8 +63,14 @@ function App() {
             numOfBars={numOfBars}
             setChordIsDragging={setChordIsDragging}
             chordIsDragging={chordIsDragging}
+            barLabels={barLabels}
+            setBarLabels={setBarLabels}
+            barsHaveChord={barsHaveChord}
+            setBarsHaveChord={setBarsHaveChord}
+            barsHaveTwoChords={barsHaveTwoChords}
+            setBarsHaveTwoChords={setBarsHaveTwoChords}
           />
-     
+
           <StyleSelector
             controller={appController.current}
             isPlaying={isPlaying}
@@ -70,6 +82,9 @@ function App() {
             controller={appController.current}
             isPlaying={isPlaying}
             setIsPlaying={setIsPlaying}
+            setBarLabels={setBarLabels}
+            setBarsHaveChord={setBarsHaveChord}
+            setBarsHaveTwoChords={setBarsHaveTwoChords}
           />
         </div>
       </div>

@@ -95,6 +95,18 @@ class AppController {
     load(chords) {
         this.#harmonySequence.load(chords);
     }
+
+    reset() {
+        this.#harmonySequence.reset()
+    }
+
+    /**
+     * 
+     */
+    popBar() {
+        this.#harmonySequence.popBar()
+    }
+
     /**
      * 
      */
@@ -107,6 +119,7 @@ class AppController {
      * @returns 
      */
     getNumOfBars() {
+        console.log("GET NUM OF BARS WAS CALLED")
         return this.#harmonySequence.getNumOfBars()
     }
 

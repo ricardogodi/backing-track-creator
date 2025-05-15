@@ -1,0 +1,14 @@
+.resetButton {
+  background-color: #444;
+  color: var(--fg-color);
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.resetButton:hover {
+  background-color: #666;
+}
+
+.resetButton:active {
+  background-color: #555;
+}

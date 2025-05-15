@@ -8,8 +8,16 @@ export default function Bars({
     isPlaying,
     chordIsDragging,
     setChordIsDragging,
+    barLabels,
+    setBarLabels,
+    barsHaveChord,
+    setBarsHaveChord,
+    barsHaveTwoChords,
+    setBarsHaveTwoChords,
 }) {
 
+    const [barIsDragging, setBarIsDragging] = useState(false);
+    const [isOverDropZone, setBarIsOverDropZone] = useState(false);
 
     const positionMap = () => ({
         left: "",
@@ -17,270 +25,91 @@ export default function Bars({
         right: ""
     });
 
-    const [numOfBars, setNumOfBars] = useState(4);
-    const [barLabels, setBarLabels] = useState(
-        Array.from({ length: 4 }, () => ({ ...positionMap() }))
-    );
-    const [barsHaveChord, setBarsHaveChord] = useState([false, false, false, false]);
-    const [barsHaveTwoChords, setBarsHaveTwoChords] = useState([false, false, false, false]);
-    const [barIsDragging, setBarIsDragging] = useState(false);
-    const [isOverDropZone, setBarIsOverDropZone] = useState(false);
-
     const addBar = () => {
         controller.addBar();
-        let newNumOfBars = controller.getNumOfBars();
-        setNumOfBars(newNumOfBars);
         setBarLabels(prev => [...prev, { ...positionMap() }]);
         setBarsHaveChord(prev => [...prev, false]);
         setBarsHaveTwoChords(prev => [...prev, false]);
     };
 
+    const removeLastBar = () => {
+        if (barLabels.length <= 1) return;
+        
+        controller.popBar();
+
+        // Update state arrays by removing the last element
+        setBarLabels(prev => prev.slice(0, -1));
+        setBarsHaveChord(prev => prev.slice(0, -1));
+        setBarsHaveTwoChords(prev => prev.slice(0, -1));
+    };
 
     const handleChordDrop = (chordBoxIndex, barIndex, positionTo) => {
-        const chordBoxLabel = controller.getFullChordAtIndex(chordBoxIndex);
-        const newLabels = [...barLabels];
-        const newBarsHaveChord = [...barsHaveChord];
-        const newBarsHaveTwoChords = [...barsHaveTwoChords];
-        const bar = newLabels[barIndex];
-        const newBar = { ...bar }
-
-        newLabels[barIndex] = newBar
-
-        // Now we manage Bars component state
-        if (!barsHaveChord[barIndex]) {  // Does not have a chord
-            newBar["middle"] = chordBoxLabel;
-            newBarsHaveChord[barIndex] = true;
-        } else if (barsHaveChord[barIndex] && !barsHaveTwoChords[barIndex]) { // Has one chord exactly
-            // We know the current chord in the bar is in the middle
-
-            if (positionTo == "left") {
-                newBar["left"] = chordBoxLabel;
-                newBar["right"] = newBar["middle"]
-                newBar["middle"] = ""
-                newBarsHaveTwoChords[barIndex] = true;
-            } else if (positionTo == "middle") {
-                newBar["middle"] = chordBoxLabel;
-            } else if (positionTo == "right") {
-                newBar["right"] = chordBoxLabel;
-                newBar["left"] = newBar["middle"]
-                newBar["middle"] = ""
-                newBarsHaveTwoChords[barIndex] = true;
-            }
-
-        } else if (barsHaveTwoChords[barIndex]) {  // Has two chords
-            if (positionTo == "left") {
-                newBar["left"] = chordBoxLabel
-            } else if (positionTo == "right") {
-                newBar["right"] = chordBoxLabel
-            }
-        }
-        setChordIsDragging(false)
-        setBarLabels(newLabels);
-        setBarsHaveChord(newBarsHaveChord);
-        setBarsHaveTwoChords(newBarsHaveTwoChords);
         controller.setChord(chordBoxIndex, barIndex, positionTo);
-    }
+        refreshBarStates();
+        setChordIsDragging(false);
+    };
 
     const handleBarDrop = (barIndexFrom, barIndexTo, positionFrom, positionTo) => {
-        if ((barIndexFrom == barIndexTo) && (positionFrom == positionTo)) {
-            return;
-        }
-
-        const barFrom = barLabels[barIndexFrom];
-        const barTo = barLabels[barIndexTo];
-
-        const chordFrom = barFrom[positionFrom]
-        const chordTo = barTo[positionTo]
-
-        if (barsHaveChord[barIndexFrom] && !barsHaveTwoChords[barIndexFrom]) { // Bar from has exactly one chord
-            if (!barsHaveChord[barIndexTo]) { // Bar to does not have a chord
-                barTo[positionTo] = chordFrom;
-                barFrom[positionFrom] = "";
-                barsHaveChord[barIndexTo] = true;
-                barsHaveChord[barIndexFrom] = false;
-            } else if (barsHaveChord[barIndexTo] && !barsHaveTwoChords[barIndexTo]) { // Bar to has exactly one chord
-                if (positionTo == "middle") { // We just switch the middle chords
-                    barTo["middle"] = chordFrom;
-                    barFrom[positionFrom] = chordTo;
-                } else if (positionTo == "left") {
-                    barTo["left"] = chordFrom;
-                    barTo["right"] = barTo["middle"] // Must move the middle chord to the right
-                    barTo["middle"] = "";
-
-                    barFrom[positionFrom] = ""
-
-                    barsHaveChord[barIndexFrom] = false;
-                    barsHaveTwoChords[barIndexTo] = true;
-
-                } else if (positionTo == "right") {
-                    barTo["right"] = chordFrom;
-                    barTo["left"] = barTo["middle"];  // Must move the middle chord to the left
-                    barTo["middle"] = "";
-
-                    barFrom[positionFrom] = ""
-
-                    barsHaveChord[barIndexFrom] = false;
-                    barsHaveTwoChords[barIndexTo] = true;
-                }
-
-            } else if (barsHaveTwoChords[barIndexTo]) { // Bar to has two chords 
-                barTo[positionTo] = chordFrom;
-                barFrom[positionFrom] = chordTo;
-            }
-
-        } else if (barsHaveTwoChords[barIndexFrom]) { // Bar from has two chords
-            if (!barsHaveChord[barIndexTo]) { // Bar to does not have a chord
-                barTo[positionTo] = chordFrom;
-                barFrom[positionFrom] = "";
-                if (positionFrom == "left") {
-                    barFrom["middle"] = barFrom["right"]
-                    barFrom["right"] = ""
-                } else if (positionFrom == "right") {
-                    barFrom["middle"] = barFrom["left"]
-                    barFrom["left"] = ""
-                }
-                barsHaveChord[barIndexTo] = true;
-                barsHaveTwoChords[barIndexFrom] = false;
-
-            } else if (barsHaveChord[barIndexTo] && !barsHaveTwoChords[barIndexTo]) { // Bar to has exactly one chord
-                if (positionTo == "middle") {
-                    barTo["middle"] = chordFrom;
-                    barFrom[positionFrom] = chordTo;
-                } else if (positionTo == "left") {
-                    barTo["left"] = chordFrom;
-                    barTo["right"] = barTo["middle"]
-                    barTo["middle"] = ""
-
-                    if (positionFrom == "left") {
-
-                        barFrom["left"] = ""
-                        barFrom["middle"] = barFrom["right"]
-                        barFrom["right"] = "";
-
-                    } else if (positionFrom == "right") {
-
-                        barFrom["right"] = ""
-                        barFrom["middle"] = barFrom["left"]
-                        barFrom["left"] = "";
-                    }
-
-                    barsHaveTwoChords[barIndexTo] = true;
-                    barsHaveTwoChords[barIndexFrom] = false;
-
-                } else if (positionTo == "right") {
-
-                    barTo["right"] = chordFrom;
-                    barTo["left"] = barTo["middle"]
-                    barTo["middle"] = ""
-
-                    if (positionFrom == "left") {
-
-                        barFrom["left"] = ""
-                        barFrom["middle"] = barFrom["right"]
-                        barFrom["right"] = "";
-
-                    } else if (positionFrom == "right") {
-
-                        barFrom["right"] = ""
-                        barFrom["middle"] = barFrom["left"]
-                        barFrom["left"] = "";
-                    }
-
-                    barsHaveTwoChords[barIndexTo] = true;
-                    barsHaveTwoChords[barIndexFrom] = false;
-                }
-
-            } else if (barsHaveTwoChords[barIndexTo]) { // Bar to has two chords 
-
-                barTo[positionTo] = chordFrom;
-                barFrom[positionFrom] = chordTo;
-            }
-        }
-
-        const newBarLabels = [...barLabels];
-        const newBarsHaveChord = [...barsHaveChord];
-        const newBarsHaveTwoChords = [...barsHaveTwoChords];
-
-        setBarIsDragging(false)
-        setBarLabels(newBarLabels);
-        setBarsHaveChord(newBarsHaveChord);
-        setBarsHaveTwoChords(newBarsHaveTwoChords);
-
-        controller.moveChord(barIndexFrom, barIndexTo, positionFrom, positionTo)
-    }
+        if (barIndexFrom === barIndexTo && positionFrom === positionTo) return;
+        controller.moveChord(barIndexFrom, barIndexTo, positionFrom, positionTo);
+        refreshBarStates();
+        setBarIsDragging(false);
+    };
 
     const handleBarRemove = (barIndexFrom, positionFrom) => {
-        const barFrom = barLabels[barIndexFrom];
+        controller.removeChord(barIndexFrom, positionFrom);
+        refreshBarStates();
+        setBarIsDragging(false);
+    };
 
-        if (positionFrom == "left") {
-            barFrom["middle"] = barFrom["right"];
-            barFrom["left"] = "";
-            barFrom["right"] = "";
+    const refreshBarStates = () => {
+        const updatedLabels = controller.getBarLabels();
 
-            barsHaveTwoChords[barIndexFrom] = false;
+        const formatLabel = (label) => {
+            if (!label) return "";
+            const quality = label.quality === "M" ? "" : label.quality;
+            return `${label.root}${quality}`;
+        };
 
-        } else if (positionFrom == "middle") {
+        const formattedLabels = updatedLabels.map(label => ({
+            left: formatLabel(label.left),
+            middle: formatLabel(label.middle),
+            right: formatLabel(label.right),
+        }));
 
-            barFrom["middle"] = ""
-            barsHaveChord[barIndexFrom] = false;
-
-        } else if (positionFrom == "right") {
-
-            barFrom["middle"] = barFrom["left"];
-            barFrom["left"] = "";
-            barFrom["right"] = "";
-
-            barsHaveTwoChords[barIndexFrom] = false;
-        }
-
-        const newLabels = [...barLabels]
-        const newBarsHaveChord = [...barsHaveChord];
-        const newBarsHaveTwoChords = [...barsHaveTwoChords]
-
-        setBarLabels(newLabels);
-        setBarsHaveChord(newBarsHaveChord)
-        setBarsHaveTwoChords(newBarsHaveTwoChords)
-        setBarIsDragging(false)
-
-        controller.removeChord(barIndexFrom, positionFrom)
-    }
-
-    if (barLabels.length < numOfBars) {
-        return null;
-    }
-
-    let bars = []
-    for (let i = 0; i < numOfBars; i++) {
-
-        bars.push(
-            <Bar
-                key={i}
-
-                barIndex={i}
-                barLabels={barLabels[i]}
-                barDropHandler={handleBarDrop}
-                chordDropHandler={handleChordDrop}
-
-                setBarIsDragging={setBarIsDragging}
-                barIsDragging={barIsDragging}
-
-                setChordIsDragging={setChordIsDragging}
-                chordIsDragging={chordIsDragging}
-
-                hasAChord={barsHaveChord[i]}
-                hasTwoChords={barsHaveTwoChords[i]}
-
-                isPlaying={isPlaying}
-            />
+        const newBarsHaveChord = updatedLabels.map(label =>
+            !!label.left || !!label.middle || !!label.right
         );
-    }
 
+        const newBarsHaveTwoChords = updatedLabels.map(label =>
+            !!label.left && !!label.right
+        );
+
+        setBarLabels(formattedLabels);
+        setBarsHaveChord(newBarsHaveChord);
+        setBarsHaveTwoChords(newBarsHaveTwoChords);
+    };
+
+    const bars = barLabels.map((label, i) => (
+        <Bar
+            key={i}
+            barIndex={i}
+            barLabels={label}
+            barDropHandler={handleBarDrop}
+            chordDropHandler={handleChordDrop}
+            setBarIsDragging={setBarIsDragging}
+            barIsDragging={barIsDragging}
+            setChordIsDragging={setChordIsDragging}
+            chordIsDragging={chordIsDragging}
+            hasAChord={barsHaveChord[i]}
+            hasTwoChords={barsHaveTwoChords[i]}
+            isPlaying={isPlaying}
+        />
+    ));
 
     return (
         <div className={styles.barsAndDropZoneContainer}>
-            <div
-                className={`${styles.dropZoneWrapper} ${barIsDragging ? styles.dragging : ''}`}
-            >
+            <div className={`${styles.dropZoneWrapper} ${barIsDragging ? styles.dragging : ''}`}>
                 <div
                     className={`${styles.dropZone} ${barIsDragging ? styles.dragging : ''} ${isOverDropZone ? styles.over : ''}`}
                     onDragOver={(e) => { e.preventDefault(); setBarIsOverDropZone(true); }}
@@ -301,12 +130,15 @@ export default function Bars({
                 </div>
             </div>
             <div className={styles.barsContainer}>{bars}</div>
-            {/* Add Bar button below barsContainer */}
             <div className={styles.addBarButtonWrapper}>
                 <button className={styles.addBarButton} onClick={addBar}>
                     + Add Bar
                 </button>
+                <button className={styles.addBarButton} onClick={removeLastBar}>
+                    − Remove Last Bar
+                </button>
             </div>
+
         </div>
     );
 }

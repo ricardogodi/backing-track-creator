@@ -36,11 +36,10 @@ class HarmonySequence {
     }
 
     load(chords) {
-        // Step 1: Reset and reinitialize with the new bar count
+
         this.#numOfBars = chords.length;
         this.#initializeBars();
 
-        // Step 2: Iterate through the chords array
         chords.forEach((labelObj, barIndex) => {
             if (labelObj.left) {
                 const quality = labelObj.left.quality === "" ? "M" : labelObj.left.quality;
@@ -61,7 +60,6 @@ class HarmonySequence {
             }
         });
 
-        // Step 3: Update playback
         this.#playback.updateHarmony(this.createIterator());
     }
 

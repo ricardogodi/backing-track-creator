@@ -26,36 +26,36 @@ class HarmonyBar {
         this.#hasRightChord = false;
     }
 
-  getChordLabels() {
-    // If only left chord exists, treat it as "middle"
-    if (this.#hasLeftChord && !this.#hasRightChord) {
+    getChordLabels() {
+        // If only left chord exists, treat it as "middle"
+        if (this.#hasLeftChord && !this.#hasRightChord) {
+            return {
+                left: null,
+                middle: {
+                    root: this.#leftChord.getRoot(),
+                    quality: this.#leftChord.getQuality(),
+                },
+                right: null
+            };
+        }
+
+        // If both chords exist
         return {
-            left: null,
-            middle: {
-                root: this.#leftChord.getRoot(),
-                quality: this.#leftChord.getQuality(),
-            },
-            right: null
+            left: this.#hasLeftChord
+                ? {
+                    root: this.#leftChord.getRoot(),
+                    quality: this.#leftChord.getQuality(),
+                }
+                : null,
+            middle: null,
+            right: this.#hasRightChord
+                ? {
+                    root: this.#rightChord.getRoot(),
+                    quality: this.#rightChord.getQuality(),
+                }
+                : null,
         };
     }
-
-    // If both chords exist
-    return {
-        left: this.#hasLeftChord
-            ? {
-                root: this.#leftChord.getRoot(),
-                quality: this.#leftChord.getQuality(),
-            }
-            : null,
-        middle: null,
-        right: this.#hasRightChord
-            ? {
-                root: this.#rightChord.getRoot(),
-                quality: this.#rightChord.getQuality(),
-            }
-            : null,
-    };
-}
 
     /**
      * 

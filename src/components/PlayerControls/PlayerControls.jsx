@@ -59,6 +59,7 @@ function PlayerControls({
         setBarsHaveTwoChords={setBarsHaveTwoChords}
       />
       <SaveTrackButton
+      controller = {controller}
         barLabels={barLabels}
         tempo={tempo}
         style={style}

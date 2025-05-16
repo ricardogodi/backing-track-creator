@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './SaveTrackButton.module.css';
 
 export default function SaveTrackButton({ 
+  controller,
   barLabels, 
   tempo, 
   style, 
@@ -14,7 +15,7 @@ export default function SaveTrackButton({
       drums,
       bass,
       tempo,
-      chords: barLabels
+      chords: controller.getBarLabels()
     };
 
     // Simulate saving (replace with your real logic)

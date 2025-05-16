@@ -1,15 +1,12 @@
-function StyleButton({ label, handleStyleSelection, pressedIndex, setPressedIndex, index }) {
-
-    return (
-        <button
-            className={`style-button ${pressedIndex == index ? "pressed" : ""}`}
-            onClick={() => {
-                handleStyleSelection(label)
-                setPressedIndex(index)
-            }}>
-            {label}
-        </button>
-    )
+function StyleButton({ label, handleStyleSelection, isPressed }) {
+  return (
+    <button
+      className={`style-button ${isPressed ? "pressed" : ""}`}
+      onClick={() => handleStyleSelection(label)}
+    >
+      {label}
+    </button>
+  );
 }
 
-export default StyleButton
+export default StyleButton;

@@ -27,7 +27,10 @@ function App() {
   const [chords, setChords] = useState(appController.current.getFullChordNames());
   const [isPlaying, setIsPlaying] = useState(false);
   const [chordIsDragging, setChordIsDragging] = useState(false);
-  const [numOfBars, setNumOfBars] = useState(4);
+  const [style, setStyle] = useState("Rock");
+  const [drums, setDrums] = useState(appController.current.getDrumsListByStyle("Rock")[0]);
+  const [bass, setBass] = useState(appController.current.getBassListByStyle("Rock")[0]);
+  const [tempo, setTempo] = useState(120);
 
   return (
     <div className="app">
@@ -60,7 +63,6 @@ function App() {
           <Bars
             controller={appController.current}
             isPlaying={isPlaying}
-            numOfBars={numOfBars}
             setChordIsDragging={setChordIsDragging}
             chordIsDragging={chordIsDragging}
             barLabels={barLabels}
@@ -74,6 +76,12 @@ function App() {
           <StyleSelector
             controller={appController.current}
             isPlaying={isPlaying}
+            style={style}
+            setStyle={setStyle}
+            drums={drums}
+            setDrums={setDrums}
+            bass={bass}
+            setBass={setBass}
           />
         </div>
 
@@ -82,6 +90,16 @@ function App() {
             controller={appController.current}
             isPlaying={isPlaying}
             setIsPlaying={setIsPlaying}
+
+            setTempo={setTempo}
+            tempo={tempo}
+            setStyle={setStyle}
+            style={style}
+            setDrums={setDrums}
+            drums={drums}
+            setBass={setBass}
+            bass={bass}
+            barLabels={barLabels}
             setBarLabels={setBarLabels}
             setBarsHaveChord={setBarsHaveChord}
             setBarsHaveTwoChords={setBarsHaveTwoChords}

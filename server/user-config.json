@@ -1,0 +1,28 @@
+{
+  "style": "Rock",
+  "drums": "Drums 1",
+  "bass": "Bass 1",
+  "tempo": 120,
+  "chords": [
+    {
+      "left": null,
+      "middle": null,
+      "right": null
+    },
+    {
+      "left": null,
+      "middle": null,
+      "right": null
+    },
+    {
+      "left": null,
+      "middle": null,
+      "right": null
+    },
+    {
+      "left": null,
+      "middle": null,
+      "right": null
+    }
+  ]
+}

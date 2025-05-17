@@ -1,0 +1,114 @@
+.barContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: calc(25% - 12px);
+  box-sizing: border-box;
+  height: 90px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.bar {
+  border-radius: 15px;
+  position: absolute;
+  margin: 4px;
+  border: 3px solid #ddd;
+  width: 100%;      
+  height: 90px;
+  box-sizing: border-box;
+}
+
+.bar.over {
+  border-color: #77aaff;
+}
+
+.bar:hover {
+  border-color: #77aaff;
+}
+
+.barContainer:hover .bar {
+  border-color: #77aaff;
+}
+
+.leftArea,
+.middleArea,
+.rightArea {
+  flex: 0;
+  height: 100%;
+  transition: flex 0.3s ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.droppableMode {
+  flex: 1;
+}
+
+.draggableMode {
+  flex: 1;
+}
+
+.barIsDragging {
+  border-radius: 15px;
+  border: 3px solid #ddd;
+  background-color: #242424;
+}
+
+/* Highlights */
+.leftHighlight,
+.middleHighlight,
+.rightHighlight {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: #77aaff;
+  opacity: 0;
+  border-radius: 15px;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
+  z-index: -1;
+}
+
+.leftHighlight {
+  left: 0;
+  width: 50%;
+}
+
+.middleHighlight {
+  left: 0;
+  width: 100%;
+}
+
+.rightHighlight {
+  right: 0;
+  width: 50%;
+}
+
+.highlightVisible {
+  opacity: 1;
+}
+
+
+.placeholderText {
+  color: grey;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
+  text-align: center;
+}

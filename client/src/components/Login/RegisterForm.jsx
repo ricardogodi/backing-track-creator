@@ -24,7 +24,7 @@ export default function RegisterForm({ onBack }) {
       const data = await res.json();
 
       if (!res.ok) throw new Error(data.message || 'Registration failed');
-      alert('✅ Registration successful. You can now log in.');
+      alert('Registration successful. You can now log in.');
       onBack(); // Return to login view
     } catch (err) {
       alert(err.message);

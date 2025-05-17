@@ -67,13 +67,12 @@ button:active {
   box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* Optional: Make interactive elements feel clickable */
+/* Make interactive elements feel clickable */
 button,
 input,
 select {
   outline: none;
 }
-
 
 /* Disable body scroll when dragging */
 .no-scroll {

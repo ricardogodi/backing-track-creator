@@ -1,18 +1,13 @@
 .tempoSliderContainer {
     width: 100%;
-    /* Expand to full width of parent */
     display: flex;
     flex: 1;
-    /* Optional if you want it to grow relative to others */
     flex-direction: column;
     align-items: stretch;
-    /* Ensures children like <input> also stretch */
     gap: 0.5rem;
-    /* Optional: spacing between <h3> and slider */
 }
 
 .tempoSliderContainer h3 {
     margin: 0;
     text-align: center;
-    /* Optional: center the tempo label */
 }

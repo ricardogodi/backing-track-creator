@@ -10,14 +10,14 @@
   height: 80px;
   font-weight: bold;
   box-sizing: border-box;
-  padding: 0;                     /* ✅ REMOVE horizontal padding */
+  padding: 0;                  
 
   user-select: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 
-  flex: 0 0 auto;                 /* ✅ Never grow or shrink */
+  flex: 0 0 auto;     
 }
 .chordIsDragging {
   background-color: #242424;;

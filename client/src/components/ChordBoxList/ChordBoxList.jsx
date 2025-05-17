@@ -4,7 +4,6 @@ import styles from './ChordBoxList.module.css';
 function ChordBoxList({ chordList, isPlaying, setChordIsDragging }) {
   const maxLabelLength = Math.max(...chordList.map(label => label.length));
 
-  // Clamp font size between 12px and 18px
   const baseFontSize = Math.max(12, 18 - (maxLabelLength - 4) * 1.5); 
 
   return (

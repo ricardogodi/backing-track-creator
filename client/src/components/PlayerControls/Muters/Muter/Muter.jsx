@@ -1,6 +1,6 @@
 // src/components/Muter/Muter.jsx
 import React from 'react';
-import styles from './Muter.module.css';  // optional, for the .muter-button style
+import styles from './Muter.module.css'; 
 
 export default function Muter({ label, isMuted, onToggle }) {
   return (

@@ -1,5 +1,5 @@
 .patternList {
-  flex: 1 1 0;                     /* ✅ Take up equal column space */
+  flex: 1 1 0;                    
   display: flex;
   flex-direction: column;
 
@@ -8,7 +8,7 @@
   border-radius: var(--border-radius);
   box-sizing: border-box;
 
-  height: 100%;                   /* ✅ Take full height of parent */
-  overflow-y: auto;               /* ✅ Scroll if content overflows */
+  height: 100%;                 
+  overflow-y: auto;              
   scrollbar-width: thin;
 }

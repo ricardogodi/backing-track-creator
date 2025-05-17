@@ -65,7 +65,7 @@ export default function StyleSelector({
     <div className={`${styles.styleSelectorContainer} ${isPlaying ? "disabled" : ""}`}>
       <StylesList
         controller={controller}
-        currentStyle={style}  // if your StylesList needs it
+        currentStyle={style} 
         handleStyleSelection={handleStyleSelection}
       />
 

@@ -4,7 +4,7 @@
   padding: 1rem;
   width: 100%;
   box-sizing: border-box;
-  height: 200px; /* ✅ Lock height (adjust if needed) */
+  height: 200px;
   display: flex;
   flex-direction: column;
 }
@@ -15,5 +15,5 @@
   gap: 1rem;
   margin-top: 1rem;
   flex: 1;
-  overflow: hidden; /* ✅ Ensures no overflow from children */
+  overflow: hidden; 
 }

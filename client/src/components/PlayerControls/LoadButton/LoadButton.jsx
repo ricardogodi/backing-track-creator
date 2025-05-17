@@ -33,7 +33,7 @@ export default function LoadButton({
         setTracks(data);
         if (data.length > 0) setSelectedName(data[0].name); // default to first
       } catch (err) {
-        console.error('❌ Error fetching tracks:', err.message);
+        console.error('Error fetching tracks:', err.message);
       }
     };
 

@@ -23,7 +23,7 @@
 @media (max-width: 767px) {
   .tonicSelectionContainer {
     flex-direction: row;
-    flex-wrap: nowrap; /* 👈 Prevents wrapping */
+    flex-wrap: nowrap;
     overflow-x: auto;
     justify-content: flex-start;
   }

@@ -44,13 +44,13 @@ const handleSave = async () => {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Failed to save track');
 
-    console.log('✅ Track saved:', data.message);
+    console.log('Track saved:', data.message);
     alert(`Track "${name}" saved successfully!`);
     setName('');
     setTracks(prev => [...prev, track]);
   } catch (err) {
-    console.error('❌ Error saving track:', err.message);
-    alert(err.message); // <-- Now shows the backend's message
+    console.error('Error saving track:', err.message);
+    alert(err.message);
   }
 };
 

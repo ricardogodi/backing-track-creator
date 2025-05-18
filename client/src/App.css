@@ -21,17 +21,26 @@ h1 {
     margin: 5%;
   }
 
-  .leftPanel,
-  .middleContent,
-  .rightPanel {
-    flex: 1;
-    min-height: 0;
-  }
+ .leftPanel {
+ flex: 0.8;
+  min-height: 0;
+}
+
+.middleContent {
+  flex: 1.5;
+  min-height: 0;
+}
+
+.rightPanel {
+  flex: 0.8;
+  min-height: 0;
+}
 
   .leftPanel {
     display: flex;
     flex-direction: row;
     /* Lay children horizontally */
+    
     width: 100%;
     height: 100%;
     gap: 1rem;
@@ -68,36 +77,7 @@ h1 {
       "right";
   }
 
-  /* breathing room above middle/right */
-  .leftPanel,
-  .rightPanel {
-    margin-top: var(--gap);
-  }
-
-  /*
-    Now make the leftPanel wrap:
-    - First child (tonic) goes full width on its own row
-    - Second + third children (scale & chord) share the next row, each 50%
-  */
-  .leftPanel {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: var(--gap);
-  }
-
-  /* TonicSelectionPanel spans 100% */
-  .leftPanel> :nth-child(1) {
-    flex: 0 0 100%;
-  }
-
-  /* ScaleType & ChordType each take half width */
- /* Correct, browser-compatible fix */
-.leftPanel > :nth-child(2),
-.leftPanel > :nth-child(3) {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: calc(50% - 0.5rem); /* or use gap value directly */
-  box-sizing: border-box;
+ 
 }
-}
+
+

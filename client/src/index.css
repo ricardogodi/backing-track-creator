@@ -1,11 +1,16 @@
 /** client/src/index.css */
 
 :root {
+
+
   --bg-color: #1e1e1e;
   --fg-color: #f0f0f0;
-  --accent-color: #4f8ef7;
-  --accent-color-hover: #77aaff;
-  --border-radius: 0.5rem;
+
+  --accent-color: #3a5a78;
+  --accent-color-hover: #4a6c8d;
+  --accent-color-active: #2f4b66;
+
+  --border-radius: 10px;
   --transition: 0.2s ease;
 
   font-family: "Inter", system-ui, sans-serif;
@@ -20,6 +25,7 @@ body {
   min-height: 100vh;
 
   color: var(--fg-color);
+  background-color: var(--bg-color);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -33,41 +39,48 @@ h1 {
 
 /* Buttons */
 button {
-  padding: 0.6em 1.2em;
-  font-size: 1rem;
-  font-weight: 500;
+  padding: 0.5em 1em;
+  font-size: 0.95rem;
+  font-weight: 600;
   font-family: inherit;
   background-color: var(--accent-color);
   color: #fff;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color var(--transition), box-shadow var(--transition);
+  box-shadow: none;
 }
 
-button:hover {
+button:not(:disabled):hover {
   background-color: var(--accent-color-hover);
-  transform: translateY(-2px);
 }
 
 button:active {
-  transform: translateY(1px);
+  background-color: var(--accent-color-active);
 }
 
+button:disabled {
+  cursor: default;
+  opacity: 0.5;
+  filter: grayscale(70%);
+}
+
+/* Disabled utility class */
 .disabled {
   pointer-events: none;
   opacity: 0.4;
   filter: grayscale(80%);
 }
 
-/* Pressed style for virtual pads etc. */
-.pressed {
-  background-color: #2a3f8d;
-  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+/* Selected/Pressed state */
+.pressed,
+.selected {
+  background-color:#28384d;
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.9);
 }
 
-/* Make interactive elements feel clickable */
+/* Input/select basics */
 button,
 input,
 select {
@@ -82,6 +95,6 @@ select {
 
 /* Make draggable items touch-reactive */
 .draggable {
-  touch-action: none; /* Prevent default scrolling on touch */
-  -webkit-user-drag: element; /* Enables native drag on WebKit */
+  touch-action: none;
+  -webkit-user-drag: element;
 }

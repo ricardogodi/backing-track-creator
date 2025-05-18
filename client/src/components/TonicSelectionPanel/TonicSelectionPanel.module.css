@@ -20,17 +20,41 @@
   gap: 5px;
 }
 
-@media (max-width: 767px) {
-  .tonicSelectionContainer {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    justify-content: flex-start;
-  }
 
-  .buttonPair {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-  }
+.openButton {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modalContent {
+  background-color: #2b2b2b;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  max-width: 90%;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
 }

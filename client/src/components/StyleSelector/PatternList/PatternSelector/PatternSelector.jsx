@@ -10,11 +10,11 @@ export default function PatternSelector({
 }) {
   const isActive = selectedIndex === index;
   return (
-  <div
-  className={`${styles.patternSelector} ${isActive ? 'pressed' : ''}`}
-  onClick={() => onSelect(label, index)}
->
-  {label}
-</div>
+    <div
+      className={`${styles.patternSelector} ${isActive ? 'pressed' : ''}`}
+      onClick={() => onSelect(label, index)}
+    >
+      {label}
+    </div>
   );
 }

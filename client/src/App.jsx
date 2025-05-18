@@ -35,6 +35,7 @@ function App() {
   const [drums, setDrums] = useState(appController.current.getDrumsListByStyle("Rock")[0]);
   const [bass, setBass] = useState(appController.current.getBassListByStyle("Rock")[0]);
   const [tempo, setTempo] = useState(120);
+  const [showTonicModal, setShowTonicModal] = useState(false);
 
   useEffect(() => {
     const fetchTracks = async () => {
@@ -51,7 +52,7 @@ function App() {
         const data = await res.json();
         setTracks(data);
       } catch (err) {
-        console.error("❌ Error fetching tracks:", err.message);
+        console.error("Error fetching tracks:", err.message);
       }
     };
 
@@ -102,6 +103,12 @@ function App() {
             setBarsHaveChord={setBarsHaveChord}
             barsHaveTwoChords={barsHaveTwoChords}
             setBarsHaveTwoChords={setBarsHaveTwoChords}
+            tempo={tempo}
+            style={style}
+            drums={drums}
+            bass={bass}
+            tracks={tracks}
+            setTracks={setTracks}
           />
           <StyleSelector
             controller={appController.current}

@@ -16,33 +16,14 @@ export default function LoadButton({
 }) {
   const [selectedName, setSelectedName] = useState('');
 
-  // Fetch all saved tracks when component mounts
-  useEffect(() => {
-    const fetchTracks = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const res = await fetch('/api/track/load', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-
-        if (!res.ok) throw new Error('Failed to load saved tracks');
-
-        const data = await res.json();
-        setTracks(data);
-        if (data.length > 0) setSelectedName(data[0].name); // default to first
-      } catch (err) {
-        console.error('Error fetching tracks:', err.message);
-      }
-    };
-
-    fetchTracks();
-  }, [setTracks]);
-
   const handleLoad = () => {
+    console.log("WHAT?")
+
     const track = tracks.find(t => t.name === selectedName);
     if (!track) return alert('Track not found');
+
+    console.log("WHAT?")
+    console.log(track)
 
     // Step 1: Load chords into controller
     controller.load(track.chords);

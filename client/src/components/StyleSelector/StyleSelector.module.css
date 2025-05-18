@@ -1,5 +1,7 @@
 .styleSelectorContainer {
   border: 2px solid #ddd;
+    background-color: #2a2a2a; /* Darker background to distinguish */
+  border: 1px solid #3a3a3a; /* Thin border for visual separation */
   border-radius: var(--border-radius);
   padding: 1rem;
   width: 100%;

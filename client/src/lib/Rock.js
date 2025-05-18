@@ -69,6 +69,18 @@ class Rock {
         ['kick', [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0]]
     ]);
 
+        static #drums5 = new Map([
+        ['hi-hat', [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]],
+        ['snare', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]],
+        ['kick', [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0]]
+    ]);
+
+        static #drums6 = new Map([
+        ['hi-hat', [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]],
+        ['snare', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0]],
+        ['kick', [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0]]
+    ]);
+
 
 
 
@@ -81,7 +93,7 @@ class Rock {
 
     static #bassMap = new Map([
         ["Bass 1", this.#bass1],
-        ["Bass 2", this.#bass2],
+        ["Bass 2 (Swing)", this.#bass2],
         ["Bass 3", this.#bass3],
         ["Bass 4", this.#bass4],
         // more rhythms
@@ -89,9 +101,11 @@ class Rock {
 
     static #drumsMap = new Map([
         ["Drums 1", this.#drums1],
-        ["Drums 2", this.#drums2],
+        ["Drums 2 (Swing)", this.#drums2],
         ["Drums 3", this.#drums3],
         ["Drums 4", this.#drums4],
+           ["Drums 5", this.#drums5],
+              ["Drums 6", this.#drums6],
 
         // more rhythms
     ]);

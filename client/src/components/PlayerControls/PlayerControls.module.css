@@ -5,3 +5,10 @@
     align-items: stretch;
     gap: 40px;
 }
+
+@media (max-width: 767px) { 
+.playerControls {
+    margin-top: 20px;
+}
+
+}

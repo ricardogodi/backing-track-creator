@@ -3,10 +3,6 @@
   align-items: center;
   justify-content: center;
 
-  width: 80px;
-  height: 80px;
-  margin: 4px;
-
   background-color: #2b2b2b;
   color: #f0f0f0;
   font-weight: 600;
@@ -25,6 +21,10 @@
   transition: border-color 0.2s ease, background-color 0.2s ease;
   cursor: grab;
 
+  /* Default (desktop) size */
+  width: 80px;
+  height: 80px;
+  margin: 4px;
   flex: 0 0 auto;
 }
 
@@ -38,4 +38,23 @@
   border-color: #6c9dcf;
   cursor: grabbing;
   opacity: 0.85;
+}
+
+/* Mobile override: shrink boxes to fit row */
+@media (max-width: 767px) {
+   .chordBoxListContainer {
+    justify-content: center;
+  }
+
+  .chordBox {
+    flex: 1 1 0;
+    width: auto;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 4px;
+    max-width: none;
+    max-height: none;
+
+   font-size: clamp(0.6rem, 4vw, 1rem);
+  }
 }

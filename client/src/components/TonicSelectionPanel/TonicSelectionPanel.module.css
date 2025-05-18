@@ -20,13 +20,18 @@
   gap: 5px;
 }
 
-
 .openButton {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   margin-bottom: 1rem;
+  border-radius: var(--border-radius);
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
+/* Modal overlay for dark background */
 .modalOverlay {
   position: fixed;
   inset: 0;
@@ -39,22 +44,23 @@
 
 .modalContent {
   background-color: #2b2b2b;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: var(--border-radius);
-  max-width: 90%;
-  width: 100%;
-  max-height: 90vh;
+  width: 90%;
+  max-width: 320px;
+  max-height: 80vh;
   overflow-y: auto;
   position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
 }
 
 .closeButton {
   position: absolute;
   top: 10px;
-  right: 15px;
+  right: 10px;
   background: transparent;
   border: none;
   color: white;
-  font-size: 2rem;
+  font-size: 1.25rem;
   cursor: pointer;
 }

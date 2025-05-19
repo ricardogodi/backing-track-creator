@@ -15,7 +15,7 @@ export default function RegisterForm({ onBack }) {
     }
 
     try {
-     const res = await fetch('https://backing-track-creator.onrender.com/api/auth/register', {
+      const res = await fetch('https://backing-track-creator.onrender.com/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -23,7 +23,11 @@ export default function RegisterForm({ onBack }) {
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.message || 'Registration failed');
+
+      if (!res.ok) {
+        console.error('Registration error:', data); 
+        throw new Error(data.message || 'Registration failed');
+      }
       alert('Registration successful. You can now log in.');
       onBack(); // Return to login view
     } catch (err) {

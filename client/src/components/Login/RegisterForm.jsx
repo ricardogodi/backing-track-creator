@@ -15,7 +15,7 @@ export default function RegisterForm({ onBack }) {
     }
 
     try {
-      const res = await fetch('http://localhost:3001/api/auth/register', {
+     const res = await fetch('https://backing-track-creator.onrender.com/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })

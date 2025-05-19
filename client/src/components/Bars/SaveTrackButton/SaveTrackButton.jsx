@@ -35,7 +35,7 @@ export default function SaveTrackButton({
     };
 
     try {
-      const res = await fetch('/api/track/save', {
+      const res = await fetch('https://backing-track-creator.onrender.com/api/track/save', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -62,7 +62,7 @@ export default function MyTracks({
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`/api/track/${track._id}`, {
+      const res = fetch(`https://backing-track-creator.onrender.com/api/track/${track._id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

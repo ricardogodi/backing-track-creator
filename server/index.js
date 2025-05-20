@@ -1,19 +1,30 @@
 // server/index.js
 
 import express from 'express';
-import cors from 'cors';
-import connectDB from './db.js'; // Connect to MongoDB
+import cors from 'cors'; // "Cross-Origin Resource Sharing"
+import connectDB from './db.js'; // For connecting to MongoDB
 import authRoutes from './routes/auth.js'; // Auth endpoints
 import trackRoutes from './routes/track.js'; // Track save/load endpoints
 
+/**
+ * Initialize an Express application instance.
+ */
 const app = express();
-const PORT = 3001;
+/** 
+ * Define port number where server will listen for requests.
+ * Platform of deployment will assign a port via process.env.PORT, if it fails
+ * it will fall back to 3001, which will be useful for local development.
+ * */ 
+const PORT = process.env.PORT || 3001;
 
-// Connect to MongoDB on startup
+/**
+ * Call connectDB defined in ./db.js. 
+ * Establish connection with the MongoDB
+ */
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(cors()); 
 app.use(express.json());
 
 // Routes

@@ -1,7 +1,8 @@
 // client/src/components/Auth/AuthBar.jsx
 import React from 'react';
 
-export default function AuthBar({ token, setToken }) {
+export default function AuthBar({token, setToken}) {
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     setToken(null);

@@ -35,7 +35,6 @@ function App() {
   const [drums, setDrums] = useState(appController.current.getDrumsListByStyle("Rock")[0]);
   const [bass, setBass] = useState(appController.current.getBassListByStyle("Rock")[0]);
   const [tempo, setTempo] = useState(120);
-  const [showTonicModal, setShowTonicModal] = useState(false);
 
   useEffect(() => {
     const fetchTracks = async () => {

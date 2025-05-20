@@ -13,21 +13,17 @@ export const saveTrack = async (req, res) => {
     }
 
     // Let Mongoose assign an _id properly
-    const newTrack = { name, style, drums, bass, tempo, chords };
     const savedTrack = user.tracks.create(req.body);
     user.tracks.push(savedTrack);
     await user.save();
-    console.log("About to save...!!!")
     res.json({ message: 'Track saved', track: savedTrack });
-    console.log("track saved is:")
-    console.log(savedTrack)
   } catch (err) {
     console.error('Backend error saving track:', err);
     res.status(500).json({ message: 'Error saving track' });
   }
 };
 
-export const loadTracks = async (req, res) => {
+export const fetchTracks = async (req, res) => {
   try {
     const user = await User.findById(req.userId);
     res.json(user.tracks);

@@ -21,7 +21,7 @@ export default function ChordBox({ label, index, fontSize, setChordIsDragging })
         setChordIsDragging(false);
         setIsLocalDragging(false);
       }}
-      style={{ fontSize: `${fontSize}px` }}
+     
     >
       {label}
     </div>

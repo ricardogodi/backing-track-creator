@@ -66,7 +66,7 @@ function TonicSelectionPanel({ controller, setChords, isPlaying }) {
     return (
       <>
         <button
-          className={styles.openButton}
+          className="openButton"
           onClick={() => setShowModal(true)}
         >
           Tonic

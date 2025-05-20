@@ -11,7 +11,8 @@
 
   .dropZoneWrapper {
     display: flex;
-    height: 100px;
+    min-height: 60px;
+    height: auto;
     justify-content: center;
     align-items: center;
 
@@ -23,8 +24,9 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 100px;
-    width: 200px;
+
+    padding: 1rem;
+    width: 150px;
     font-weight: bold;
     border: 3px dashed gray;
     border-radius: 15px;

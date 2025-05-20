@@ -49,7 +49,7 @@ function ChordTypeSelectionPanel({ controller, setChords, isPlaying }) {
   if (isMobile) {
     return (
       <>
-        <button onClick={() => setShowModal(true)} className={styles.openButton}>
+        <button onClick={() => setShowModal(true)} className="openButton">
           Chords Type
         </button>
         {showModal && (

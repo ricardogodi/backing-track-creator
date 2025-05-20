@@ -1,5 +1,6 @@
 // client/src/components/Auth/AuthBar.jsx
 import React from 'react';
+import styles from "./AuthBar.module.css"
 
 export default function AuthBar({token, setToken}) {
 
@@ -13,11 +14,11 @@ export default function AuthBar({token, setToken}) {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '1rem' }}>
+    <div className={styles.authBar}>
       {token === 'guest' ? (
-        <button onClick={handleLoginClick}>Log In</button>
+        <button className={styles.logInOutButton} onClick={handleLoginClick}>Log In</button>
       ) : (
-        <button onClick={handleLogout}>Log Out</button>
+        <button className={styles.logInOutButton} onClick={handleLogout}>Log Out</button>
       )}
     </div>
   );

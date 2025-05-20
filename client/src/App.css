@@ -2,8 +2,7 @@
 
 /* Center & constrain the app */
 .app {
-  max-width: var(--max-width);
-  margin: 0 auto;
+
   padding: var(--padding);
   user-select: none;
 }
@@ -17,22 +16,17 @@ h1 {
   .mainContent {
     display: flex;
     height: 100%;
-    gap: var(--gap);
-    margin: 5%;
   }
 
   .leftPanel {
-    flex: 0.8;
     min-height: 0;
   }
 
   .middleContent {
-    flex: 1.5;
     min-height: 0;
   }
 
   .rightPanel {
-    flex: 0.8;
     min-height: 0;
   }
 
@@ -56,15 +50,35 @@ h1 {
 
   .leftPanel>* {
     flex: 1;
-   
+
     height: 100%;
-    
+
     min-width: 0;
-   
+
   }
 }
 
 @media (max-width: 767px) {
+
+  .openButton {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 100px;
+    padding: 0.5rem;
+    font-size: clamp(0.75rem, 2.5vw, 1rem);
+    text-align: center;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .app h1 {
+    font-size: 1.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.5rem;
+  }
+
   .mainContent {
     display: flex;
     flex-direction: column;
@@ -82,15 +96,15 @@ h1 {
     width: 100%;
     padding: 0 1rem;
     box-sizing: border-box;
+    margin: 2%;
   }
 
-  .leftPanel > * {
+  .leftPanel>* {
     flex: 1 1 0;
     min-width: 0;
-    max-width: 100px; 
   }
 
   .rightPanel {
-    margin-top: var(--gap);
+    margin-top: 50px
   }
 }

@@ -1,0 +1,15 @@
+.authBar {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 767px) {
+  .authBar {
+    padding: 1%;
+  }
+
+  .logInOutButton {
+    font-size: clamp(0.75rem, 2.5vw, 1rem);
+  }
+}

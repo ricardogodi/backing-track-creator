@@ -2,7 +2,6 @@ import PlayStopButton from './PlayStopButton/PlayStopButton';
 import TempoSlider from './TempoSlider/TempoSlider';
 import Muters from './Muters/Muters';
 import ChangeHarmonicPosition from './ChangeHarmonicPosition/ChangeHarmonicPosition';
-import LoadButton from './LoadButton/LoadButton';
 
 import MyTracks from './MyTracks/MyTracks';
 

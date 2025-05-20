@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors'; // "Cross-Origin Resource Sharing"
 import connectDB from './db.js'; // For connecting to MongoDB
 import authRoutes from './routes/auth.js'; // Auth endpoints
-import trackRoutes from './routes/track.js'; // Track save/load endpoints
+import trackRoutes from './routes/track.js'; // Track save/fetch endpoints
 
 /**
  * Initialize an Express application instance.
@@ -29,7 +29,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);   // POST /api/auth/register, POST /api/auth/login
-app.use('/api/track', trackRoutes); // POST /api/track/save, GET /api/track/load
+app.use('/api/track', trackRoutes); // POST /api/track/save, GET /api/track/fetch
 
 // Root route for quick status check
 app.get('/', (req, res) => {

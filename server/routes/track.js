@@ -7,7 +7,7 @@ import { authMiddleware } from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 router.post('/save', authMiddleware, saveTrack);
-router.get('/load', authMiddleware, fetchTracks);
+router.get('/fetch', authMiddleware, fetchTracks);
 router.delete('/:id', authMiddleware, deleteTrack);
 
 export default router;

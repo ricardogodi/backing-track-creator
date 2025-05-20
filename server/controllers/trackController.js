@@ -28,7 +28,7 @@ export const fetchTracks = async (req, res) => {
     const user = await User.findById(req.userId);
     res.json(user.tracks);
   } catch {
-    res.status(500).json({ message: 'Error loading tracks' });
+    res.status(500).json({ message: 'Error fetching tracks' });
   }
 };
 

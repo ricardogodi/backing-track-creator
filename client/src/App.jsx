@@ -40,7 +40,7 @@ function App() {
     const fetchTracks = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("https://backing-track-creator.onrender.com/api/track/load", {
+        const res = await fetch("https://backing-track-creator.onrender.com/api/track/fetch", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

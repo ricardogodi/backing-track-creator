@@ -111,7 +111,7 @@ class Scales {
 
         // 5
         ["E#", "doubleSharp"],
-        ["F", "sharp"],  // might also be flat
+        ["F", "flat"],  // might also be flat
         ["Gbb", "doubleFlat"],
 
         // 6

@@ -8,9 +8,3 @@
   padding: 0;
   height: 75px;
 }
-
-.disabled {
-  pointer-events: none;
-  opacity: 0.04;
-  user-select: none;
-}

@@ -63,8 +63,42 @@ class HarmonySequence {
         this.#playback.updateHarmony(this.createIterator());
     }
 
-    export() {
+    transpose(numSemitones) {
+        const transportedLabels = [];
 
+        for (let i = 0; i < this.#numOfBars; i++) {
+            const chordLabel = this.#bars[i].getChordLabels();
+            const transported = {
+                left: chordLabel.left
+                    ? {
+                        root: this.#transposeRoot(chordLabel.left.root, numSemitones),
+                        quality: chordLabel.left.quality
+                    }
+                    : null,
+                middle: chordLabel.middle
+                    ? {
+                        root: this.#transposeRoot(chordLabel.middle.root, numSemitones),
+                        quality: chordLabel.middle.quality
+                    }
+                    : null,
+                right: chordLabel.right
+                    ? {
+                        root: this.#transposeRoot(chordLabel.right.root, numSemitones),
+                        quality: chordLabel.right.quality
+                    }
+                    : null
+            };
+            transportedLabels.push(transported);
+        }
+
+        this.load(transportedLabels)
+    }
+
+    #transposeRoot(root, numSemitones) {
+        let index = MusicalCore.getIndexInOneOctaveChromaticScale(root);
+        let scaleName = MusicalCore.getOneOctaveChromaticScaleByNote(root);
+        let transported = scaleName[(index + numSemitones) % 12];
+        return transported
     }
 
     reset() {
@@ -93,7 +127,7 @@ class HarmonySequence {
     }
 
     popBar() {
-        if (this.#numOfBars <= 1) return; 
+        if (this.#numOfBars <= 1) return;
 
         this.#bars.pop();
         this.#numOfBars--;
@@ -107,7 +141,7 @@ class HarmonySequence {
             this.#linkAll(chord, this.#firstBarWithChordIndex, "left");
         }
 
-        this.#playback.updateHarmony(this.createIterator());
+       this.#playback.updateHarmony(this.createIterator());
     }
 
     /**
@@ -152,7 +186,7 @@ class HarmonySequence {
             const CHORD_POSITION = "left";
             this.#linkAll(firstChord, this.#firstBarWithChordIndex, CHORD_POSITION);
         }
-        this.#playback.updateHarmony(this.createIterator());
+       this.#playback.updateHarmony(this.createIterator());
     }
 
     /**
@@ -201,7 +235,7 @@ class HarmonySequence {
             this.#linkAll(chord, barIndex, chordPosition);
         }
 
-        this.#playback.updateHarmony(this.createIterator());
+       this.#playback.updateHarmony(this.createIterator());
     }
 
     /**
@@ -390,7 +424,7 @@ class HarmonySequence {
             this.#firstChordType = chord.getType();
             this.#linkAll(chord, this.#firstBarWithChordIndex, 0)
         }
-        this.#playback.updateHarmony(this.createIterator());
+       this.#playback.updateHarmony(this.createIterator());
     }
 
     /**

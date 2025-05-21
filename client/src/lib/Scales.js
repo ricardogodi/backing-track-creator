@@ -68,7 +68,6 @@ class Scales {
 
     /**
     * 
-    * 
     */
     static #doubleSharpChromaticScale = Object.freeze(['B#', 'C#', 'C##', 'D#', 'D##', 'E#', 'F#', 'F##', 'G#', 'G##', 'A#', 'A##']);
     static #sharpChromaticScale = Object.freeze(['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']);

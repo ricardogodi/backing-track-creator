@@ -157,6 +157,10 @@ class AppController {
         this.#harmonySequence.changeInitialHarmonicPosition();
     }
 
+    transpose(numSemitones) {
+        this.#harmonySequence.transpose(numSemitones)
+    }
+
     /* -------------------------------------------------------------------------- */
     /*                                                                            */
     /*                    Methods to interact with Playback                       */

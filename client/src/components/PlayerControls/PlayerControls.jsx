@@ -1,7 +1,7 @@
 import PlayStopButton from './PlayStopButton/PlayStopButton';
 import TempoSlider from './TempoSlider/TempoSlider';
 import Muters from './Muters/Muters';
-import ChangeHarmonicPosition from './ChangeHarmonicPosition/ChangeHarmonicPosition';
+import HarmonicChange from './HarmonicChange/HarmonicChange';
 
 import MyTracks from './MyTracks/MyTracks';
 
@@ -40,9 +40,12 @@ function PlayerControls({
         setTempo={setTempo}
       />
       <Muters controller={controller} />
-      <ChangeHarmonicPosition
+      <HarmonicChange
         controller={controller}
         isPlaying={isPlaying}
+        setBarLabels={setBarLabels}
+        setBarsHaveChord={setBarsHaveChord}
+        setBarsHaveTwoChords={setBarsHaveTwoChords}
       />
       <MyTracks
         controller={controller}

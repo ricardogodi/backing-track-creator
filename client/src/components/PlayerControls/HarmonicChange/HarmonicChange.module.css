@@ -1,0 +1,75 @@
+/* src/components/ChangeHarmonicPosition/ChangeHarmonicPosition.module.css */
+
+.harmonicChangeWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.changeHarmPos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75px;
+  padding: 0.5rem 1rem;
+}
+
+.changeHarmPos:hover {
+  background-color: var(--accent-color-hover);
+}
+
+.changeHarmPos:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Modal styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #2a2a2a;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  min-width: 400px;
+  max-width: 90%;
+}
+
+.input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #555;
+  border-radius: var(--border-radius);
+  background-color: #1e1e1e;
+  color: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modalButtons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.feedback {
+  margin-top: 1rem;
+  color: var(--accent-color);
+}

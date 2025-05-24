@@ -1,10 +1,14 @@
 /** client/src/components/ChordBoxList/ChordBoxList.module.css */
 
 .chordBoxListContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Adjust min size if needed */
-  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap; /* ❗ PREVENT wrapping */
+  justify-content: space-between;
+  align-items: center;
+
   width: 100%;
-  padding: 0 0.5rem;
+  padding: 0 7% 0;
   box-sizing: border-box;
+  gap: 10px;
 }

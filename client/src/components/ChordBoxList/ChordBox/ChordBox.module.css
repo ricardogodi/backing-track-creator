@@ -1,34 +1,28 @@
 /** client/src/components/ChordBoxList/ChordBox/ChordBox.module.css */ 
 .chordBox {
+  flex: 1 1 0;           /* allow equal distribution */
+  aspect-ratio: 1 / 1;   /* maintain square */
+  max-width: 100px;      /* optional: controls how large they can get */
+  min-width: 0;          /* crucial to avoid overflow */
+
+  /* keep your styles untouched */
   display: flex;
   align-items: center;
   justify-content: center;
-
   background-color: #2b2b2b;
   color: #f0f0f0;
   font-weight: 600;
   font-size: 1rem;
   letter-spacing: 0.5px;
-
   border: 2px solid #555;
   border-radius: 10px;
-
   box-sizing: border-box;
   user-select: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
   transition: border-color 0.2s ease, background-color 0.2s ease;
   cursor: grab;
-
-  width: 100%;
-  height: auto;
-  margin: 0;
-  aspect-ratio: 1 / 1;
-  flex: unset;
-
-  flex: 0 0 auto;
 }
 
 .chordBox:hover {

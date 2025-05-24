@@ -9,16 +9,15 @@ class AppController {
     #scaleChords
     #playback
     #harmonySequence
-
+    
     /**
      * 
      */
     constructor() {
-        // Initialize models
-        console.log("Initializing controller...")
         this.#scaleChords = new ScaleChords("C", "major", "triads");
+        this.#harmonySequence = new HarmonySequence();
         this.#playback = new Playback();
-        this.#harmonySequence = new HarmonySequence(this.#playback);
+        this.#harmonySequence.registerObserver(this.#playback);
     }
 
     /* -------------------------------------------------------------------------- */
@@ -92,10 +91,17 @@ class AppController {
         this.#harmonySequence.insertChordAtBar(chord, indexTo, chordPosition);
     }
 
+    /**
+     * 
+     * @param {*} chords 
+     */
     load(chords) {
         this.#harmonySequence.load(chords);
     }
 
+    /**
+     * 
+     */
     reset() {
         this.#harmonySequence.reset()
     }
@@ -119,7 +125,6 @@ class AppController {
      * @returns 
      */
     getNumOfBars() {
-        console.log("GET NUM OF BARS WAS CALLED")
         return this.#harmonySequence.getNumOfBars()
     }
 
@@ -146,6 +151,10 @@ class AppController {
         this.#harmonySequence.removeChordAtBarAndPosition(barIndex, position);
     }
 
+    /**
+     * 
+     * @returns 
+     */
     getBarLabels() {
         return this.#harmonySequence.getBarLabels();
     }
@@ -153,10 +162,17 @@ class AppController {
     /**
      * 
      */
+    /**
+     * 
+     */
     changeInitialHarmonicPosition() {
         this.#harmonySequence.changeInitialHarmonicPosition();
     }
 
+    /**
+     * 
+     * @param {*} numSemitones 
+     */
     transpose(numSemitones) {
         this.#harmonySequence.transpose(numSemitones)
     }

@@ -31,6 +31,14 @@ class VoicedChord {
 
     /**
      * 
+     * @returns 
+     */
+    getAllVoices() {
+        return [...this.#concreteBass, this.#voicedUpperVoices]
+    }
+
+    /**
+     * 
      * @param {*} voicedUpperVoices 
      */
     setVoicedUpperVoices(voicedUpperVoices) {

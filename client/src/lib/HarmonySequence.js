@@ -13,18 +13,30 @@ class HarmonySequence {
     #firstBarWithChordIndex;
     #numOfBars;
     #playback; // Observer
+    #observers;
 
     /**
      * 
-     * @param {*} playback 
      */
-    constructor(playback) {
+    constructor() {
         this.#numOfBars = 4;
         this.#initializeBars();
         this.#initialHarmonicPosition = 0;
         this.#firstChordType = null;
         this.#firstBarWithChordIndex = -1;
-        this.#playback = playback;
+        this.#observers = []
+    }
+
+    registerObserver(observer) {
+        this.#observers.push(observer)
+    }
+
+    #notifyObservers() {
+        this.#observers.forEach(observer => {
+            if (typeof observer.updateHarmony === 'function') {
+                observer.updateHarmony(this.createIterator());
+            }
+        });
     }
 
     getBarLabels() {
@@ -60,7 +72,7 @@ class HarmonySequence {
             }
         });
 
-        this.#playback.updateHarmony(this.createIterator());
+        this.#notifyObservers();
     }
 
     transpose(numSemitones) {
@@ -104,7 +116,7 @@ class HarmonySequence {
     reset() {
         this.#numOfBars = 4;
         this.#initializeBars();
-        this.#playback.updateHarmony(this.createIterator());
+        this.#notifyObservers();
     }
 
     /**
@@ -123,7 +135,7 @@ class HarmonySequence {
     addBar() {
         this.#bars.push(new HarmonyBar());
         this.#numOfBars++;
-        this.#playback.updateHarmony(this.createIterator());
+        this.#notifyObservers();
     }
 
     popBar() {
@@ -141,7 +153,7 @@ class HarmonySequence {
             this.#linkAll(chord, this.#firstBarWithChordIndex, "left");
         }
 
-       this.#playback.updateHarmony(this.createIterator());
+        this.#notifyObservers();
     }
 
     /**
@@ -186,7 +198,7 @@ class HarmonySequence {
             const CHORD_POSITION = "left";
             this.#linkAll(firstChord, this.#firstBarWithChordIndex, CHORD_POSITION);
         }
-       this.#playback.updateHarmony(this.createIterator());
+        this.#notifyObservers();
     }
 
     /**
@@ -235,7 +247,7 @@ class HarmonySequence {
             this.#linkAll(chord, barIndex, chordPosition);
         }
 
-       this.#playback.updateHarmony(this.createIterator());
+        this.#notifyObservers();
     }
 
     /**
@@ -398,7 +410,7 @@ class HarmonySequence {
         let firstChord = this.#bars[this.#firstBarWithChordIndex].getLeftChord();
         this.#firstChordType = firstChord.getType();
         this.#linkAll(firstChord, this.#firstBarWithChordIndex, "left")
-        this.#playback.updateHarmony(this.createIterator());
+        this.#notifyObservers();
     }
 
     /**
@@ -424,7 +436,7 @@ class HarmonySequence {
             this.#firstChordType = chord.getType();
             this.#linkAll(chord, this.#firstBarWithChordIndex, 0)
         }
-       this.#playback.updateHarmony(this.createIterator());
+        this.#notifyObservers();
     }
 
     /**

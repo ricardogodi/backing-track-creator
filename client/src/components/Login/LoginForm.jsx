@@ -39,7 +39,7 @@ export default function LoginForm({ onLogin }) {
   return (
     <form className={styles.loginForm} onSubmit={handleSubmit}>
       <div className={styles.logoHeader}>
-        <h1>🎵 Backing Track Creator</h1>
+        <h1>Backing Track Creator</h1>
         <p className={styles.tagline}>Jam. Create. Loop.</p>
       </div>
 

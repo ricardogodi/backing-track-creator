@@ -2,7 +2,7 @@
 import React from 'react';
 import styles from "./AuthBar.module.css"
 
-export default function AuthBar({token, setToken, controller}) {
+export default function AuthBar({ token, setToken, isPlaying, controller }) {
 
   const handleLogout = () => {
     controller.stop();
@@ -17,9 +17,15 @@ export default function AuthBar({token, setToken, controller}) {
   return (
     <div className={styles.authBar}>
       {token === 'guest' ? (
-        <button className={styles.logInOutButton} onClick={handleLoginClick}>Log In</button>
+        <button className={`${styles.logInOutButton} ${isPlaying ? "disabled" : ""}`}
+          onClick={handleLoginClick}>
+          Log In
+        </button>
       ) : (
-        <button className={styles.logInOutButton} onClick={handleLogout}>Log Out</button>
+        <button className={`${styles.logInOutButton} ${isPlaying ? "disabled" : ""}`}
+          onClick={handleLogout}>
+          Log Out
+        </button>
       )}
     </div>
   );

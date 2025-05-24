@@ -64,7 +64,12 @@ function App() {
 
   return (
     <div className="app">
-      <AuthBar token={token} setToken={setToken} controller={appController.current} />
+      <AuthBar 
+      token={token} 
+      setToken={setToken} 
+      controller={appController.current} 
+      isPlaying={isPlaying}
+      />
       <h1>Backing Track Creator</h1>
       <div className="mainContent">
         <div className="leftPanel">

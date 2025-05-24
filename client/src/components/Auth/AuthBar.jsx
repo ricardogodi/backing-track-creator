@@ -2,9 +2,10 @@
 import React from 'react';
 import styles from "./AuthBar.module.css"
 
-export default function AuthBar({token, setToken}) {
+export default function AuthBar({token, setToken, controller}) {
 
   const handleLogout = () => {
+    controller.stop();
     localStorage.removeItem('token');
     setToken(null);
   };
